@@ -1,12 +1,14 @@
 ---
 const year = new Date().getFullYear();
+import { Image } from 'astro:assets';
+import hbLogo from '../assets/hb-logo.png';
 ---
 
 <footer class="footer">
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <span class="footer__logo">&#x1F9A1; HoneyBadger<span class="footer__accent">Bots</span></span>
+        <span class="footer__logo" style="display: flex; align-items: center; gap: 0.5rem;"><Image src={hbLogo} alt="HoneyBadger Bots" width={24} height={24} style={{ borderRadius: '4px' }} /> HoneyBadger<span class="footer__accent">Bots</span></span>
         <p class="footer__tagline">Geautomatiseerd crypto traden, zonder technische kennis.</p>
       </div>
 
