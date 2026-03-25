@@ -1,0 +1,166 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Pricing — HoneyBadger Bots" description="Transparant en eerlijk: je betaalt alleen bij winst.">
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1>Eerlijke pricing</h1>
+        <p>Je betaalt een laag basisabonnement en een klein percentage van je winst. Geen winst? Dan betaal je alleen het basisabonnement.</p>
+      </div>
+
+      <div class="pricing-card">
+        <span class="badge">Hybride model</span>
+        <div class="pricing-card__price">
+          <span class="pricing-card__amount">&euro;5</span>
+          <span class="pricing-card__period">/maand basisabonnement</span>
+        </div>
+        <div class="pricing-card__plus">+</div>
+        <div class="pricing-card__fee">
+          <span class="pricing-card__fee-pct">8%</span>
+          <span class="pricing-card__fee-label">performance fee op netto winst</span>
+        </div>
+
+        <ul class="pricing-card__features">
+          <li>Alle strategieen beschikbaar</li>
+          <li>Persoonlijk dashboard met live monitoring</li>
+          <li>Verplichte stoploss-bescherming</li>
+          <li>24/7 geautomatiseerd handelen</li>
+          <li>Op elk moment stoppen of pauzeren</li>
+          <li>Geen opnamerechten op je account</li>
+        </ul>
+
+        <a href="/waitlist" class="btn btn--primary btn--large" style="width: 100%; justify-content: center;">
+          Schrijf je in voor early access
+        </a>
+      </div>
+
+      <div class="pricing-example">
+        <h2>Rekenvoorbeeld</h2>
+        <div class="grid-3">
+          <div class="card" style="text-align: center;">
+            <h4>Goed jaar</h4>
+            <p class="example-scenario">Inleg &euro;5.000, rendement 15%</p>
+            <p class="example-profit">Winst: &euro;750</p>
+            <p class="example-cost">Kosten: &euro;60 + &euro;60 = <strong>&euro;120</strong></p>
+            <p class="example-net">Netto voor jou: <strong>&euro;630</strong></p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <h4>Gemiddeld jaar</h4>
+            <p class="example-scenario">Inleg &euro;5.000, rendement 8%</p>
+            <p class="example-profit">Winst: &euro;400</p>
+            <p class="example-cost">Kosten: &euro;60 + &euro;32 = <strong>&euro;92</strong></p>
+            <p class="example-net">Netto voor jou: <strong>&euro;308</strong></p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <h4>Slecht jaar</h4>
+            <p class="example-scenario">Inleg &euro;5.000, rendement 0%</p>
+            <p class="example-profit">Winst: &euro;0</p>
+            <p class="example-cost">Kosten: &euro;60 + &euro;0 = <strong>&euro;60</strong></p>
+            <p class="example-net">Alleen basisabonnement</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .pricing-card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .pricing-card__price {
+    margin-top: 1.5rem;
+  }
+
+  .pricing-card__amount {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .pricing-card__period {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+  }
+
+  .pricing-card__plus {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    margin: 0.75rem 0;
+  }
+
+  .pricing-card__fee-pct {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .pricing-card__fee-label {
+    display: block;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .pricing-card__features {
+    list-style: none;
+    margin: 2rem 0;
+    text-align: left;
+  }
+
+  .pricing-card__features li {
+    padding: 0.5rem 0;
+    padding-left: 1.75rem;
+    position: relative;
+    color: var(--color-text-muted);
+  }
+
+  .pricing-card__features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-success);
+    font-weight: 700;
+  }
+
+  .pricing-example {
+    margin-top: 4rem;
+  }
+
+  .pricing-example h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .example-scenario {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .example-profit {
+    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .example-cost {
+    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .example-net {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: var(--color-success);
+  }
+</style>

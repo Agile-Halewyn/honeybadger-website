@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqs = [
+  {
+    q: 'Wat is HoneyBadger Bots?',
+    a: 'HoneyBadger is een platform dat geautomatiseerde crypto trading bots beheert op jouw Bitvavo account. Wij regelen de techniek, jij behoudt de controle over je geld.'
+  },
+  {
+    q: 'Is mijn geld veilig?',
+    a: 'Ja. Je crypto staat op jouw eigen Bitvavo account. Wij krijgen via een API-sleutel alleen handelsrechten, nooit opnamerechten. We kunnen je geld niet overmaken. Bij invoer valideren we automatisch dat de sleutel geen opnamerechten heeft.'
+  },
+  {
+    q: 'Welke exchange wordt ondersteund?',
+    a: 'Op dit moment ondersteunen we alleen Bitvavo, de grootste Nederlandse crypto exchange. Ondersteuning voor andere exchanges kan in de toekomst worden toegevoegd.'
+  },
+  {
+    q: 'Welke strategieen zijn beschikbaar?',
+    a: 'We bieden bewezen strategieen zoals DCA (Dollar Cost Averaging) en grid trading. Elke strategie heeft een duidelijk risicoprofiel. Je kiest zelf welke strategie past bij jouw situatie.'
+  },
+  {
+    q: 'Wat kost het?',
+    a: 'Een basisabonnement van €5 per maand plus 8% performance fee over je netto winst. Geen winst? Dan betaal je alleen het basisabonnement. Zie onze pricing pagina voor rekenvoorbeelden.'
+  },
+  {
+    q: 'Kan ik op elk moment stoppen?',
+    a: 'Ja, altijd. Je kunt bots pauzeren of volledig uitschakelen via je dashboard. Er is geen minimale contractduur.'
+  },
+  {
+    q: 'Wat is een stoploss?',
+    a: 'Een stoploss is een automatische bescherming die je bot stopt als het verlies een bepaald percentage bereikt. Bij HoneyBadger is een stoploss verplicht ingesteld bij elke bot, zodat je beschermd bent tegen ongecontroleerd verlies.'
+  },
+  {
+    q: 'Garanderen jullie winst?',
+    a: 'Nee. Crypto-trading brengt altijd risico\'s met zich mee en resultaten uit het verleden bieden geen garantie voor de toekomst. Onze bots gebruiken bewezen strategieen, maar verlies is mogelijk. Investeer alleen geld dat je kunt missen.'
+  },
+  {
+    q: 'Hoeveel moet ik minimaal inleggen?',
+    a: 'De minimale inleg hangt af van de gekozen strategie en de minimale ordergrootte op Bitvavo. Doorgaans kun je starten vanaf circa €100.'
+  },
+  {
+    q: 'Hoe kan ik meedoen?',
+    a: 'We zijn momenteel in early access. Schrijf je in op onze waitlist en we nemen contact met je op zodra er plek is.'
+  }
+];
+---
+
+<Base title="FAQ — HoneyBadger Bots" description="Veelgestelde vragen over HoneyBadger crypto trading bots.">
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1>Veelgestelde vragen</h1>
+        <p>Alles wat je wilt weten over HoneyBadger Bots.</p>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq">
+            <summary class="faq__question">{faq.q}</summary>
+            <div class="faq__answer">
+              <p>{faq.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div class="faq-contact">
+        <p>Staat je vraag er niet tussen? Neem contact op via <a href="mailto:info@honeybadgerbots.nl">info@honeybadgerbots.nl</a></p>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .faq {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__question {
+    padding: 1.25rem 0;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq__question::-webkit-details-marker { display: none; }
+
+  .faq__question::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: transform 0.2s;
+  }
+
+  .faq[open] .faq__question::after {
+    content: '−';
+  }
+
+  .faq__answer {
+    padding-bottom: 1.25rem;
+  }
+
+  .faq__answer p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .faq-contact {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--color-text-muted);
+  }
+</style>

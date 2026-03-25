@@ -1,0 +1,119 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="footer__logo">&#x1F9A1; HoneyBadger<span class="footer__accent">Bots</span></span>
+        <p class="footer__tagline">Geautomatiseerd crypto traden, zonder technische kennis.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__heading">Product</h4>
+        <ul class="footer__links">
+          <li><a href="/hoe-het-werkt">Hoe het werkt</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/waitlist">Early access</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__heading">Juridisch</h4>
+        <ul class="footer__links">
+          <li><a href="/juridisch/privacy">Privacy Policy</a></li>
+          <li><a href="/juridisch/voorwaarden">Algemene Voorwaarden</a></li>
+          <li><a href="/juridisch/disclaimer">Risicoverklaring</a></li>
+          <li><a href="/juridisch/cookies">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; {year} HoneyBadger Bots. Alle rechten voorbehouden.</p>
+      <p class="footer__risk">
+        Crypto-trading brengt risico's met zich mee. Resultaten uit het verleden bieden geen garantie voor de toekomst.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg-dark);
+    color: var(--color-text-light);
+    padding: 4rem 0 2rem;
+    margin-top: 5rem;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .footer__logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .footer__accent { color: var(--color-primary); }
+
+  .footer__tagline {
+    margin-top: 0.75rem;
+    color: #9ca3af;
+    font-size: 0.9375rem;
+    max-width: 280px;
+  }
+
+  .footer__heading {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+  }
+
+  .footer__links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .footer__links a {
+    color: #d1d5db;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer__links a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .footer__bottom {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #374151;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+
+  .footer__risk {
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    color: #4b5563;
+  }
+
+  @media (max-width: 768px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

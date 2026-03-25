@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Hoe het werkt — HoneyBadger Bots" description="Ontdek hoe HoneyBadger trading bots werken op je Bitvavo account.">
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1>Hoe het werkt</h1>
+        <p>Van aanmelding tot je eerste geautomatiseerde trade — dit is wat je kunt verwachten.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step-detail">
+          <div class="step-detail__marker">
+            <span class="step-detail__number">1</span>
+            <div class="step-detail__line"></div>
+          </div>
+          <div class="step-detail__content">
+            <h2>Maak een account aan</h2>
+            <p>Registreer bij HoneyBadger en log in op je persoonlijke dashboard. Je hebt een bestaand Bitvavo account nodig.</p>
+          </div>
+        </div>
+
+        <div class="step-detail">
+          <div class="step-detail__marker">
+            <span class="step-detail__number">2</span>
+            <div class="step-detail__line"></div>
+          </div>
+          <div class="step-detail__content">
+            <h2>Koppel je Bitvavo account</h2>
+            <p>Maak een API-sleutel aan op Bitvavo met <strong>alleen handelsrechten</strong>. Geef nooit opnamerechten — ons systeem valideert dit automatisch bij invoer. Je crypto blijft altijd op jouw eigen account.</p>
+          </div>
+        </div>
+
+        <div class="step-detail">
+          <div class="step-detail__marker">
+            <span class="step-detail__number">3</span>
+            <div class="step-detail__line"></div>
+          </div>
+          <div class="step-detail__content">
+            <h2>Kies een strategie</h2>
+            <p>Selecteer uit bewezen strategieen zoals DCA (Dollar Cost Averaging) en grid trading. Elke strategie heeft een duidelijk risicoprofiel en uitleg over hoe het werkt.</p>
+          </div>
+        </div>
+
+        <div class="step-detail">
+          <div class="step-detail__marker">
+            <span class="step-detail__number">4</span>
+            <div class="step-detail__line"></div>
+          </div>
+          <div class="step-detail__content">
+            <h2>Stel je allocatie in</h2>
+            <p>Bepaal hoeveel kapitaal je wilt inzetten. Stel een verplichte stoploss in voor extra bescherming. Je kunt dit op elk moment aanpassen.</p>
+          </div>
+        </div>
+
+        <div class="step-detail">
+          <div class="step-detail__marker">
+            <span class="step-detail__number">5</span>
+          </div>
+          <div class="step-detail__content">
+            <h2>Volg alles live</h2>
+            <p>Je bot handelt 24/7 automatisch. Via je persoonlijke dashboard zie je elke trade, je rendement, en de status van je bots in realtime. Pas instellingen aan of pauzeer wanneer je wilt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <h2>Beveiliging staat voorop</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>API-sleutel validatie</h3>
+          <p>Bij invoer controleert ons systeem automatisch dat je sleutel alleen handelsrechten heeft. Sleutels met opnamerechten worden geweigerd.</p>
+        </div>
+        <div class="card">
+          <h3>Versleutelde opslag</h3>
+          <p>Je API-sleutel wordt versleuteld opgeslagen en is nooit in leesbare vorm beschikbaar — ook niet voor ons.</p>
+        </div>
+        <div class="card">
+          <h3>Verplichte stoploss</h3>
+          <p>Elke bot heeft een verplichte stoploss-instelling. Dit beschermt je tegen ongecontroleerd verlies in volatiele markten.</p>
+        </div>
+        <div class="card">
+          <h3>Jouw account, jouw crypto</h3>
+          <p>We beheren nooit je geld. Alles staat op jouw eigen Bitvavo account. Je kunt op elk moment stoppen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta">
+      <h2>Overtuigd?</h2>
+      <p>Schrijf je in voor early access en wees een van de eersten.</p>
+      <a href="/waitlist" class="btn btn--primary btn--large">Schrijf je in</a>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .steps {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .step-detail {
+    display: flex;
+    gap: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .step-detail__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .step-detail__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .step-detail__line {
+    flex: 1;
+    width: 2px;
+    background: var(--color-border);
+    margin-top: 0.5rem;
+  }
+
+  .step-detail__content h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-detail__content p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .cta {
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .cta p {
+    color: var(--color-text-muted);
+    margin: 1rem 0 2rem;
+    font-size: 1.125rem;
+  }
+</style>

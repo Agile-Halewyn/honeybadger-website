@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Early access — HoneyBadger Bots" description="Schrijf je in voor early access bij HoneyBadger Bots.">
+
+  <section class="section">
+    <div class="container">
+      <div class="waitlist">
+        <div class="waitlist__content">
+          <span class="badge">Early access</span>
+          <h1>Wees er als eerste bij</h1>
+          <p>We laten geleidelijk nieuwe gebruikers toe. Schrijf je in en we nemen contact met je op zodra er plek is.</p>
+
+          <div class="waitlist__benefits">
+            <div class="waitlist__benefit">
+              <span>&#x2713;</span>
+              <span>Gratis tijdens de early access periode</span>
+            </div>
+            <div class="waitlist__benefit">
+              <span>&#x2713;</span>
+              <span>Directe toegang tot alle strategieen</span>
+            </div>
+            <div class="waitlist__benefit">
+              <span>&#x2713;</span>
+              <span>Persoonlijke onboarding</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="waitlist__form-wrapper">
+          <!--
+            Tijdelijk: Netlify Forms
+            Na VPS-migratie: POST naar app.honeybadgerbots.nl/api/waitlist
+          -->
+          <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="waitlist__form">
+            <input type="hidden" name="form-name" value="waitlist" />
+            <p class="hidden" aria-hidden="true">
+              <label>Niet invullen: <input name="bot-field" /></label>
+            </p>
+
+            <div class="form-group">
+              <label for="name">Naam</label>
+              <input type="text" id="name" name="name" placeholder="Je naam" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mailadres</label>
+              <input type="email" id="email" name="email" placeholder="je@email.nl" required />
+            </div>
+
+            <div class="form-group">
+              <label for="experience">Ervaring met crypto</label>
+              <select id="experience" name="experience">
+                <option value="">— Selecteer —</option>
+                <option value="beginner">Beginner — ik wil ermee starten</option>
+                <option value="some">Enige ervaring — ik koop/verkoop af en toe</option>
+                <option value="active">Actief — ik trade regelmatig</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--large" style="width: 100%; justify-content: center;">
+              Schrijf me in
+            </button>
+
+            <p class="form-privacy">
+              Door je in te schrijven ga je akkoord met onze
+              <a href="/juridisch/privacy">Privacy Policy</a>.
+              We gebruiken je e-mailadres alleen om je te informeren over HoneyBadger.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .waitlist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .waitlist__content h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .waitlist__content > p {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .waitlist__benefits {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .waitlist__benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .waitlist__benefit span:first-child {
+    color: var(--color-success);
+    font-weight: 700;
+  }
+
+  .waitlist__form-wrapper {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+  }
+
+  .waitlist__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .form-group label {
+    font-weight: 500;
+    font-size: 0.9375rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+    border-color: var(--color-primary);
+  }
+
+  .form-privacy {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .hidden { display: none; }
+
+  @media (max-width: 768px) {
+    .waitlist {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
