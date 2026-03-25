@@ -74,20 +74,20 @@ netlify.toml          # Build config + .com → .nl redirect
 ## TODO voor go-live
 
 ### Fase 1: Technisch
-- [ ] `npm install` en `npm run dev` draaien
-- [ ] Banner afbeelding toevoegen in `src/assets/`
-- [ ] GitHub repo aanmaken en code pushen
-- [ ] Netlify koppelen aan repo
-- [ ] Custom domain instellen (honeybadgerbots.nl)
-- [ ] Plausible Analytics activeren (uncomment script in Base.astro)
-- [ ] UptimeRobot instellen
+- [x] `npm install` en `npm run dev` draaien
+- [x] Banner afbeelding toevoegen in `src/assets/`
+- [x] GitHub repo aanmaken en code pushen
+- [x] Netlify koppelen aan repo
+- [x] Custom domain instellen (honeybadgerbots.nl)
+- [x] Plausible Analytics activeren (uncomment script in Base.astro)
+- [x] UptimeRobot instellen
 
 ### Fase 2: Content
-- [ ] Landing page copy finaliseren
-- [ ] "Hoe het werkt" tekst reviewen
-- [ ] Pricing bevestigen
-- [ ] FAQ aanvullen op basis van feedback
-- [ ] Banner/hero afbeelding designen of laten maken
+- [x] Landing page copy finaliseren
+- [x] "Hoe het werkt" tekst reviewen
+- [x] Pricing bevestigen
+- [x] FAQ aanvullen op basis van feedback
+- [x] Banner/hero afbeelding designen of laten maken
 
 ### Fase 3: Juridisch
 - [ ] Juridisch adviesgesprek plannen
@@ -99,6 +99,11 @@ netlify.toml          # Build config + .com → .nl redirect
 ### Fase 4: Na VPS-migratie
 - [ ] Waitlist formulier migreren van Netlify Forms naar Flask API
 - [ ] "Inloggen" knop updaten naar app.honeybadgerbots.nl/login
+
+### Backlog (Ideeën voor later)
+- [ ] Specifieke 'Prestaties & Strategieën' pagina bouwen (backtests vs live data tonen om verwachtingen te managen)
+- [ ] Kennisbank/Informatieve Hub opzetten (zoeken en filters)
+- [ ] Links naar educatieve artikelen (bijv. de Bitvavo actuele marktsituaties en uitleg) toevoegen in de FAQ sectie
 
 ## Gerelateerde documenten
 

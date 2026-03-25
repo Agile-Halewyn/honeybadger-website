@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
 ---
 
 <Base title="HoneyBadger Bots — Geautomatiseerd crypto traden">
@@ -9,18 +10,16 @@ import Base from '../layouts/Base.astro';
     <div class="container hero__inner">
       <div class="hero__content">
         <span class="badge">Nu in early access</span>
-        <h1>Crypto trading bots die voor je werken</h1>
+        <h1>Automatiseer je crypto trading zonder de controle te verliezen</h1>
         <p class="hero__sub">
-          Professionele handelsstrategieen, automatisch uitgevoerd op jouw Bitvavo account.
-          Geen technische kennis nodig. Jij behoudt volledige controle.
+          Koppel eenmalig je Bitvavo account, kies een professionele strategie en laat de bot 24/7 het werk doen. Veiliger dan dit wordt het niet: jouw crypto blijft altijd op je eigen exchange.
         </p>
         <div class="hero__actions">
           <a href="/waitlist" class="btn btn--primary btn--large">Schrijf je in voor early access</a>
-          <a href="/hoe-het-werkt" class="btn btn--secondary btn--large">Hoe het werkt</a>
+          <a href="/hoe-het-werkt" class="btn btn--secondary">Hoe het werkt &rarr;</a>
         </div>
       </div>
-      <!-- TODO: banner afbeelding toevoegen via <Image /> component -->
-      <!-- <Image src={import('../assets/banner.png')} alt="HoneyBadger dashboard" widths={[640, 1024, 1600]} formats={['webp', 'avif']} /> -->
+      <Image src={import('../assets/banner.png')} alt="HoneyBadger dashboard dashboard overzicht" widths={[640, 1024, 1600]} formats={['webp', 'avif']} />  
     </div>
   </section>
 
@@ -29,23 +28,23 @@ import Base from '../layouts/Base.astro';
     <div class="container">
       <div class="section__header">
         <h2>Waarom HoneyBadger?</h2>
-        <p>Trading bots zijn krachtig, maar tot nu toe alleen toegankelijk voor techneuten. Wij veranderen dat.</p>
+        <p>Trading bots waren tot nu toe alleen voor de techneuten of grote fondsen. Wij maken professioneel crypto-beheer toegankelijk voor iedereen.</p>
       </div>
       <div class="grid-3">
         <div class="card">
           <div class="card__icon">&#x1F916;</div>
-          <h3>Volledig geautomatiseerd</h3>
-          <p>Onze bots handelen 24/7 op basis van bewezen strategieen. DCA, grid trading en meer — zonder dat jij iets hoeft te doen.</p>
+          <h3>Handelt 24/7 voor jou</h3>
+          <p>Profiteer dag en nacht van marktbewegingen met bewezen strategieën zoals DCA en grid trading. Terwijl jij slaapt, blijft de bot waakzaam.</p>
         </div>
         <div class="card">
           <div class="card__icon">&#x1F512;</div>
-          <h3>Jij houdt de controle</h3>
-          <p>Je crypto blijft op jouw eigen Bitvavo account. Wij krijgen alleen handelsrechten, nooit opnamerechten.</p>
+          <h3>Jouw geld, jouw regels</h3>
+          <p>Je crypto staat en blijft veilig op je eigen Bitvavo account. Via API-sleutels krijgen wij enkel handelsrechten, nooit toestemming om op te nemen.</p>
         </div>
         <div class="card">
-          <div class="card__icon">&#x1F4CA;</div>
-          <h3>Volledig transparant</h3>
-          <p>Elke trade is zichtbaar in je persoonlijke dashboard. Geen verborgen kosten, geen ondoorzichtige strategieen.</p>
+          <div class="card__icon">&#x1F4F1;</div>
+          <h3>Zowel simpel als pro</h3>
+          <p>Start direct en simpel via een strak, intuïtief dashboard. Liever diep in de data duiken? Voor de analist is er een geavanceerde view vol met gedetailleerde grafieken en handelsstatistieken.</p>
         </div>
       </div>
     </div>
@@ -55,23 +54,23 @@ import Base from '../layouts/Base.astro';
   <section class="section">
     <div class="container">
       <div class="section__header">
-        <h2>In drie stappen aan de slag</h2>
+        <h2>Binnen 3 stappen aan de slag</h2>
       </div>
       <div class="grid-3">
         <div class="step">
           <span class="step__number">1</span>
-          <h3>Account aanmaken</h3>
-          <p>Registreer en koppel je Bitvavo account via een beveiligde API-sleutel (alleen handelsrechten).</p>
+          <h3>Koppel je account</h3>
+          <p>Maak een HoneyBadger account aan en verbind je Bitvavo account veilig via een exclusieve API-sleutel.</p>
         </div>
         <div class="step">
           <span class="step__number">2</span>
-          <h3>Strategie kiezen</h3>
-          <p>Selecteer een strategie die past bij jouw risicoprofiel en bepaal hoeveel kapitaal je wilt inzetten.</p>
+          <h3>Kies & configureer</h3>
+          <p>Selecteer een professionele bot, bepaal met welke inleg hij mag werken en stel eventuele eigen limieten in.</p>
         </div>
         <div class="step">
           <span class="step__number">3</span>
-          <h3>Bot activeert</h3>
-          <p>De bot begint automatisch met handelen. Volg alles live via je dashboard en pas instellingen aan wanneer je wilt.</p>
+          <h3>Activeer & volg live</h3>
+          <p>Geef je bot de 'Go' en leun achterover. Monitor alle trades en het rendement eenvoudig via je persoonlijke dashboard.</p>
         </div>
       </div>
       <div class="section__footer">
@@ -96,8 +95,27 @@ import Base from '../layouts/Base.astro';
     padding: 5rem 0 4rem;
   }
 
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4rem;
+  }
+
   .hero__content {
-    max-width: 640px;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
   }
 
   .hero__content h1 {
@@ -109,13 +127,6 @@ import Base from '../layouts/Base.astro';
     font-size: 1.1875rem;
     color: var(--color-text-muted);
     line-height: 1.6;
-  }
-
-  .hero__actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
   }
 
   .card__icon {
@@ -134,6 +145,21 @@ import Base from '../layouts/Base.astro';
 
   .step {
     text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 960px) {
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 60%;
+      right: -40%;
+      height: 2px;
+      background-color: var(--color-border);
+      z-index: -1;
+    }
   }
 
   .step__number {

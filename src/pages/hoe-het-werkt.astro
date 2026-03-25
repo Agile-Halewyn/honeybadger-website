@@ -18,8 +18,8 @@ import Base from '../layouts/Base.astro';
             <div class="step-detail__line"></div>
           </div>
           <div class="step-detail__content">
-            <h2>Maak een account aan</h2>
-            <p>Registreer bij HoneyBadger en log in op je persoonlijke dashboard. Je hebt een bestaand Bitvavo account nodig.</p>
+            <h3>Maak een account aan</h3>
+            <p>Registreer veilig bij HoneyBadger en log in op je persoonlijke dashboard. Je hebt alleen een bestaand Bitvavo account nodig om te starten.</p>
           </div>
         </div>
 
@@ -29,8 +29,8 @@ import Base from '../layouts/Base.astro';
             <div class="step-detail__line"></div>
           </div>
           <div class="step-detail__content">
-            <h2>Koppel je Bitvavo account</h2>
-            <p>Maak een API-sleutel aan op Bitvavo met <strong>alleen handelsrechten</strong>. Geef nooit opnamerechten — ons systeem valideert dit automatisch bij invoer. Je crypto blijft altijd op jouw eigen account.</p>
+            <h3>Koppel je exchange account</h3>
+            <p>Maak een beveiligde API-sleutel aan op je exchange (bijv. Bitvavo). Zorg ervoor dat je <strong>uitsluitend handelsrechten</strong> activeert. Met deze veilige afbakening blijft jouw crypto direct en 100% in jouw eigen beheer.</p>
           </div>
         </div>
 
@@ -40,8 +40,8 @@ import Base from '../layouts/Base.astro';
             <div class="step-detail__line"></div>
           </div>
           <div class="step-detail__content">
-            <h2>Kies een strategie</h2>
-            <p>Selecteer uit bewezen strategieen zoals DCA (Dollar Cost Averaging) en grid trading. Elke strategie heeft een duidelijk risicoprofiel en uitleg over hoe het werkt.</p>
+            <h3>Kies een strategie</h3>
+            <p>Selecteer een van onze professionele bots, gebaseerd op bewezen strategieën zoals DCA en grid trading. Bij elke bot zie je direct het risicoprofiel en historische prestaties.</p>
           </div>
         </div>
 
@@ -51,8 +51,8 @@ import Base from '../layouts/Base.astro';
             <div class="step-detail__line"></div>
           </div>
           <div class="step-detail__content">
-            <h2>Stel je allocatie in</h2>
-            <p>Bepaal hoeveel kapitaal je wilt inzetten. Stel een verplichte stoploss in voor extra bescherming. Je kunt dit op elk moment aanpassen.</p>
+            <h3>Stel je allocatie in</h3>
+            <p>Bepaal zelf met welk gedeelte van je portfolio de bot mag handelen. Wij traden uitsluitend op de 'Spot' markt. Dit betekent geen gevaarlijke hefbomen (leverage) en dus nooit risico op liquidatie van je account.</p>
           </div>
         </div>
 
@@ -61,8 +61,8 @@ import Base from '../layouts/Base.astro';
             <span class="step-detail__number">5</span>
           </div>
           <div class="step-detail__content">
-            <h2>Volg alles live</h2>
-            <p>Je bot handelt 24/7 automatisch. Via je persoonlijke dashboard zie je elke trade, je rendement, en de status van je bots in realtime. Pas instellingen aan of pauzeer wanneer je wilt.</p>
+            <h3>Volg alles live</h3>
+            <p>De bot doet het werk, 24/7. Bekijk je actieve posities en trade-geschiedenis eenvoudig via je dashboard. Jij behoudt altijd de controle en kunt bots op elk moment pauzeren.</p>
           </div>
         </div>
       </div>
@@ -76,20 +76,20 @@ import Base from '../layouts/Base.astro';
       </div>
       <div class="grid-2">
         <div class="card">
-          <h3>API-sleutel validatie</h3>
-          <p>Bij invoer controleert ons systeem automatisch dat je sleutel alleen handelsrechten heeft. Sleutels met opnamerechten worden geweigerd.</p>
+          <h3 class="card__title-inline"><span class="card__icon-inline">&#x1F512;</span> Handelsrechten per design</h3>
+          <p>Onze architectuur (gebouwd op Freqtrade) is uitsluitend ingericht om orders uit te voeren. Wij vragen je expliciet een sleutel aan te maken zonder opnamerechten. Zelfs in het onwaarschijnlijke geval dat ons systeem gecompromitteerd raakt, kan je crypto vermogen nooit worden weggesluisd.</p>
         </div>
         <div class="card">
-          <h3>Versleutelde opslag</h3>
-          <p>Je API-sleutel wordt versleuteld opgeslagen en is nooit in leesbare vorm beschikbaar — ook niet voor ons.</p>
+          <h3 class="card__title-inline"><span class="card__icon-inline">&#x1F5DE;</span> Versleutelde opslag</h3>
+          <p>Je API-sleutel wordt veilig (ge\-encrypt) opgeslagen op onze database in de EU. Zelfs wij kunnen jouw sleutel nooit in ware vorm ontcijferen na de koppeling.</p>
         </div>
         <div class="card">
-          <h3>Verplichte stoploss</h3>
-          <p>Elke bot heeft een verplichte stoploss-instelling. Dit beschermt je tegen ongecontroleerd verlies in volatiele markten.</p>
+          <h3 class="card__title-inline"><span class="card__icon-inline">&#x1F6E1;</span> HODL-vriendelijke aanpak</h3>
+          <p>Weet de markt zwaar te dalen? Geen paniek. Omdat we uitsluitend 'Spot' handelen (zoals in BTC), kun je een vaststaande trade eenvoudig vasthouden (HODL). Zo komt de bot direct weer vrij voor nieuwe kansen.</p>
         </div>
         <div class="card">
-          <h3>Jouw account, jouw crypto</h3>
-          <p>We beheren nooit je geld. Alles staat op jouw eigen Bitvavo account. Je kunt op elk moment stoppen.</p>
+          <h3 class="card__title-inline"><span class="card__icon-inline">&#x1F3E6;</span> Jouw geld, jouw beheer</h3>
+          <p>HoneyBadger raakt jouw tegoeden niet aan en verwerkt geen crypto storten of opnames. Alles draait in jouw naam op je eigen, verzekerde Bitvavo account.</p>
         </div>
       </div>
     </div>
@@ -144,9 +144,10 @@ import Base from '../layouts/Base.astro';
     margin-top: 0.5rem;
   }
 
-  .step-detail__content h2 {
-    font-size: 1.25rem;
+  .step-detail__content h3 {
+    font-size: 1.125rem;
     margin-bottom: 0.5rem;
+    color: var(--color-accent);
   }
 
   .step-detail__content p {
@@ -164,5 +165,17 @@ import Base from '../layouts/Base.astro';
     color: var(--color-text-muted);
     margin: 1rem 0 2rem;
     font-size: 1.125rem;
+  }
+
+  .card__title-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card__icon-inline {
+    font-size: 1.75rem;
+    line-height: 1;
   }
 </style>
