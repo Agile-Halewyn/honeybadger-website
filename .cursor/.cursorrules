@@ -1,0 +1,32 @@
+# Cursor Rules — HoneyBadger Website
+# Versie: 1.0 (IDE-agnostisch adapter)
+# Datum: 2026-03-31
+#
+# ⚠️  Dit bestand is een ADAPTER, geen bron van waarheid.
+# Alle gedetailleerde kennis staat in .github/skills/ of AGENTS.md
+# Voeg nieuwe kennis TOE aan de skills, niet aan dit bestand.
+
+---
+
+## Navigatie — skills per taak
+
+| Taak | Skill |
+|---|---|
+| Astro components, layouts, pages | `.github/skills/astro-frontend/SKILL.md` |
+| Content, pricing, brand voice | `.github/skills/website-content/SKILL.md` |
+
+Lees ook `AGENTS.md` voor de volledige skills-index en design tokens.
+
+---
+
+## De meest kritische regels
+
+1. **Design Tokens**: Gebruik ALTIJD de `var(--color-*)` variabelen uit `global.css`. Hardcodeer nooit hex-kleuren.
+2. **Mobile First**: Ontwikkel altijd voor 375px breedte als startpunt.
+3. **SEO**: Elke pagina moet een unieke `<title>` en `<meta name="description">` hebben.
+4. **Performance**: Minimaliseer externe scripts; gebruik native Astro optimalisaties voor images.
+5. **Brand Voice**: Spreek de bezoeker aan in de "u" of "jij" vorm (kies consistent op basis van `hb-brand-guardian`).
+
+---
+
+*Voor de volledige methodologie: zie `.github/skills/` of `AGENTS.md`*
