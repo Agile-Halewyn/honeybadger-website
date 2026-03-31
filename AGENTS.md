@@ -1,17 +1,18 @@
 ---
-name: honeybadger-website-hub
+name: HoneyBadger Website Hub
 description: Main entry point for AI agents working on the HoneyBadger Website (Astro project).
 color: #f59e0b
 emoji: 🌐
-vibe: Clean, performant, and brand-aligned.
+vibe: Clean, performant, and brand-aligned. English-first instructions.
 ---
 
 # AGENTS.md — HoneyBadger Website Hub
 
-Welcome, Agent. This project is the public face of HoneyBadger. We prioritize performance, SEO, and the "Jij houdt de controle" brand identity.
+Welcome, Agent. This project is the public face of HoneyBadger. We prioritize performance, SEO, and the "Jij houdt de controle" brand identity. One source of truth (`.github/skills/`), many adapters.
+
+---
 
 ## 🎯 MANDATORY: Load the Relevant Skill
-
 Based on your current task, load the corresponding skill from `.github/skills/` or global skills:
 
 | Capability | Path | Use for... |
@@ -25,20 +26,23 @@ Based on your current task, load the corresponding skill from `.github/skills/` 
 | **UX Architect** | [C:\Users\agile\.gemini\antigravity\skills\hb-ux-architect\SKILL.md](file:///C:/Users/agile/.gemini/antigravity/skills/hb-ux-architect/SKILL.md) | 3-step funnel logic and mobile-first navigation. |
 | **SEO Specialist** | [C:\Users\agile\.gemini\antigravity\skills\hb-seo-specialist\SKILL.md](file:///C:/Users/agile/.gemini/antigravity/skills/hb-seo-specialist\SKILL.md) | Meta tags, heading structure, and keyword optimization. |
 
-## 📁 Repository Reference
+---
 
+## 📁 Repository Reference
 - **Tech Stack**: Astro 5.7+ (Static Site Generation), Vanilla CSS, Design Tokens.
 - **Project Goal**: High-converting landing page for HoneyBadger Trader.
 - **Design Tokens**: See `src/styles/global.css` for the source of truth for colors and spacing.
 
+---
+
 ## 🖥️ IDE Adapters
 
-| IDE | Bestand | Status |
+| IDE | Configuration File | Status |
 |---|---|---|
-| Cursor | `.cursor/.cursorrules` | ✅ Thin adapter → skills |
-| VS Code / Copilot | `.github/copilot-instructions.md` | ⚠️ Missing |
-| Antigravity / Codex | `AGENTS.md` (dit bestand) | ✅ Volledige router |
-| Claude Code / CLI | `CLAUDE.md` | ✅ Thin adapter → skills |
+| Cursor | `.cursor/.cursorrules` | ✅ Active (English) |
+| VS Code / Copilot | `.github/copilot-instructions.md` | ✅ Active (English) |
+| Antigravity / Codex | `AGENTS.md` (this file) | ✅ Active (English) |
+| Claude Code / CLI | `CLAUDE.md` | ✅ Active (English) |
 
 ---
-*Updated: March 2026 (IDE-agnostisch setup)*
+*Updated: March 2026 (IDE-Agnostic English Unification)*

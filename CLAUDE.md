@@ -1,16 +1,19 @@
 # CLAUDE.md — HoneyBadger Website
-# Router voor Claude Code / Antigravity CLI
-# Versie: 1.0 | 2026-03-31
+# Router for Claude Code / Antigravity CLI
+# Version: 1.1 (English adapter)
+# Date: 2026-03-31
 #
-# Dit bestand is een dunne router. Alle gedetailleerde kennis staat in .github/skills/
+# This file is a thin router. All detailed knowledge resides in .github/skills/
 
-## Lees eerst
+## Essential Reading
 
-- **AGENTS.md** (repo root) — skills-overzicht, tech stack, projectdoel
-- **src/styles/global.css** — Design tokens en styling system
+- **AGENTS.md** (repo root) — Skill index, tech stack, project goals.
+- **src/styles/global.css** — Design tokens and styling system.
 
-## Skills — gedetailleerde workflows per taak
+## Task-based Skill Index
 
+| Task | Skill Path |
+|---|---|
 | Astro components, layouts, pages | `.github/skills/astro-frontend/SKILL.md` |
 | Code Reviewer (Linter, A11y) | `.github/skills/astro-code-reviewer/SKILL.md` |
 | SEO Strategist (Keywords, Meta) | `.github/skills/seo-strategist/SKILL.md` |
@@ -19,18 +22,18 @@
 | Brand consistency (Dutch) | Global: `hb-brand-guardian` |
 | SEO & Meta tags (Specialist) | Global: `hb-seo-specialist` |
 
-## Tech Stack
+## Tech Stack Overview
 
 - **Framework**: Astro 5.7+ (SSG)
 - **Styling**: Vanilla CSS with Design Tokens
-- **Performance**: 100/100 Lighthouse target
-- **Deployment**: Static hosting (Netlify/Vercel target)
+- **Performance**: Lighthouse 100/100 target
+- **Quality**: Pre-push audit mandatory
 
-## Veiligheid & Privacy
+## General Privacy & Compliance
 
-- GDPR/AVG compliant (juridische pagina's)
-- Geen trackers zonder cookie-banner
-- Formulier-validatie (waitlist) op client + server
+- GDPR (AVG) compliant.
+- No third-party trackers without explicit consent.
+- Encryption for waitlist registrations (at rest/transit).
 
 ---
-*Updated: March 2026*
+*Updated: March 2026 (English Hub)*

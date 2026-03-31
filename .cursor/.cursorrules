@@ -1,35 +1,44 @@
 # Cursor Rules — HoneyBadger Website
-# Versie: 1.0 (IDE-agnostisch adapter)
-# Datum: 2026-03-31
+# Version: 1.1 (English adapter)
+# Date: 2026-03-31
 #
-# ⚠️  Dit bestand is een ADAPTER, geen bron van waarheid.
-# Alle gedetailleerde kennis staat in .github/skills/ of AGENTS.md
-# Voeg nieuwe kennis TOE aan de skills, niet aan dit bestand.
+# ⚠️  This file is an ADAPTER, not a source of truth.
+# All detailed knowledge resides in .github/skills/ or AGENTS.md.
+# Add new knowledge to the skills, not to this file.
 
 ---
 
-## Navigatie — skills per taak
+## Navigation — Skills by Task
 
-| Taak | Skill |
+| Task | Skill Path |
 |---|---|
 | Astro components, layouts, pages | `.github/skills/astro-frontend/SKILL.md` |
-| Code Reviewer (Linter, A11y) | `.github/skills/astro-code-reviewer/SKILL.md` |
-| SEO Strategist (Keywords, Meta) | `.github/skills/seo-strategist/SKILL.md` |
-| Security Auditor (GDPR, Legal) | `.github/skills/security-auditor/SKILL.md` |
+| Code Reviewer (Subagent) | `.github/skills/astro-code-reviewer/SKILL.md` |
+| SEO Strategist (Subagent) | `.github/skills/seo-strategist/SKILL.md` |
+| Security Auditor (Subagent) | `.github/skills/security-auditor/SKILL.md` |
 | Content, pricing, brand voice | `.github/skills/website-content/SKILL.md` |
 
-Lees ook `AGENTS.md` voor de volledige skills-index en design tokens.
+Review **AGENTS.md** for the full skill index and brand guidelines.
 
 ---
 
-## De meest kritische regels
+## Critical Rules Summary
 
-1. **Design Tokens**: Gebruik ALTIJD de `var(--color-*)` variabelen uit `global.css`. Hardcodeer nooit hex-kleuren.
-2. **Mobile First**: Ontwikkel altijd voor 375px breedte als startpunt.
-3. **SEO**: Elke pagina moet een unieke `<title>` en `<meta name="description">` hebben.
-4. **Performance**: Minimaliseer externe scripts; gebruik native Astro optimalisaties voor images.
-5. **Brand Voice**: Spreek de bezoeker aan in de "u" of "jij" vorm (kies consistent op basis van `hb-brand-guardian`).
+1. **Design Tokens**: ALWAYS use the `var(--color-*)` design tokens from `global.css`. Never hardcode hex values.
+2. **Mobile First**: Develop for 375px width as the baseline.
+3. **SEO**: Every page require unique `<title>`, `<meta name="description">` and `og:*` tags.
+4. **Performance**: Minimize client-side JS; use Astro optimal defaults for images.
+5. **Brand Tone**: Follow the "Jij houdt de controle" Dutch brand persona. Use "U/Jij" consistently.
+6. **No Placeholder Content**: Use real content or realistic generated content.
 
 ---
 
-*Voor de volledige methodologie: zie `.github/skills/` of `AGENTS.md`*
+## Stack Reference
+
+- **Core**: Astro 5.7+ SSG.
+- **Styling**: Vanilla CSS (no Tailwind default).
+- **Deployment**: Static cloud hosting (target Netlify/Vercel).
+
+---
+
+*For the full methodology: see `.github/skills/` or `AGENTS.md`*
