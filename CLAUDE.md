@@ -11,12 +11,13 @@
 
 ## Skills — gedetailleerde workflows per taak
 
-| Taak | Skill |
-|---|---|
 | Astro components, layouts, pages | `.github/skills/astro-frontend/SKILL.md` |
+| Code Reviewer (Linter, A11y) | `.github/skills/astro-code-reviewer/SKILL.md` |
+| SEO Strategist (Keywords, Meta) | `.github/skills/seo-strategist/SKILL.md` |
+| Security Auditor (GDPR, Legal) | `.github/skills/security-auditor/SKILL.md` |
 | Content, pricing, brand voice | `.github/skills/website-content/SKILL.md` |
 | Brand consistency (Dutch) | Global: `hb-brand-guardian` |
-| SEO & Meta tags | Global: `hb-seo-specialist` |
+| SEO & Meta tags (Specialist) | Global: `hb-seo-specialist` |
 
 ## Tech Stack
 

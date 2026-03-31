@@ -13,6 +13,9 @@
 | Taak | Skill |
 |---|---|
 | Astro components, layouts, pages | `.github/skills/astro-frontend/SKILL.md` |
+| Code Reviewer (Linter, A11y) | `.github/skills/astro-code-reviewer/SKILL.md` |
+| SEO Strategist (Keywords, Meta) | `.github/skills/seo-strategist/SKILL.md` |
+| Security Auditor (GDPR, Legal) | `.github/skills/security-auditor/SKILL.md` |
 | Content, pricing, brand voice | `.github/skills/website-content/SKILL.md` |
 
 Lees ook `AGENTS.md` voor de volledige skills-index en design tokens.
