@@ -28,3 +28,4 @@ The website should guide users toward the waitlist/app in 3 clear steps:
 
 - Ensure the footer contains links to Privacy Policy and Terms of Service.
 - Disclaimer: "Crypto trading involves risk" must be visible on the home page and pricing page.
+- Disclaimer text (Dutch): "Handelen in crypto brengt risico's met zich mee."
