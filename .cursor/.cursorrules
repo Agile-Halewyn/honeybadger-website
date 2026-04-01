@@ -17,6 +17,9 @@
 | SEO Strategist (Subagent) | `.github/skills/seo-strategist/SKILL.md` |
 | Security Auditor (Subagent) | `.github/skills/security-auditor/SKILL.md` |
 | Content, pricing, brand voice | `.github/skills/website-content/SKILL.md` |
+| PR Comments | `.github/skills/processing-pr-comments/SKILL.md` |
+| Debugging | `.github/skills/systematic-debugging/SKILL.md` |
+| TDD Workflow | `.github/skills/test-driven-development/SKILL.md` |
 
 Review **AGENTS.md** for the full skill index and brand guidelines.
 

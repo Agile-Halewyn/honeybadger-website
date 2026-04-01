@@ -25,6 +25,9 @@ Based on your current task, load the corresponding skill from `.github/skills/` 
 | **Brand Guardian** | Global: `hb-brand-guardian` | Ensuring the Dutch "safe crypto" brand voice. |
 | **UX Architect** | Global: `hb-ux-architect` | 3-step funnel logic and mobile-first navigation. |
 | **SEO Specialist** | Global: `hb-seo-specialist` | Meta tags, heading structure, and keyword optimization. |
+| **PR Comments** | [.github/skills/processing-pr-comments/SKILL.md](.github/skills/processing-pr-comments/SKILL.md) | Responding to code review feedback. |
+| **Debugging** | [.github/skills/systematic-debugging/SKILL.md](.github/skills/systematic-debugging/SKILL.md) | Systematic bug finding and regression testing. |
+| **TDD Workflow** | [.github/skills/test-driven-development/SKILL.md](.github/skills/test-driven-development/SKILL.md) | Test-driven development methodology. |
 
 ---
 

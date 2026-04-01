@@ -21,6 +21,9 @@
 | Content, pricing, brand voice | `.github/skills/website-content/SKILL.md` |
 | Brand consistency (Dutch) | Global: `hb-brand-guardian` |
 | SEO & Meta tags (Specialist) | Global: `hb-seo-specialist` |
+| PR Comments | [.github/skills/processing-pr-comments/SKILL.md](.github/skills/processing-pr-comments/SKILL.md) |
+| Debugging | [.github/skills/systematic-debugging/SKILL.md](.github/skills/systematic-debugging/SKILL.md) |
+| TDD Workflow | [.github/skills/test-driven-development/SKILL.md](.github/skills/test-driven-development/SKILL.md) |
 
 ## Tech Stack Overview
 
