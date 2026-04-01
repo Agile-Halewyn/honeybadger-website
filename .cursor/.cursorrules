@@ -1,0 +1,49 @@
+# Cursor Rules — HoneyBadger Website
+# Version: 1.1 (English adapter)
+# Date: 2026-03-31
+#
+# ⚠️  This file is an ADAPTER, not a source of truth.
+# All detailed knowledge resides in .github/skills/ or AGENTS.md.
+# Add new knowledge to the skills, not to this file.
+
+---
+
+## Navigation — Skills by Task
+
+| Task | Skill Path |
+|---|---|
+| Astro components, layouts, pages | `.github/skills/astro-frontend/SKILL.md` |
+| Code Reviewer (Subagent) | `.github/skills/astro-code-reviewer/SKILL.md` |
+| SEO Strategist (Subagent) | `.github/skills/seo-strategist/SKILL.md` |
+| Security Auditor (Subagent) | `.github/skills/security-auditor/SKILL.md` |
+| Content, pricing, brand voice | `.github/skills/website-content/SKILL.md` |
+| PR Comments | `.github/skills/processing-pr-comments/SKILL.md` |
+| Debugging | `.github/skills/systematic-debugging/SKILL.md` |
+| TDD Workflow | `.github/skills/test-driven-development/SKILL.md` |
+
+Review **AGENTS.md** for the full skill index and brand guidelines.
+
+---
+
+## Canonical rules — directory
+
+The **detailed rules** live in the skill docs under `.github/skills/` and in `AGENTS.md`. Use this section only as a pointer:
+
+- **Design, layout, and tokens** → `.github/skills/astro-frontend/SKILL.md`
+- **Code quality and security checks** → `.github/skills/astro-code-reviewer/SKILL.md` and `.github/skills/security-auditor/SKILL.md`
+- **SEO strategy and metadata requirements** → `.github/skills/seo-strategist/SKILL.md`
+- **Content, tone of voice, and brand rules** → `.github/skills/website-content/SKILL.md` and `AGENTS.md`
+
+Always update and consult those docs for the exact, up-to-date rules; do **not** add detailed rules to this adapter.
+
+---
+
+## Stack Reference
+
+- **Core**: Astro 5.7+ SSG.
+- **Styling**: Vanilla CSS (no Tailwind default).
+- **Deployment**: Static cloud hosting (target Netlify/Vercel).
+
+---
+
+*For the full methodology: see `.github/skills/` or `AGENTS.md`*
