@@ -1,11 +1,12 @@
 # Fetch Copilot PR review comments via GitHub CLI
-# Usage: .\scripts\fetch-copilot-comments.ps1 [PR_NUMBER]
+# Usage: .\scripts\fetch-copilot-comments.ps1 -PrNumber [N]  [-Owner org] [-Repo name]
+# Default repository: Agile-Halewyn/honeybadger-website
 # Output: Markdown file with comments for Cursor to process
 
 param(
     [int]$PrNumber = 15,
     [string]$Owner = "Agile-Halewyn",
-    [string]$Repo = "HoneyBadgerTrader"
+    [string]$Repo = "honeybadger-website"
 )
 
 if (-not (Test-Path "docs")) { New-Item -ItemType Directory -Path "docs" | Out-Null }

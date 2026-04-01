@@ -2,7 +2,7 @@
 
 > **Gebruik:** Na elke PR waar Copilot automatic review opmerkingen heeft geplaatst  
 > **Vereisten:** `gh auth login` uitgevoerd, scripts/ aanwezig in repo  
-> **Locatie:** Sla dit bestand op als `scripts/process-review-comments.md` in de repo
+> **Locatie:** `scripts/CURSOR-PROCESS-REVIEW-COMMENTS.md` (canonieke bestandsnaam in deze repo)
 
 > **Source of truth:** `scripts/README.md` is de centrale runbook voor Copilot PR review handling. Dit document is Cursor-specifieke uitvoering en volgt die runbook.
 
@@ -53,9 +53,8 @@ Stap 2b – Opmerking is niet van toepassing (leg uit waarom)
     .\scripts\reply-copilot-comment.ps1 -PrNumber [N] -CommentId [ID uit md bestand] -Reply "Not applicable: [reden]" -NoResolve
 
 Stap 3 – Na alle opmerkingen
-  - Draai: black .
-  - Draai: ruff check --fix .
-  - Controleer: python app.py start zonder errors
+  - Draai: npm run build
+  - Draai: npx astro check
   - Commit: fix(review): address Copilot review comments PR#[N]
   - Push naar bestaande PR branch
 
@@ -76,10 +75,8 @@ VOLGORDE:
 SUCCESS CRITERIA:
 - [ ] Alle opmerkingen in docs/copilot-comments-pr[N].md beantwoord
 - [ ] Alle threads resolved (of NoResolve met uitleg)
-- [ ] black . geeft geen wijzigingen
-- [ ] ruff check . geeft geen errors
-- [ ] python app.py start zonder errors
-- [ ] pytest slaagt (coverage >= 80%)
+- [ ] npm run build slaagt
+- [ ] npx astro check zonder errors (of gedocumenteerde uitzondering)
 - [ ] CI slaagt na push
 ```
 
@@ -128,20 +125,18 @@ gh pr review [N] --approve
 
 ---
 
-## Opslaan als herbruikbaar script
-
-Sla dit bestand op in de repo zodat Cursor het altijd kan vinden:
+## Bestandslocatie in de repo
 
 ```
 scripts/
 ├── fetch-copilot-comments.ps1
 ├── reply-copilot-comment.ps1
 ├── README.md
-└── process-review-comments.md   ← dit bestand
+└── CURSOR-PROCESS-REVIEW-COMMENTS.md   ← dit bestand
 ```
 
-Dan kun je in Cursor altijd zeggen:
-> "Lees scripts/process-review-comments.md en verwerk de Copilot opmerkingen voor PR #[N]"
+Gebruik in Cursor:
+> "Lees scripts/CURSOR-PROCESS-REVIEW-COMMENTS.md en verwerk de Copilot opmerkingen voor PR #[N]"
 
 ---
 

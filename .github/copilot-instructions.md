@@ -1,27 +1,20 @@
 # Copilot Review Guidelines — HoneyBadger Website
-# Version: 1.1 (English)
-# Date: 2026-03-31
+# Version: 1.2 (English adapter)
+# Date: 2026-04-01
+#
+# Thin adapter: detailed review criteria live in `.github/skills/`.
 
-When performing a code review, apply these HoneyBadger standards:
+When performing a code review, load the relevant skill from **AGENTS.md** (repo root). Common mappings:
 
-## Frontend & Astro
-- **Performance**: Minimize `client:*` directive usage to reduce JS bundle size.
-- **Images**: Ensure the `<Image />` component is used from `astro:assets`.
-- **Typing**: Mandatory TypeScript interfaces for component `Props`.
-- **Styles**: Enforce the use of design tokens from `global.css`.
+| Review focus | Skill |
+|--------------|--------|
+| Astro components, layouts, islands | `.github/skills/astro-frontend/SKILL.md` |
+| Lint, A11y, design tokens, `client:*` | `.github/skills/astro-code-reviewer/SKILL.md` |
+| Meta, keywords, Google.nl | `.github/skills/seo-strategist/SKILL.md` |
+| Privacy, disclaimers, compliance | `.github/skills/security-auditor/SKILL.md` |
+| Copy, pricing, funnel | `.github/skills/website-content/SKILL.md` |
 
-## Accessibility (A11y)
-- **Alt Text**: All images must have descriptive alt attributes.
-- **Hierarchy**: Logical heading structure (only one `h1` per page).
-- **Contrast**: Maintain WCAG AA compliant colors (refer to design tokens).
-
-## SEO & Meta
-- **Completeness**: Every page must have metadata (Title + Description).
-- **Socials**: Verify OpenGraph (`og:*`) and Twitter card tags.
-
-## Compliance
-- **Privacy**: Ensure a link to the Privacy Policy exists in the footer.
-- **Risk Disclosure**: Verify that the "trading risk" disclaimer is visible on landing pages.
+**Start here:** [AGENTS.md](../AGENTS.md) for the full index and adapters overview.
 
 ---
-*Reference: AGENTS.md for full skill index.*
+*Updated: April 2026 (single source of truth in skills)*

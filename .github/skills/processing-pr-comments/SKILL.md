@@ -40,6 +40,8 @@ git pull --rebase origin [headRefName]
 # Output: docs/copilot-comments-pr[N].md
 ```
 
+**Andere repo?** Gebruik `-Owner` / `-Repo` (default is deze website: `Agile-Halewyn/honeybadger-website`).
+
 ### Stap 2 — Per comment beoordelen
 
 Voor elk comment:
@@ -50,17 +52,19 @@ Voor elk comment:
 | Terecht, al gefixt | Noteer dat het al opgelost is, reply met uitleg |
 | Out-of-scope / niet van toepassing | Reply met motivatie, geen code-wijziging |
 
-**Analyseer ROOT CAUSE voor je iets aanpast.** Lees de relevante bronbestanden (routes, backend, conftest) om het gedrag te begrijpen voor je een wijziging maakt.
+**Analyseer ROOT CAUSE voor je iets aanpast.** Lees de relevante Astro-bestanden (layouts, components, `global.css`) voordat je wijzigt.
 
 ### Stap 3 — Fixes verifiëren
 
 ```powershell
-# Relevante checks voor gewijzigde bestanden
-ruff check <bestand>
-pytest tests/ -q -k "<relevante test>" --no-cov
+npm run build
+npx astro check
 ```
 
+Zie `.github/skills/astro-code-reviewer/SKILL.md` voor aanvullende frontend-checks.
+
 ### Stap 4 — Commit en push
+
 
 ```powershell
 git add <bestanden>
@@ -102,14 +106,14 @@ Dit was al gecorrigeerd in <hash> — huidige code gebruikt <correct patroon>.
 Niet van toepassing: <motivatie>. Geen wijziging nodig.
 ```
 
-## HoneyBadger-specifieke Valkuilen
+## Website-specifieke Valkuilen
 
 | Valkuil | Correct patroon |
 |---------|-----------------|
-| `mock.side_effect = ConnectionError(...)` | `mock.return_value = (False, {"error": "..."})` — `call_api()` raiset nooit |
-| `/api/*` expects 302 | `/api/*` geeft altijd **401 JSON** (zie `unauthorized_handler` in app.py) |
-| Unauthenticated `client` op `/api/*` | Gebruik `client_logged_in` fixture |
-| `/health` als smoke test | Gebruik `/auth/login` (publiek endpoint) |
+| Hardcoded kleuren in component-styles | CSS-variabelen uit `src/styles/global.css` |
+| Te veel `client:*` | Islands alleen waar interactie nodig is |
+| `<img>` voor statische assets | `Image` van `astro:assets` waar van toepassing |
+| Geen meta per pagina | Unieke `<title>`, description en `og:*` (zie seo-strategist skill) |
 
 ## Quick Reference
 

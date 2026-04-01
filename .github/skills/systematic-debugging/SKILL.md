@@ -1,116 +1,85 @@
 ---
 name: systematic-debugging
 description: >
-  Use when debugging crashes, 500 errors, bot API timeouts, Freqtrade
-  failures, or unexpected UI behavior. Root cause first — check logs,
-  staging vs production, bot ping. No fixes without investigation.
+  Use when debugging Astro build failures, broken layouts, hydration issues,
+  or unexpected behavior in the browser. Root cause first — reproduce,
+  read errors, then fix. No random tweaks.
 ---
 
-# Systematic Debugging
+# Systematic Debugging — HoneyBadger Website
 
 ## Overview
 
-Random fixes waste time and create new bugs. Quick patches mask underlying issues.
+Random fixes waste time. For this **Astro static site**, investigation means build output + browser devtools — not Pi ports or Freqtrade APIs.
 
-**Core principle:** ALWAYS find root cause before attempting fixes. Symptom fixes are failure.
+**Core principle:** Find root cause before changing code.
 
 ## The Iron Law
 
 ```
-NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
+NO FIXES WITHOUT REPRODUCTION AND ERROR TEXT
 ```
 
 ## When to Use
 
-Use for ANY technical issue:
-- 500 errors in Flask
-- Bot API timeouts or failures
-- Unexpected UI behavior
-- Test failures
-- Build/CI failures
+- `npm run build` or `npx astro check` fails
+- Page looks wrong (layout, styles, missing content)
+- Console errors after adding `client:*` or scripts
+- SEO/meta not appearing as expected
 
-**Use this ESPECIALLY when:**
-- Under time pressure
-- "Just one quick fix" seems obvious
-- Previous fix didn't work
+## Phase 1: Root cause investigation
 
-## Phase 1: Root Cause Investigation
+### 1. Reproduce
 
-**BEFORE attempting ANY fix, ask:**
+- **Build-time:** Run `npm run build` and capture the **full** error (file + line).
+- **Dev-time:** Run `npm run dev`, open the page, note exact URL and steps.
 
-### 1. Omgeving & Status
+### 2. Read the error
 
-- **Op welke omgeving?** Staging (Pi port 5002) of production (port 5000)?
-- **Is de Freqtrade bot online?**
-  ```bash
-  curl http://localhost:<port>/api/v1/ping -u freqtrader:<password>
-  ```
-- **Is het de juiste bot/port?** Check `config/bots.json` en `config_path`.
+- Astro/Vite stack traces point to the real file — follow them.
+- TypeScript errors from `astro check` are authoritative until resolved.
 
-### 2. Logs
+### 3. Browser (client-only issues)
 
-```bash
-# Dashboard logs
-sudo journalctl -u honeybadger -n 100
-sudo journalctl -u honeybadger-staging -n 100
+- F12 → **Console** for JS errors from islands.
+- **Network** tab for failed assets or form posts.
+- **Elements** for wrong DOM / duplicate `h1` / missing landmarks.
 
-# Browser console (voor JS fouten)
-# F12 → Console tab
+### 4. Recent changes
 
-# Freqtrade bot logs
-sudo journalctl -u freqtrade-<botnaam> -n 50
-```
+- `git diff`, `git log -n 5`
+- Did a change break typography tokens (`global.css`) or a shared layout?
 
-### 3. Read Error Messages
+### 5. Environment
 
-- Don't skip past errors or stack traces
-- Note line numbers, file paths, error codes
+- Node version matches project expectations?
+- Dependencies installed: `npm install`
 
-### 4. Reproduce Consistently
+## Phase 2: Hypothesis and minimal fix
 
-- Can you trigger it reliably?
-- What are the exact steps?
+1. One hypothesis: “X fails because Y.”
+2. Smallest change; rebuild or refresh.
+3. If wrong, **new** hypothesis — do not stack guesses.
 
-### 5. Check Recent Changes
+## Phase 3: Verify
 
-- Git diff, recent commits
-- Config changes, new dependencies
+- `npm run build`
+- `npx astro check`
+- Manual spot-check for UI changes
 
-## Phase 2: Pattern Analysis
+## Website-specific patterns
 
-- Find working examples in same codebase
-- Compare: what's different between working and broken?
-- Understand dependencies (config_path, env vars)
+| Symptom | Likely cause | Check |
+|---------|--------------|--------|
+| Styles look “off” | Hardcoded color/spacing | Use tokens from `src/styles/global.css` |
+| Hydration mismatch | Island boundary or invalid HTML | Astro docs; component boundaries |
+| SEO missing | Layout missing `<title>` / Meta | Compare with seo-strategist skill |
+| Build OOM / slow | Accidentally huge client bundle | Reduce `client:*` usage |
 
-## Phase 3: Hypothesis and Testing
+## Red flags — STOP
 
-1. **Form single hypothesis:** "I think X is the root cause because Y"
-2. **Test minimally:** Smallest possible change
-3. **Verify before continuing:** Did it work? If not, form NEW hypothesis
+- “Try this CSS” without seeing which rule applied
+- Fixing without a failing command or console message
+- Editing production deploy scripts for a static site bug (wrong layer)
 
-## Phase 4: Implementation
-
-1. **Create failing test case** (use test-driven-development skill)
-2. **Implement single fix** — ONE change at a time
-3. **Verify fix** — Test passes? No regressions?
-
-**If 3+ fixes failed:** Question the architecture. Discuss with human partner.
-
-## HoneyBadger-Specific Failure Patterns
-
-| Symptom | Likely Cause | Check |
-|---------|--------------|-------|
-| Bot offline → timeout | `freqtrade_api` geeft timeout, niet crash | Handle graceful: return `{"online": false}` |
-| 500 on config read | Config zonder `config_path` | Zie Issue #25 fix — config_path verplicht |
-| Wrong P&L / trades | Endpoint verwarring | `/api/v1/status` = open trades, `/api/v1/profit` = closed P&L (nooit omwisselen) |
-| CSRF errors on POST | Missing token | X-CSRFToken header + cookie |
-| Login fails | users.yaml / hash | Check config/users.yaml, regenerate hash |
-
-## Red Flags — STOP and Follow Process
-
-- "Quick fix for now, investigate later"
-- "Just try changing X and see if it works"
-- Proposing solutions before tracing data flow
-- "One more fix attempt" (when already tried 2+)
-
-**ALL of these mean: STOP. Return to Phase 1.**
+**Return to Phase 1.**

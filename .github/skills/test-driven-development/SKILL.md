@@ -1,156 +1,62 @@
 ---
 name: test-driven-development
 description: >
-  Use when implementing new features, bug fixes, Flask routes, backend
-  functions, or Playwright E2E tests. RED-GREEN-REFACTOR: write failing
-  test first, watch it fail, then implement. Verplicht voor alle nieuwe code.
+  Use when implementing Astro components, fixing UI bugs, or changing content
+  with clear acceptance criteria. This repo is Astro SSG — prefer minimal
+  reproducible checks and npm run build; add Vitest/E2E when the project adopts them.
 ---
 
-# Test-Driven Development (TDD)
+# Test-Driven Development (TDD) — HoneyBadger Website
 
 ## Overview
 
-Write the test first. Watch it fail. Write minimal code to pass.
+Define expected behavior **before** you ship changes. For this Astro codebase there is no mandatory Python/Flask or Playwright suite in-repo yet — the **non-negotiable gate** is a clean production build.
 
-**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
-
-**Violating the letter of the rules is violating the spirit of the rules.**
+**Core principle:** If you cannot state what “done” looks like, you cannot know if the change is correct.
 
 ## When to Use
 
-**Always:**
-- New Flask routes of API endpoints
-- Backend functions (bot_manager, freqtrade_api, allocation)
-- Bug fixes
-- Refactoring
+**Always (mental RED-GREEN):**
 
-**Exceptions (ask your human partner):**
-- Throwaway prototypes
-- Configuration files only
+- New or changed Astro components / layouts
+- Routing, content, or SEO metadata changes
+- Bug fixes affecting rendered HTML or styles
 
-## The Iron Law
+**Practical RED:** Reproduce the issue or missing behavior (minimal page, `npm run dev`, or failing `npm run build`).
+
+**Practical GREEN:** Smallest change that satisfies acceptance criteria; then `npm run build` + `npx astro check`.
+
+## The Iron Law (this repo)
 
 ```
-NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+NO MERGE WITHOUT npm run build SUCCESS (for code changes)
 ```
 
-Write code before the test? Delete it. Start over.
+Pure copy tweaks in markdown/HTML still need a quick build if they touch components or frontmatter.
 
-## Red-Green-Refactor
+## Acceptance criteria (examples)
 
-### RED — Write Failing Test
+- **Component:** “Hero shows headline + CTA; one `h1`; CTAs keyboard-focusable.”
+- **SEO:** “Page has unique title + meta description + `og:title` per seo-strategist skill.”
+- **Bug:** “Steps X–Y no longer throw in console; layout matches design tokens.”
 
-Write one minimal test showing what should happen.
+## When automated tests exist
 
-**Flask route tests** (`tests/`):
-```python
-# Gebruik client_logged_in: /api/* is @login_required, client (anoniem) geeft 401
-def test_get_bots_returns_json_with_success(client_logged_in):
-    """GET /api/bots returns success and bots list."""
-    response = client_logged_in.get('/api/bots')
-    assert response.status_code == 200
-    data = response.get_json()
-    assert data['success'] is True
-    assert 'bots' in data
-```
+If the project adds **Vitest** or **Playwright**, extend this workflow: failing test first → minimal fix → green CI. Until then, document checks in the PR description.
 
-**Playwright E2E tests** (`e2e/`):
-```typescript
-test('dashboard shows bot cards when loaded', async ({ page }) => {
-  await page.goto('/dashboard');
-  await expect(page.getByTestId('bot-grid')).toBeVisible();
-  await expect(page.getByTestId(/^bot-card-/)).toHaveCount(3);
-});
-```
-
-**Requirements:**
-- One behavior per test
-- Clear name
-- Real code (mock Freqtrade API, not production logic)
-
-### Verify RED — Watch It Fail
-
-**MANDATORY. Never skip.**
-
-```bash
-# Flask routes en backend units
-pytest tests/ -v -k "test_get_bots"
-
-# E2E tests (Playwright via script)
-.\scripts\run-e2e-tests-simple.ps1
-```
-
-Confirm: test fails for expected reason (feature missing, not typo).
-
-### GREEN — Minimal Code
-
-Write simplest code to pass the test. Don't over-engineer.
-
-### REFACTOR — Clean Up
-
-After green only: remove duplication, improve names. Keep tests green.
-
-## HoneyBadger-Specific Rules
-
-### Twee Testtypen
-
-| Type | Location | Tool | Mock |
-|------|----------|------|------|
-| Flask routes, backend | `tests/` | `pytest tests/` | `freqtrade_api.*` |
-| E2E user journeys | `e2e/tests/` | `npx playwright test` (via `scripts\run-e2e-tests-simple.ps1`) | mock-api helper |
-
-**Playwright is actief:** TypeScript, Page Object Model in `e2e/pages/`, `data-testid` verplicht voor selectors.
-
-**Lees ALTIJD** `docs/TASK-playwright-selector-assertion-standards.md` voordat je een E2E test schrijft.
-
-### Anti-Pattern: Never Call Real Freqtrade API in Tests
-
-```python
-# ❌ BAD: Real API call in test
-def test_get_status():
-    ok, data = freqtrade_api.get_status(8087, "user", "pass")
-    assert ok
-
-# ✅ GOOD: Mock the API (freqtrade_api uses requests.request in call_api)
-@patch('backend.freqtrade_api.requests.request')
-def test_get_status(mock_request):
-    mock_request.return_value.json.return_value = {"state": "running"}
-    mock_request.return_value.raise_for_status = lambda: None
-    ok, data = freqtrade_api.ping(8087, "user", "pass")
-    assert ok
-```
-
-### Commit Format
-
-- pytest test commit: `test: add [beschrijving] test`
-- E2E test commit (na groene run): `test(e2e): add [feature] E2E spec`
-- Implementation commit: `feat: [beschrijving]` or `fix: [beschrijving]`
-
-## Verification Checklist
+## Verification checklist
 
 Before marking work complete:
 
-- [ ] Every new function/route has a test
-- [ ] Watched each test fail before implementing
-- [ ] Each test failed for expected reason
-- [ ] Wrote minimal code to pass each test
-- [ ] All tests pass
-- [ ] No Freqtrade API calls in tests (always mocked)
+- [ ] Expected behavior written down (even briefly)
+- [ ] `npm run build` succeeds
+- [ ] `npx astro check` succeeds (or failure explained)
+- [ ] Spot-check in `npm run dev` for interactive or visual changes
 
-Can't check all boxes? You skipped TDD. Start over.
+## Red flags
 
-## Red Flags — STOP and Start Over
+- Skipping `npm run build` “because it’s only CSS”
+- No reproduction steps for a bugfix
+- Changing design tokens without checking `global.css`
 
-- Code before test
-- Test passes immediately (didn't watch it fail)
-- Tests added "later"
-- "I already manually tested it"
-- Freqtrade API called in test (not mocked)
-
-**All of these mean: Delete code. Start over with TDD.**
-
-## Testing Anti-Patterns
-
-When adding mocks, read [testing-anti-patterns](./testing-anti-patterns.md) to avoid:
-- Testing mock behavior instead of real behavior
-- Incomplete mocks that don't match API schema
+**Return to a clear acceptance criterion and rebuild.**

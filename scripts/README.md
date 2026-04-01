@@ -8,9 +8,8 @@ Met GitHub CLI kun je Copilot-reviewcomments ophalen en Cursor kan ze verwerken.
 
 Dit document is de centrale werkwijze voor Copilot PR review handling.
 
-- `AGENTS.md` bevat alleen de policy + verwijzing naar dit document.
-- `docs/DEVELOPMENT.md` bevat alleen een korte workflow-samenvatting + link.
-- `scripts/CURSOR-PROCESS-REVIEW-COMMENTS.md` beschrijft een Cursor-specifieke stap-voor-stap workflow en volgt inhoudelijk deze runbook als bron van waarheid.
+- **`AGENTS.md`** — skill-index, tech stack en projectdoelen (start hier).
+- **`scripts/CURSOR-PROCESS-REVIEW-COMMENTS.md`** — Cursor-prompt en checklist; volgt deze runbook.
 
 ## Standaard volgorde (ophalen → beoordelen/fixen → reply/resolve → cleanup)
 
@@ -38,7 +37,7 @@ Gebruik alleen een nieuwe branch vanaf `develop` als je bewust een clean-slate o
 
 Output: `docs/copilot-comments-pr26.md` – alle Copilot-comments met bestand, regel en comment ID.
 
-**Let op:** Default is PR 15. Voor elke andere PR moet je `-PrNumber [N]` meegeven.
+**Let op:** Default is PR **15** en repo **`Agile-Halewyn/honeybadger-website`**. Gebruik `-PrNumber [N]` en zo nodig `-Owner` / `-Repo` voor andere PR’s of forks.
 
 ### 2. In Cursor
 
@@ -49,10 +48,11 @@ Open het bestand of zeg: *"Verwerk de Copilot-comments in docs/copilot-comments-
 Run minimaal de relevante checks voor je wijzigingen (bijv. lint/tests op aangepast bestand of map), commit daarna pas.
 
 ```powershell
-# Voorbeeld (pas aan op de wijziging)
-ruff check tests/unit/test_config_manager.py
-black --check tests/unit/test_config_manager.py
-pytest tests/unit/test_config_manager.py -q --no-cov
+# Astro website (minimaal voor doc-only wijzigingen)
+npm run build
+
+# Aanbevolen frontend checks (zie .github/skills/astro-code-reviewer/SKILL.md)
+npx astro check
 ```
 
 ### 2c. Commit en push
@@ -66,7 +66,7 @@ git push origin [headRefName]
 ### 3. Reageren op een comment (en thread resolven)
 
 ```powershell
-.\scripts\reply-copilot-comment.ps1 -PrNumber 26 -CommentId 2867277977 -Reply "Fixed in commit xyz."
+.\scripts\reply-copilot-comment.ps1 -PrNumber 26 -CommentId 2867277977 -Reply "Opgelost in a1b2c3d: korte uitleg in het Nederlands."
 ```
 
 **Belangrijk:** 
