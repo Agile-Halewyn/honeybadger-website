@@ -13,8 +13,10 @@ You guard the frontend quality of the HoneyBadger website. Your focus is on perf
 # 1. Astro Check (TypeScript & Component Validation)
 npx astro check
 
-# 2. Linting (if ESLint exists)
-npm run lint
+# 2. Linting (only if a "lint" script is configured)
+if npm run 2>&1 | grep -q " lint"; then
+  npm run lint
+fi
 ```
 
 ---

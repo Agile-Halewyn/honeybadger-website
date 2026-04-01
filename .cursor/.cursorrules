@@ -22,14 +22,16 @@ Review **AGENTS.md** for the full skill index and brand guidelines.
 
 ---
 
-## Critical Rules Summary
+## Canonical rules — directory
 
-1. **Design Tokens**: ALWAYS use the `var(--color-*)` design tokens from `global.css`. Never hardcode hex values.
-2. **Mobile First**: Develop for 375px width as the baseline.
-3. **SEO**: Every page require unique `<title>`, `<meta name="description">` and `og:*` tags.
-4. **Performance**: Minimize client-side JS; use Astro optimal defaults for images.
-5. **Brand Tone**: Follow the "Jij houdt de controle" Dutch brand persona. Use "U/Jij" consistently.
-6. **No Placeholder Content**: Use real content or realistic generated content.
+The **detailed rules** live in the skill docs under `.github/skills/` and in `AGENTS.md`. Use this section only as a pointer:
+
+- **Design, layout, and tokens** → `.github/skills/astro-frontend/SKILL.md`
+- **Code quality and security checks** → `.github/skills/astro-code-reviewer/SKILL.md` and `.github/skills/security-auditor/SKILL.md`
+- **SEO strategy and metadata requirements** → `.github/skills/seo-strategist/SKILL.md`
+- **Content, tone of voice, and brand rules** → `.github/skills/website-content/SKILL.md` and `AGENTS.md`
+
+Always update and consult those docs for the exact, up-to-date rules; do **not** add detailed rules to this adapter.
 
 ---
 

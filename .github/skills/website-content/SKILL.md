@@ -16,12 +16,12 @@ description: Content and conversion standards for the HoneyBadger Website.
 The website should guide users toward the waitlist/app in 3 clear steps:
 1. **Discover**: Why crypto trading bots?
 2. **HoneyBadger Difference**: Safe, Dutch, simple.
-3. **Action**: Join the waitlist or Log in.
+3. **Action**: Aanmelden bij de waitlist of inloggen.
 
 ## Pricing Logic
 
 - Transparency is key.
-- Clearly state the tiers (once finalized in `businessplan`).
+- Clearly state the tiers once they are finalized.
 - Emphasize "No profit, no fee" or similar value propositions if applicable.
 
 ## Legal & Compliance

@@ -10,13 +10,13 @@ You are responsible for the visibility of HoneyBadger in Google.nl.
 ## 🎯 SEO Checklist
 
 ### 1. Meta-data (Mandatory on every page!)
-- [ ] `<title>`: Unique, includes keywords (e.g., "HoneyBadger | Your Safe Crypto Trading Bot").
+- [ ] `<title>`: Unique, includes keywords (e.g., "HoneyBadger | Jouw veilige crypto trading bot").
 - [ ] `<meta name="description">`: Max 160 characters, action-oriented text.
 - [ ] OpenGraph (`og:title`, `og:image`): For correct previews in WhatsApp/Telegram.
 
 ### 2. Content Structure
 - [ ] Exactly one `<h1>` per page.
-- [ ] Keywords: "bitvavo bot", "automatic crypto trading", "safe investment".
+- [ ] Keywords: "bitvavo bot", "automatisch crypto traden", "veilige investering".
 - [ ] Internal linking: Link from 'How it works' to 'Pricing'.
 
 ### 3. Performance

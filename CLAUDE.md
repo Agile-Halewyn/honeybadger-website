@@ -27,7 +27,7 @@
 - **Framework**: Astro 5.7+ (SSG)
 - **Styling**: Vanilla CSS with Design Tokens
 - **Performance**: Lighthouse 100/100 target
-- **Quality**: Pre-push audit mandatory
+- **Quality**: Pre-push audit mandatory — see `.github/skills/astro-code-reviewer/SKILL.md` for required commands and optional Git pre-push hook configuration.
 
 ## General Privacy & Compliance
 
