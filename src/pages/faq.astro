@@ -1,5 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import {
+  BITVAVO_AFFILIATE_DISCLOSURE,
+  BITVAVO_AFFILIATE_URL,
+} from '../constants/affiliate';
 
 const faqs = [
   {
@@ -12,7 +16,7 @@ const faqs = [
   },
   {
     q: 'Welke exchange wordt ondersteund?',
-    aHtml: 'Op dit moment ondersteunen we alleen Bitvavo, de grootste Nederlandse crypto exchange. Ondersteuning voor andere exchanges kan in de toekomst worden toegevoegd. Heb je nog geen Bitvavo account? Je kunt <a href="https://bitvavo.com/invite?a=629EC7BACD" target="_blank" rel="noopener noreferrer">hier een account aanmaken</a> — gebruik van deze link helpt ons, maar is niet verplicht.'
+    aHtml: `Op dit moment ondersteunen we alleen Bitvavo, de grootste Nederlandse crypto exchange. Ondersteuning voor andere exchanges kan in de toekomst worden toegevoegd. Heb je nog geen Bitvavo account? Je kunt <a href="${BITVAVO_AFFILIATE_URL}" target="_blank" rel="noopener noreferrer sponsored">hier een account aanmaken</a>. ${BITVAVO_AFFILIATE_DISCLOSURE}`
   },
   {
     q: 'Welke strategieen zijn beschikbaar?',
