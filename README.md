@@ -65,7 +65,7 @@ netlify.toml          # Build config + .com → .nl redirect
 | `/hoe-het-werkt` | Hoe het werkt | Scaffold compleet |
 | `/pricing` | Pricing | Scaffold compleet |
 | `/faq` | FAQ | Scaffold compleet |
-| `/waitlist` | Early access formulier | Scaffold compleet (Netlify Forms) |
+| `/waitlist` | Early access formulier | Live: POST naar Flask API (`fetch`, JavaScript vereist) |
 | `/juridisch/privacy` | Privacy Policy | Concept — juridisch advies nodig |
 | `/juridisch/voorwaarden` | Algemene Voorwaarden | Concept — juridisch advies nodig |
 | `/juridisch/disclaimer` | Risicoverklaring | Concept — juridisch advies nodig |
@@ -97,7 +97,7 @@ netlify.toml          # Build config + .com → .nl redirect
 - [ ] Cookie Policy reviewen
 
 ### Fase 4: Na VPS-migratie
-- [ ] Waitlist formulier migreren van Netlify Forms naar Flask API
+- [x] Waitlist formulier: Netlify Forms vervangen door directe POST naar Flask API (`src/pages/waitlist.astro`, zie `docs/WAITLIST-API-SPEC.md`)
 - [ ] "Inloggen" knop updaten naar app.honeybadgertrader.com/login
 
 ### Backlog (Ideeën voor later)

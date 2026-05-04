@@ -10,9 +10,12 @@ Request body (JSON):
 {
   "name": "string, verplicht",
   "email": "string, verplicht, geldig e-mailadres",
-  "experience": "beginner | some | active, optioneel"
+  "experience": "beginner | some | active, optioneel (leeg = geen keuze)",
+  "submitted_at": "string, optioneel — ISO-8601 timestamp (client); server vult server-side indien ontbreekt"
 }
 ```
+
+**Honeypot (client, niet in JSON):** de referentie-website gebruikt een verborgen formulierveld `bot-field`. Als dit veld is ingevuld, **stuurt de client geen geldige aanmelding** (spam). Dit veld staat **niet** in de JSON-body; backends kunnen desgewenst een eigen server-side honeypot/veld ondersteunen, maar dat is niet verplicht voor clients die dit patroon volgen.
 
 Response (201 Created):
 
@@ -54,9 +57,12 @@ Admin overzicht route:
 
 ## Migratie van Netlify naar Flask
 
-Wanneer de Flask API live is:
+**Website (honeybadger-website):** de waitlist-pagina is **gemigreerd** naar een client-side `fetch()`-POST naar deze API (geen Netlify Forms meer op `/waitlist`). Er is **geen** `data-netlify` op dit formulier.
 
-1. Export Netlify Forms submissions als CSV
-2. Importeer in SQLite waitlist tabel
-3. Vervang in `waitlist.astro` de Netlify form action door een fetch() POST naar de Flask API
-4. Verwijder `data-netlify="true"` attribuut
+**Nog te doen aan de server/data-kant:**
+
+1. Zorg dat deze Flask-endpoint productie-klaar is (incl. validatie, duplicate detection, mail-notificaties — zie backend-plan).
+2. Exporteer historische Netlify Forms submissions als CSV (indien nog beschikbaar).
+3. Importeer die rijen in de SQLite `waitlist`-tabel (Operator-actie; schema hierboven).
+
+Zie ook `README.md` (go-live checklist) voor projectstatus.

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import BitvavoAffiliate from '../components/BitvavoAffiliate.astro';
-import { WAITLIST_API_URL } from '../config';
+import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
 ---
 
 <Base title="Early access — HoneyBadger Trader" description="Schrijf je in voor early access bij HoneyBadger Trader.">
@@ -31,7 +31,13 @@ import { WAITLIST_API_URL } from '../config';
         </div>
 
         <div class="waitlist__form-wrapper">
-          <form id="waitlist-form" class="waitlist__form" novalidate>
+          <noscript>
+            <p class="form-status form-status--warn">
+              Om je aan te melden via dit formulier is JavaScript nodig. Schakel JavaScript in of mail ons op{' '}
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+            </p>
+          </noscript>
+          <form id="waitlist-form" class="waitlist__form">
             <p class="hidden" aria-hidden="true">
               <label>Niet invullen: <input name="bot-field" id="bot-field" /></label>
             </p>
@@ -57,7 +63,7 @@ import { WAITLIST_API_URL } from '../config';
               </select>
             </div>
 
-            <button type="submit" class="btn btn--primary btn--large" style="width: 100%; justify-content: center;">
+            <button type="submit" id="waitlist-submit" class="btn btn--primary btn--large" style="width: 100%; justify-content: center;">
               Schrijf me in
             </button>
             <p id="waitlist-form-status" class="form-status" role="status" aria-live="polite"></p>
@@ -86,13 +92,23 @@ import { WAITLIST_API_URL } from '../config';
   const submittedAtInput = document.getElementById('submitted-at');
   const botField = document.getElementById('bot-field');
   const statusEl = document.getElementById('waitlist-form-status');
+  const submitBtn = document.getElementById('waitlist-submit');
 
   if (form && submittedAtInput && statusEl) {
-    submittedAtInput.value = new Date().toISOString();
-
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       statusEl.textContent = '';
+
+      if (typeof form.reportValidity === 'function' && !form.reportValidity()) {
+        return;
+      }
+
+      if (botField && botField.value) {
+        statusEl.textContent = 'Er ging iets mis. Probeer het opnieuw.';
+        return;
+      }
+
+      submittedAtInput.value = new Date().toISOString();
 
       const formData = new FormData(form);
       const payload = {
@@ -107,9 +123,8 @@ import { WAITLIST_API_URL } from '../config';
         return;
       }
 
-      if (botField && botField.value) {
-        statusEl.textContent = 'Er ging iets mis. Probeer het opnieuw.';
-        return;
+      if (submitBtn) {
+        submitBtn.disabled = true;
       }
 
       try {
@@ -128,6 +143,10 @@ import { WAITLIST_API_URL } from '../config';
         statusEl.textContent = responseData.message || 'Aanmelden mislukt. Probeer het later opnieuw.';
       } catch (_error) {
         statusEl.textContent = 'Er is een netwerkfout opgetreden. Probeer het later opnieuw.';
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
       }
     });
   }
@@ -224,6 +243,15 @@ import { WAITLIST_API_URL } from '../config';
     min-height: 1.25rem;
     font-size: 0.875rem;
     color: var(--color-text-muted);
+  }
+
+  .form-status--warn {
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
   }
 
   .hidden { display: none; }
