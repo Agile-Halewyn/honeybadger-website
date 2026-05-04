@@ -17,6 +17,16 @@ Request body (JSON):
 
 **Honeypot (client, niet in JSON):** de referentie-website gebruikt een verborgen formulierveld `bot-field`. Als dit veld is ingevuld, **stuurt de client geen geldige aanmelding** (spam). Dit veld staat **niet** in de JSON-body; backends kunnen desgewenst een eigen server-side honeypot/veld ondersteunen, maar dat is niet verplicht voor clients die dit patroon volgen.
 
+**Headers:** `Content-Type: application/json`
+
+**CORS (browser):** requests komen van de publieke website-origin(s). De Flask-app beperkt CORS tot **`POST /api/waitlist`** (geen globale CORS); toegestane origins configureer je server-side (comma-gescheiden `WAITLIST_CORS_ORIGIN` — zie backend-deploy).
+
+**CSRF:** het formulier post **cross-origin JSON** (`fetch`), geen cookies voor CSRF. Op de server is doorgaans **alleen** `POST /api/waitlist` van CSRF-bescherming **uitgezonderd**; andere state-changing routes blijven beschermd. Clients hoeven geen CSRF-token te sturen.
+
+### Frontend (Astro / Netlify)
+
+De website leest **`PUBLIC_WAITLIST_API_URL`** op **buildtijd** (fallback: productie-URL in `src/config.ts`). Zie **`.env.example`**. Voor staging/preview: zet in Netlify **Branch deploys** of een aparte site een eigen waarde richting **staging-Flask**, niet impliciet productie.
+
 Response (201 Created):
 
 ```json
@@ -34,6 +44,14 @@ Response (409 Conflict):
 ```json
 { "status": "error", "message": "E-mailadres al aangemeld" }
 ```
+
+Response (429 Too Many Requests — wanneer rate limiting actief is):
+
+```json
+{ "status": "error", "message": "Te veel aanmeldingen. Probeer het later opnieuw." }
+```
+
+*(Exacte `message` mag afwijken; clients tonen bij voorkeur de servertekst of een vaste Nederlandse fallback.)*
 
 Database tabel (SQLite):
 

@@ -26,6 +26,10 @@ npm run build
 npm run preview
 ```
 
+## Omgeving (waitlist-API)
+
+Optioneel: kopieer `.env.example` naar `.env` lokaal. Variable **`PUBLIC_WAITLIST_API_URL`** wordt bij `npm run build` ingebakken (fallback: productie-URL in `src/config.ts`). Zie `docs/WAITLIST-API-SPEC.md` voor contract en staging/preview op Netlify.
+
 ## Projectstructuur
 
 ```
@@ -107,7 +111,7 @@ netlify.toml          # Build config + .com → .nl redirect
 
 ## Gerelateerde documenten
 
-- `docs/WEBSITE-ARCHITECTURE-PLAN.md` — Architectuurplan (v1.1, gereviewed)
+- `docs/WAITLIST-API-SPEC.md` — Waitlist POST-contract, CORS/CSRF-notities, frontend env (`PUBLIC_WAITLIST_API_URL`)
 - `docs/MULTI-USER-PLATFORM-PLAN.md` — Multi-user platform planning
 - `docs/SECURITY-STANDARDS.md` — Beveiligingsstandaarden
 - `DECISIONS.md` — ADR-004 (Frontend Framework keuze)
