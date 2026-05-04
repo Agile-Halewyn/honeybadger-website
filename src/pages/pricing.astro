@@ -35,6 +35,11 @@ import Base from '../layouts/Base.astro';
         <a href="/waitlist" class="btn btn--primary btn--large" style="width: 100%; justify-content: center;">
           Schrijf je in voor early access
         </a>
+
+        <p class="pricing-card__early-access-note">
+          Tijdens early access: de eerste 3 maanden zijn gratis.<br />
+          Daarna: €5/maand basisabonnement + 8% performance fee op netto winst.
+        </p>
       </div>
 
       <div class="pricing-example">
@@ -123,6 +128,14 @@ import Base from '../layouts/Base.astro';
     left: 0;
     color: var(--color-success);
     font-weight: 700;
+  }
+
+  .pricing-card__early-access-note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    text-align: center;
   }
 
   .pricing-example {
