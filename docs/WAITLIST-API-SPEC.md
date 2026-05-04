@@ -27,6 +27,8 @@ Request body (JSON):
 
 De website leest **`PUBLIC_WAITLIST_API_URL`** op **buildtijd** — **verplicht**; zie **`.env.example`** en `README.md`. Zonder waarde faalt de build (geen impliciete productie-URL). Voor staging/preview: zet in Netlify per context een **expliciete** endpoint-URL (bijv. staging-Flask), nooit “vergeten en alsnog productie”.
 
+De clientlogica staat in **`/js/waitlist-form.js`** (extern bestand i.p.v. inline script) zodat **`Content-Security-Policy`** (`public/_headers`, o.a. `script-src 'self'`) op productie het formulier niet blokkeert. `connect-src` vermeldt **`https://app.honeybadgertrader.com`** (en Plausible) zodat `fetch` naar de API mag. Gebruik je een **andere** waitlist-host, voeg die host toe aan `connect-src` in `_headers`.
+
 Response (201 Created):
 
 ```json

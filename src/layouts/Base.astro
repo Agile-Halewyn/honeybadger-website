@@ -41,6 +41,8 @@ const { title, description = 'Geautomatiseerd crypto handelen met tradingbots, z
   </main>
   <Footer />
 
+  <slot name="body-scripts" />
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const toggle = document.querySelector('.nav__toggle');
