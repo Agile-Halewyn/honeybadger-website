@@ -28,7 +28,7 @@ npm run preview
 
 ## Omgeving (waitlist-API)
 
-**Verplicht op buildtijd:** variabele **`PUBLIC_WAITLIST_API_URL`** (wordt door Astro ingebakken). Lokaal: kopieer `.env.example` naar `.env` en pas zo nodig aan. Zonder deze variabele faalt `astro dev` / `astro build` met een duidelijke fout — er is **geen** stille fallback naar productie (voorkomt datalekken via branch deploys).
+**Verplicht op buildtijd:** variabele **`PUBLIC_WAITLIST_API_URL`** (wordt door Astro ingebakken voor toekomstige API-modus en blijft geëvalueerd in `src/config.ts`). Lokaal: kopieer `.env.example` naar `.env`. Het waitlist-formulier gebruikt deze URL **niet** zolang Netlify Forms actief is — zie `docs/WAITLIST-API-SPEC.md`.
 
 - **Netlify — productie:** staat in `netlify.toml` onder `[context.production.environment]`.
 - **Netlify — deploy previews / branch deploys:** zelf een waarde instellen (bijv. staging-Flask); zie `docs/WAITLIST-API-SPEC.md`.
@@ -49,7 +49,8 @@ src/
 │   ├── hoe-het-werkt.astro # Uitleg over de dienst
 │   ├── pricing.astro       # Pricing met rekenvoorbeelden
 │   ├── faq.astro           # Veelgestelde vragen
-│   ├── waitlist.astro      # Early access formulier
+│   ├── waitlist.astro      # Early access (tijdelijk Netlify Forms)
+│   ├── waitlist-bedankt.astro # Bedankpagina na waitlist-submit
 │   └── juridisch/
 │       ├── privacy.astro       # Privacy Policy (concept)
 │       ├── voorwaarden.astro   # Algemene Voorwaarden (concept)
@@ -72,7 +73,8 @@ netlify.toml          # Build config + .com → .nl redirect
 | `/hoe-het-werkt` | Hoe het werkt | Scaffold compleet |
 | `/pricing` | Pricing | Scaffold compleet |
 | `/faq` | FAQ | Scaffold compleet |
-| `/waitlist` | Early access formulier | Live: POST naar Flask API (`fetch`, JavaScript vereist) |
+| `/waitlist` | Early access formulier | **Tijdelijk:** Netlify Forms (`POST`, bedankpagina `/waitlist-bedankt/`); zie `docs/WAITLIST-API-SPEC.md` |
+| `/waitlist-bedankt` | Bedankpagina na waitlist-inschrijving | Netlify Forms redirect |
 | `/juridisch/privacy` | Privacy Policy | Concept — juridisch advies nodig |
 | `/juridisch/voorwaarden` | Algemene Voorwaarden | Concept — juridisch advies nodig |
 | `/juridisch/disclaimer` | Risicoverklaring | Concept — juridisch advies nodig |
@@ -104,7 +106,7 @@ netlify.toml          # Build config + .com → .nl redirect
 - [ ] Cookie Policy reviewen
 
 ### Fase 4: Na VPS-migratie
-- [x] Waitlist formulier: Netlify Forms vervangen door directe POST naar Flask API (`src/pages/waitlist.astro`, zie `docs/WAITLIST-API-SPEC.md`)
+- [ ] Waitlist: na live Flask API terug naar directe `fetch`-POST (`PUBLIC_WAITLIST_API_URL`, zie `docs/WAITLIST-API-SPEC.md`). **Nu:** tijdelijk Netlify Forms op `/waitlist` zolang productie-endpoint ontbreekt.
 - [ ] "Inloggen" knop updaten naar app.honeybadgertrader.com/login
 
 ### Backlog (Ideeën voor later)
