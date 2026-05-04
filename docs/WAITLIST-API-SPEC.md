@@ -1,6 +1,22 @@
 # WAITLIST API SPEC
 
-## Endpoint specificatie
+## Tijdelijk: Netlify Forms (publieke site)
+
+**Status (website):** Zolang de Flask waitlist-endpoint op productie niet betrouwbaar bereikbaar is, post het formulier op **`/waitlist`** via **Netlify Forms** (klassieke HTML `POST`, **geen** `fetch` naar de API).
+
+- Formulier: `data-netlify="true"`, `name="waitlist"`, redirect naar **`/waitlist-bedankt/`** na succes.
+- **`submitted_at`:** hidden veld; wordt bij **submit** gevuld door **`/js/waitlist-netlify-submitted-at.js`** (luistert op `submit` — geen tijdstip van alleen pagina-open; compatibel met CSP `script-src 'self'`). Zonder JavaScript kan het veld leeg blijven.
+- **Geen duplicate/rate-limit parity:** Netlify Forms voert niet dezelfde server-side checks uit als Flask (`409` duplicate, `429` rate limit). Export naar SQLite vereist **dedup op e-mail** vóór import i.v.m. `UNIQUE(email)` — zie § Migratie.
+
+- **`PUBLIC_WAITLIST_API_URL`:** blijft **verplicht op buildtijd** (zie `src/config.ts`) voor toekomstige migratie / andere tooling; het waitlist-formulier gebruikt die URL **niet** zolang Netlify Forms actief is.
+
+**Terug naar Flask API:** zodra `POST https://app.honeybadgertrader.com/api/waitlist` productieklaar is: website terug naar client-side JSON-`fetch` (extern JS-bestand, geen inline script), `connect-src` blijft `https://app.honeybadgertrader.com` nodig — zie comment bij `connect-src` in `public/_headers`.
+
+**Operator (Netlify):** waar nodig Data Processing Agreement en formulier-notificaties configureren (zie privacytekst).
+
+---
+
+## Endpoint specificatie (Flask — doelarchitectuur)
 
 **POST** `https://app.honeybadgertrader.com/api/waitlist`
 
@@ -23,11 +39,11 @@ Request body (JSON):
 
 **CSRF:** het formulier post **cross-origin JSON** (`fetch`), geen cookies voor CSRF. Op de server is doorgaans **alleen** `POST /api/waitlist` van CSRF-bescherming **uitgezonderd**; andere state-changing routes blijven beschermd. Clients hoeven geen CSRF-token te sturen.
 
-### Frontend (Astro / Netlify)
+### Frontend (Astro / Netlify) — API-modus (na migratie van Forms)
 
 De website leest **`PUBLIC_WAITLIST_API_URL`** op **buildtijd** — **verplicht**; zie **`.env.example`** en `README.md`. Zonder waarde faalt de build (geen impliciete productie-URL). Voor staging/preview: zet in Netlify per context een **expliciete** endpoint-URL (bijv. staging-Flask), nooit “vergeten en alsnog productie”.
 
-De clientlogica staat in **`/js/waitlist-form.js`** (extern bestand i.p.v. inline script) zodat **`Content-Security-Policy`** (`public/_headers`, o.a. `script-src 'self'`) op productie het formulier niet blokkeert. `connect-src` vermeldt **`https://app.honeybadgertrader.com`** (en Plausible) zodat `fetch` naar de API mag. Gebruik je een **andere** waitlist-host, voeg die host toe aan `connect-src` in `_headers`.
+Clientlogica voor API-modus staat typisch in een **extern** `/js/*.js`-bestand (geen inline script) zodat **`Content-Security-Policy`** (`public/_headers`, o.a. `script-src 'self'`) het formulier niet blokkeert. `connect-src` vermeldt **`https://app.honeybadgertrader.com`** (en Plausible) zodat `fetch` naar de API mag.
 
 Response (201 Created):
 
@@ -75,14 +91,15 @@ Admin overzicht route:
 - Sortering: nieuwste eerst
 - Kolommen: naam, e-mail, ervaring, datum, status (wijzigbaar via dropdown)
 
-## Migratie van Netlify naar Flask
+## Migratie en dataconsistentiteit
 
-**Website (honeybadger-website):** de waitlist-pagina is **gemigreerd** naar een client-side `fetch()`-POST naar deze API (geen Netlify Forms meer op `/waitlist`). Er is **geen** `data-netlify` op dit formulier.
+**Van Netlify Forms naar Flask (eenmalig):**
 
-**Nog te doen aan de server/data-kant:**
+1. Zorg dat `POST /api/waitlist` productieklaar is (validatie, duplicates, rate limits, mail — backend).
+2. Exporteer Netlify Forms submissions (CSV) voor het waitlist-formulier.
+3. **Normaliseer en dedupliceer** vóór import: het tijdelijke formulier kan **meerdere rijen per e-mail** bevatten; SQLite verwacht **`UNIQUE(email)`**. Kies een regel (bijv. laatste `submitted_at` per e-mail) en verwijder of merge conflicten — anders faalt import of ontstaat handmatige opschoonwerk.
+4. Importeer de opgeschoonde rijen in SQLite `waitlist` (operator-actie).
 
-1. Zorg dat deze Flask-endpoint productie-klaar is (incl. validatie, duplicate detection, mail-notificaties — zie backend-plan).
-2. Exporteer historische Netlify Forms submissions als CSV (indien nog beschikbaar).
-3. Importeer die rijen in de SQLite `waitlist`-tabel (Operator-actie; schema hierboven).
+**Historisch:** de website heeft eerder Netlify Forms vervangen door directe API-`fetch`; bij ontbrekende productie-endpoint kan tijdelijk weer Netlify Forms worden ingezet — deze spec beschrijft beide routes; de **privacy policy** moet altijd de actieve route vermelden.
 
-Zie ook `README.md` (go-live checklist) voor projectstatus.
+Zie ook `README.md` voor build/omgevingsnotities.

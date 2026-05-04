@@ -21,8 +21,8 @@ if (-not $ResolveOnly -and -not $Reply) {
 }
 
 if (-not $ResolveOnly) {
-    # ConvertTo-Json mag in_reply_to als string serialiseren; GitHub verwacht een number.
-    $json = (@{ body = $Reply; in_reply_to = [int]$CommentId } | ConvertTo-Json -Compress)
+    # GitHub database comment IDs exceed Int32; keep numeric JSON for REST API.
+    $json = (@{ body = $Reply; in_reply_to = [long]$CommentId } | ConvertTo-Json -Compress)
     $json | gh api "repos/$Owner/$Repo/pulls/$PrNumber/comments" -X POST --input - | Out-Null
     Write-Host "Reply posted to comment $CommentId"
 }
