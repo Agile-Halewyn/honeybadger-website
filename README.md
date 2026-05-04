@@ -26,6 +26,13 @@ npm run build
 npm run preview
 ```
 
+## Omgeving (waitlist-API)
+
+**Verplicht op buildtijd:** variabele **`PUBLIC_WAITLIST_API_URL`** (wordt door Astro ingebakken). Lokaal: kopieer `.env.example` naar `.env` en pas zo nodig aan. Zonder deze variabele faalt `astro dev` / `astro build` met een duidelijke fout — er is **geen** stille fallback naar productie (voorkomt datalekken via branch deploys).
+
+- **Netlify — productie:** staat in `netlify.toml` onder `[context.production.environment]`.
+- **Netlify — deploy previews / branch deploys:** zelf een waarde instellen (bijv. staging-Flask); zie `docs/WAITLIST-API-SPEC.md`.
+
 ## Projectstructuur
 
 ```
@@ -107,7 +114,7 @@ netlify.toml          # Build config + .com → .nl redirect
 
 ## Gerelateerde documenten
 
-- `docs/WEBSITE-ARCHITECTURE-PLAN.md` — Architectuurplan (v1.1, gereviewed)
+- `docs/WAITLIST-API-SPEC.md` — Waitlist POST-contract, CORS/CSRF-notities, frontend env (`PUBLIC_WAITLIST_API_URL`)
 - `docs/MULTI-USER-PLATFORM-PLAN.md` — Multi-user platform planning
 - `docs/SECURITY-STANDARDS.md` — Beveiligingsstandaarden
 - `DECISIONS.md` — ADR-004 (Frontend Framework keuze)

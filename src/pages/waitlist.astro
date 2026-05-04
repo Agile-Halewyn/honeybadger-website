@@ -129,6 +129,8 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
         submitBtn.disabled = true;
       }
 
+      statusEl.textContent = 'Bezig met verzenden…';
+
       try {
         const response = await fetch(waitlistApiUrl, {
           method: 'POST',
@@ -142,7 +144,19 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
         }
 
         const responseData = await response.json().catch(() => ({}));
-        statusEl.textContent = responseData.message || 'Aanmelden mislukt. Probeer het later opnieuw.';
+        const serverMsg =
+          typeof responseData.message === 'string' ? responseData.message : '';
+
+        if (response.status === 409) {
+          statusEl.textContent =
+            serverMsg || 'Dit e-mailadres is al aangemeld.';
+        } else if (response.status === 429) {
+          statusEl.textContent =
+            serverMsg || 'Te veel aanmeldingen. Probeer het later opnieuw.';
+        } else {
+          statusEl.textContent =
+            serverMsg || 'Aanmelden mislukt. Probeer het later opnieuw.';
+        }
       } catch (_error) {
         statusEl.textContent = 'Er is een netwerkfout opgetreden. Probeer het later opnieuw.';
       }
