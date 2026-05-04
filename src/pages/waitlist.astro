@@ -37,7 +37,7 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
             </p>
           </noscript>
-          <form id="waitlist-form" class="waitlist__form">
+          <form id="waitlist-form" class="waitlist__form" method="post" action="/waitlist/" hidden>
             <p class="hidden" aria-hidden="true">
               <label>Niet invullen: <input name="bot-field" id="bot-field" /></label>
             </p>
@@ -95,6 +95,8 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
   const submitBtn = document.getElementById('waitlist-submit');
 
   if (form && submittedAtInput && statusEl) {
+    form.removeAttribute('hidden');
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       statusEl.textContent = '';
