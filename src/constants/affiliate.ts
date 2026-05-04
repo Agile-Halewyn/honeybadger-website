@@ -1,6 +1,6 @@
-import { AFFILIATE_URL } from '../config';
+import { BITVAVO_AFFILIATE_URL } from '../config';
 
-export const BITVAVO_AFFILIATE_URL = AFFILIATE_URL;
+export { BITVAVO_AFFILIATE_URL };
 
 export const BITVAVO_AFFILIATE_DISCLOSURE =
   'Gebruik van deze link is volledig vrijwillig. Bij aanmelding ontvangt HoneyBadger Trader een kleine vergoeding van Bitvavo, zonder extra kosten voor jou.';
