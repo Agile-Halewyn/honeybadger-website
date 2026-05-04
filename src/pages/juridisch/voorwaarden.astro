@@ -1,5 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { CONTACT_EMAIL } from '../../config';
+
+const contactMailto = `mailto:${CONTACT_EMAIL}`;
 ---
 
 <Base title="Algemene Voorwaarden — HoneyBadger Trader" description="Algemene Voorwaarden van HoneyBadger Trader.">
@@ -75,6 +78,6 @@ import Base from '../../layouts/Base.astro';
     <p>Op deze voorwaarden is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in [RECHTBANK NA JURIDISCH ADVIES].</p>
 
     <h2>11. Contact</h2>
-    <p>Vragen over deze voorwaarden? Neem contact op via <a href="mailto:info@honeybadgerbots.nl">info@honeybadgerbots.nl</a>.</p>
+    <p>Vragen over deze voorwaarden? Neem contact op via <a href={contactMailto}>{CONTACT_EMAIL}</a>.</p>
   </div>
 </Base>

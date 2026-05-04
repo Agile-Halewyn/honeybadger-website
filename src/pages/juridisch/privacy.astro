@@ -1,5 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { PRIVACY_EMAIL } from '../../config';
+
+const privacyMailto = `mailto:${PRIVACY_EMAIL}`;
 ---
 
 <Base title="Privacy Policy — HoneyBadger Trader" description="Hoe HoneyBadger Trader omgaat met je persoonsgegevens.">
@@ -57,7 +60,7 @@ import Base from '../../layouts/Base.astro';
       <li>Recht op overdraagbaarheid van je gegevens</li>
       <li>Recht om bezwaar te maken tegen verwerking</li>
     </ul>
-    <p>Neem contact op via <a href="mailto:privacy@honeybadgerbots.nl">privacy@honeybadgerbots.nl</a> om je rechten uit te oefenen.</p>
+    <p>Neem contact op via <a href={privacyMailto}>{PRIVACY_EMAIL}</a> om je rechten uit te oefenen.</p>
 
     <h2>8. Cookies</h2>
     <p>Wij gebruiken Plausible Analytics, een cookieloos analytics platform. Er worden geen tracking cookies geplaatst. Zie ook onze <a href="/juridisch/cookies">Cookie Policy</a>.</p>
@@ -66,6 +69,6 @@ import Base from '../../layouts/Base.astro';
     <p>Wij kunnen deze Privacy Policy wijzigen. De laatste versie is altijd beschikbaar op deze pagina.</p>
 
     <h2>10. Contact</h2>
-    <p>Vragen over deze Privacy Policy? Neem contact op via <a href="mailto:privacy@honeybadgerbots.nl">privacy@honeybadgerbots.nl</a>.</p>
+    <p>Vragen over deze Privacy Policy? Neem contact op via <a href={privacyMailto}>{PRIVACY_EMAIL}</a>.</p>
   </div>
 </Base>
