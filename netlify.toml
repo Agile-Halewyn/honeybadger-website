@@ -7,3 +7,9 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Alleen productie-builds: expliciete waitlist-API. Deploy previews / branch deploys krijgen
+# deze waarde niet automatisch — zet PUBLIC_WAITLIST_API_URL in Netlify (staging) om per ongeluk
+# productie-aanmeldingen te vermijden.
+[context.production.environment]
+  PUBLIC_WAITLIST_API_URL = "https://app.honeybadgertrader.com/api/waitlist"

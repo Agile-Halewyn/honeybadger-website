@@ -1,8 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { PRIVACY_EMAIL } from '../../config';
+
+const privacyMailto = `mailto:${PRIVACY_EMAIL}`;
 ---
 
-<Base title="Cookie Policy — HoneyBadger Bots" description="Hoe HoneyBadger Bots omgaat met cookies.">
+<Base title="Cookie Policy — HoneyBadger Trader" description="Hoe HoneyBadger Trader omgaat met cookies.">
   <div class="legal">
     <h1>Cookie Policy</h1>
     <p class="last-updated">Laatst bijgewerkt: [DATUM INVULLEN]</p>
@@ -15,7 +18,7 @@ import Base from '../../layouts/Base.astro';
     <h3>Publieke website (honeybadgerbots.nl)</h3>
     <p>De publieke website gebruikt <strong>geen cookies</strong>. Wij gebruiken Plausible Analytics, een privacy-vriendelijk analytics platform dat geen cookies plaatst en geen persoonsgegevens verzamelt. Er is daarom geen consent banner nodig voor de publieke website.</p>
 
-    <h3>Dashboard (app.honeybadgerbots.nl)</h3>
+    <h3>Dashboard (app.honeybadgertrader.com)</h3>
     <p>Het dashboard gebruikt de volgende strikt noodzakelijke cookies:</p>
     <ul>
       <li><strong>Sessiecookie:</strong> noodzakelijk om ingelogd te blijven. Dit cookie wordt verwijderd wanneer je uitlogt of je browser sluit. Dit is een functioneel cookie waarvoor geen toestemming vereist is onder de AVG.</li>
@@ -31,6 +34,6 @@ import Base from '../../layouts/Base.astro';
     <p>Als wij in de toekomst aanvullende cookies gebruiken, werken wij deze policy bij en informeren we je waar nodig.</p>
 
     <h2>Contact</h2>
-    <p>Vragen over cookies? Neem contact op via <a href="mailto:privacy@honeybadgerbots.nl">privacy@honeybadgerbots.nl</a>.</p>
+    <p>Vragen over cookies? Neem contact op via <a href={privacyMailto}>{PRIVACY_EMAIL}</a>.</p>
   </div>
 </Base>

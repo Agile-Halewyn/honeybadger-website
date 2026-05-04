@@ -26,6 +26,13 @@ npm run build
 npm run preview
 ```
 
+## Omgeving (waitlist-API)
+
+**Verplicht op buildtijd:** variabele **`PUBLIC_WAITLIST_API_URL`** (wordt door Astro ingebakken). Lokaal: kopieer `.env.example` naar `.env` en pas zo nodig aan. Zonder deze variabele faalt `astro dev` / `astro build` met een duidelijke fout — er is **geen** stille fallback naar productie (voorkomt datalekken via branch deploys).
+
+- **Netlify — productie:** staat in `netlify.toml` onder `[context.production.environment]`.
+- **Netlify — deploy previews / branch deploys:** zelf een waarde instellen (bijv. staging-Flask); zie `docs/WAITLIST-API-SPEC.md`.
+
 ## Projectstructuur
 
 ```
@@ -65,7 +72,7 @@ netlify.toml          # Build config + .com → .nl redirect
 | `/hoe-het-werkt` | Hoe het werkt | Scaffold compleet |
 | `/pricing` | Pricing | Scaffold compleet |
 | `/faq` | FAQ | Scaffold compleet |
-| `/waitlist` | Early access formulier | Scaffold compleet (Netlify Forms) |
+| `/waitlist` | Early access formulier | Live: POST naar Flask API (`fetch`, JavaScript vereist) |
 | `/juridisch/privacy` | Privacy Policy | Concept — juridisch advies nodig |
 | `/juridisch/voorwaarden` | Algemene Voorwaarden | Concept — juridisch advies nodig |
 | `/juridisch/disclaimer` | Risicoverklaring | Concept — juridisch advies nodig |
@@ -97,8 +104,8 @@ netlify.toml          # Build config + .com → .nl redirect
 - [ ] Cookie Policy reviewen
 
 ### Fase 4: Na VPS-migratie
-- [ ] Waitlist formulier migreren van Netlify Forms naar Flask API
-- [ ] "Inloggen" knop updaten naar app.honeybadgerbots.nl/login
+- [x] Waitlist formulier: Netlify Forms vervangen door directe POST naar Flask API (`src/pages/waitlist.astro`, zie `docs/WAITLIST-API-SPEC.md`)
+- [ ] "Inloggen" knop updaten naar app.honeybadgertrader.com/login
 
 ### Backlog (Ideeën voor later)
 - [ ] Specifieke 'Prestaties & Strategieën' pagina bouwen (backtests vs live data tonen om verwachtingen te managen)
@@ -107,7 +114,7 @@ netlify.toml          # Build config + .com → .nl redirect
 
 ## Gerelateerde documenten
 
-- `docs/WEBSITE-ARCHITECTURE-PLAN.md` — Architectuurplan (v1.1, gereviewed)
+- `docs/WAITLIST-API-SPEC.md` — Waitlist POST-contract, CORS/CSRF-notities, frontend env (`PUBLIC_WAITLIST_API_URL`)
 - `docs/MULTI-USER-PLATFORM-PLAN.md` — Multi-user platform planning
 - `docs/SECURITY-STANDARDS.md` — Beveiligingsstandaarden
 - `DECISIONS.md` — ADR-004 (Frontend Framework keuze)

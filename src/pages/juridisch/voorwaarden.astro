@@ -1,8 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { CONTACT_EMAIL } from '../../config';
+
+const contactMailto = `mailto:${CONTACT_EMAIL}`;
 ---
 
-<Base title="Algemene Voorwaarden — HoneyBadger Bots" description="Algemene Voorwaarden van HoneyBadger Bots.">
+<Base title="Algemene Voorwaarden — HoneyBadger Trader" description="Algemene Voorwaarden van HoneyBadger Trader.">
   <div class="legal">
     <h1>Algemene Voorwaarden</h1>
     <p class="last-updated">Laatst bijgewerkt: [DATUM INVULLEN NA JURIDISCH ADVIES]</p>
@@ -11,20 +14,20 @@ import Base from '../../layouts/Base.astro';
 
     <h2>1. Definities</h2>
     <ul>
-      <li><strong>HoneyBadger Bots / Wij:</strong> [BEDRIJFSNAAM], gevestigd te [ADRES], KvK-nummer [NUMMER]</li>
-      <li><strong>Gebruiker / Jij:</strong> de natuurlijke persoon die gebruikmaakt van onze dienst</li>
-      <li><strong>Dienst:</strong> het geautomatiseerd uitvoeren van handelstransacties op het Bitvavo account van de Gebruiker via trading bots</li>
-      <li><strong>Dashboard:</strong> het online platform waarop de Gebruiker zijn bots en handelsresultaten kan inzien en beheren</li>
+      <li><strong>HoneyBadger Trader / Wij:</strong> eenmanszaak Agile Halewyn, gevestigd aan Middenburcht 27, 3452MS Vleuten, KvK-nummer 90024559, vestigingsnummer 000055776876. Handelsnamen: Agile Halewyn, HoneyBadger Trader en HoneyBadger Bots.</li>
+      <li><strong>Gebruiker / Jij:</strong> de natuurlijke persoon die gebruikmaakt van onze software</li>
+      <li><strong>Dienst:</strong> het aanbieden van software (Software-as-a-Service) waarmee de Gebruiker signalen geautomatiseerd op zijn eigen Bitvavo account kan laten uitvoeren via trading bots</li>
+      <li><strong>Dashboard:</strong> het online platform waarop de Gebruiker zijn algoritmes en handelsresultaten kan inzien en zelf kan activeren of pauzeren</li>
       <li><strong>API-sleutel:</strong> de door de Gebruiker verstrekte toegangssleutel tot zijn Bitvavo account, beperkt tot handelsrechten</li>
     </ul>
 
     <h2>2. Toepasselijkheid</h2>
-    <p>Deze Algemene Voorwaarden zijn van toepassing op elk gebruik van de Dienst. Door je te registreren en gebruik te maken van HoneyBadger Bots, ga je akkoord met deze voorwaarden.</p>
+    <p>Deze Algemene Voorwaarden zijn van toepassing op elk gebruik van de Dienst. Door je te registreren en gebruik te maken van HoneyBadger Trader, ga je akkoord met deze voorwaarden.</p>
 
-    <h2>3. De dienst</h2>
+    <h2>3. De dienst (Software-as-a-Service)</h2>
     <ul>
-      <li>HoneyBadger Bots voert geautomatiseerde handelstransacties uit op jouw Bitvavo account op basis van door jou gekozen strategieen.</li>
-      <li>Wij hebben uitsluitend handelsrechten via je API-sleutel. Wij kunnen geen geld opnemen van je account.</li>
+      <li>HoneyBadger Trader biedt software die handelssignalen direct op jouw Bitvavo account kan uitvoeren. <strong>Wij beheren geen vermogen.</strong> Jij behoudt de volledige controle om bots op elk moment te starten of te stoppen.</li>
+      <li>Wij vereisen uitsluitend handelsrechten via je API-sleutel. Wij kunnen (en willen) nooit geld opnemen of verplaatsen vanaf je account.</li>
       <li>Wij garanderen geen winst. Crypto-trading is risicovol en je kunt (een deel van) je inleg verliezen.</li>
       <li>De Dienst is beschikbaar op basis van best effort. Wij streven naar maximale beschikbaarheid maar garanderen geen 100% uptime.</li>
     </ul>
@@ -55,8 +58,8 @@ import Base from '../../layouts/Base.astro';
 
     <h2>7. Aansprakelijkheid</h2>
     <ul>
-      <li>HoneyBadger Bots is niet aansprakelijk voor verliezen als gevolg van handelstransacties uitgevoerd door de bots.</li>
-      <li>HoneyBadger Bots is niet aansprakelijk voor schade als gevolg van storingen bij Bitvavo, internetverbinding of andere externe factoren.</li>
+      <li>HoneyBadger Trader is niet aansprakelijk voor verliezen als gevolg van handelstransacties uitgevoerd door de bots.</li>
+      <li>HoneyBadger Trader is niet aansprakelijk voor schade als gevolg van storingen bij Bitvavo, internetverbinding of andere externe factoren.</li>
       <li>Onze totale aansprakelijkheid is beperkt tot het bedrag dat je in de voorafgaande 3 maanden aan ons hebt betaald.</li>
       <li>[AANSPRAKELIJKHEIDSBEPERKING NA JURIDISCH ADVIES VERFIJNEN]</li>
     </ul>
@@ -75,6 +78,6 @@ import Base from '../../layouts/Base.astro';
     <p>Op deze voorwaarden is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in [RECHTBANK NA JURIDISCH ADVIES].</p>
 
     <h2>11. Contact</h2>
-    <p>Vragen over deze voorwaarden? Neem contact op via <a href="mailto:info@honeybadgerbots.nl">info@honeybadgerbots.nl</a>.</p>
+    <p>Vragen over deze voorwaarden? Neem contact op via <a href={contactMailto}>{CONTACT_EMAIL}</a>.</p>
   </div>
 </Base>
