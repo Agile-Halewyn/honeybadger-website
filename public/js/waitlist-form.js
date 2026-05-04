@@ -1,15 +1,37 @@
 (function () {
   const form = document.getElementById('waitlist-form');
+  const panel = document.getElementById('waitlist-form-panel');
+  const initNotice = document.getElementById('waitlist-init-notice');
   const submittedAtInput = document.getElementById('submitted-at');
   const botField = document.getElementById('bot-field');
   const statusEl = document.getElementById('waitlist-form-status');
   const submitBtn = document.getElementById('waitlist-submit');
   const waitlistApiUrl = form?.dataset?.waitlistApi?.trim();
+  const contactEmail = panel?.dataset?.contactEmail?.trim() || '';
+
+  function showInitFailure(message) {
+    if (!initNotice) return;
+    initNotice.replaceChildren();
+    initNotice.appendChild(document.createTextNode(message + ' '));
+    if (contactEmail) {
+      const link = document.createElement('a');
+      link.href = 'mailto:' + contactEmail;
+      link.textContent = contactEmail;
+      initNotice.appendChild(link);
+      initNotice.appendChild(document.createTextNode('.'));
+    }
+  }
 
   if (!form || !submittedAtInput || !statusEl || !waitlistApiUrl) {
+    showInitFailure(
+      'Het inschrijfformulier kan nu niet worden getoond. Controleer je internetverbinding of neem contact op via',
+    );
     return;
   }
 
+  if (initNotice) {
+    initNotice.hidden = true;
+  }
   form.removeAttribute('hidden');
 
   form.addEventListener('submit', async (event) => {

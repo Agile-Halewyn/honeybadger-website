@@ -33,13 +33,21 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
           </div>
         </div>
 
-        <div class="waitlist__form-wrapper">
+        <div
+          class="waitlist__form-wrapper"
+          id="waitlist-form-panel"
+          data-contact-email={CONTACT_EMAIL}
+        >
           <noscript>
             <p class="form-status form-status--warn">
               Om je aan te melden via dit formulier is JavaScript nodig. Schakel JavaScript in of mail ons op{' '}
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
             </p>
           </noscript>
+          <p id="waitlist-init-notice" class="form-status form-status--warn" role="status" aria-live="polite">
+            Het formulier wordt geladen. Zie je na een paar seconden geen invoervelden, vernieuw de pagina of mail{' '}
+            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+          </p>
           <form
             id="waitlist-form"
             class="waitlist__form"
