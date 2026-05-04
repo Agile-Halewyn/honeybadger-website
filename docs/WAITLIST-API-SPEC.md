@@ -25,7 +25,7 @@ Request body (JSON):
 
 ### Frontend (Astro / Netlify)
 
-De website leest **`PUBLIC_WAITLIST_API_URL`** op **buildtijd** (fallback: productie-URL in `src/config.ts`). Zie **`.env.example`**. Voor staging/preview: zet in Netlify **Branch deploys** of een aparte site een eigen waarde richting **staging-Flask**, niet impliciet productie.
+De website leest **`PUBLIC_WAITLIST_API_URL`** op **buildtijd** — **verplicht**; zie **`.env.example`** en `README.md`. Zonder waarde faalt de build (geen impliciete productie-URL). Voor staging/preview: zet in Netlify per context een **expliciete** endpoint-URL (bijv. staging-Flask), nooit “vergeten en alsnog productie”.
 
 Response (201 Created):
 

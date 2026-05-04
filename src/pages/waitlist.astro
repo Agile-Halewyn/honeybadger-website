@@ -152,8 +152,7 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
             serverMsg || 'Dit e-mailadres is al aangemeld.';
         } else if (response.status === 429) {
           statusEl.textContent =
-            serverMsg ||
-            'Te veel aanmeldingen vanaf dit apparaat. Probeer het later opnieuw.';
+            serverMsg || 'Te veel aanmeldingen. Probeer het later opnieuw.';
         } else {
           statusEl.textContent =
             serverMsg || 'Aanmelden mislukt. Probeer het later opnieuw.';

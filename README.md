@@ -28,7 +28,10 @@ npm run preview
 
 ## Omgeving (waitlist-API)
 
-Optioneel: kopieer `.env.example` naar `.env` lokaal. Variable **`PUBLIC_WAITLIST_API_URL`** wordt bij `npm run build` ingebakken (fallback: productie-URL in `src/config.ts`). Zie `docs/WAITLIST-API-SPEC.md` voor contract en staging/preview op Netlify.
+**Verplicht op buildtijd:** variabele **`PUBLIC_WAITLIST_API_URL`** (wordt door Astro ingebakken). Lokaal: kopieer `.env.example` naar `.env` en pas zo nodig aan. Zonder deze variabele faalt `astro dev` / `astro build` met een duidelijke fout — er is **geen** stille fallback naar productie (voorkomt datalekken via branch deploys).
+
+- **Netlify — productie:** staat in `netlify.toml` onder `[context.production.environment]`.
+- **Netlify — deploy previews / branch deploys:** zelf een waarde instellen (bijv. staging-Flask); zie `docs/WAITLIST-API-SPEC.md`.
 
 ## Projectstructuur
 
