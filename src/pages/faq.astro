@@ -1,10 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import {
+  BITVAVO_AFFILIATE_DISCLOSURE,
+  BITVAVO_AFFILIATE_URL,
+} from '../constants/affiliate';
 
 const faqs = [
   {
-    q: 'Wat is HoneyBadger Bots?',
-    a: 'HoneyBadger is een platform dat geautomatiseerde crypto trading bots beheert op jouw Bitvavo account. Wij regelen de techniek, jij behoudt de controle over je geld.'
+    q: 'Wat is HoneyBadger Trader?',
+    a: 'HoneyBadger Trader is een platform voor geautomatiseerd crypto handelen met tradingbots op jouw Bitvavo account. Wij regelen de techniek op de achtergrond, jij behoudt de controle over je geld.'
   },
   {
     q: 'Is mijn geld veilig?',
@@ -12,7 +16,7 @@ const faqs = [
   },
   {
     q: 'Welke exchange wordt ondersteund?',
-    a: 'Op dit moment ondersteunen we alleen Bitvavo, de grootste Nederlandse crypto exchange. Ondersteuning voor andere exchanges kan in de toekomst worden toegevoegd.'
+    aHtml: `Op dit moment ondersteunen we alleen Bitvavo, de grootste Nederlandse crypto exchange. Ondersteuning voor andere exchanges kan in de toekomst worden toegevoegd. Heb je nog geen Bitvavo account? Je kunt <a href="${BITVAVO_AFFILIATE_URL}" target="_blank" rel="noopener noreferrer sponsored">hier een account aanmaken</a>. ${BITVAVO_AFFILIATE_DISCLOSURE}`
   },
   {
     q: 'Welke strategieen zijn beschikbaar?',
@@ -45,13 +49,13 @@ const faqs = [
 ];
 ---
 
-<Base title="FAQ — HoneyBadger Bots" description="Veelgestelde vragen over HoneyBadger crypto trading bots.">
+<Base title="FAQ — HoneyBadger Trader" description="Veelgestelde vragen over HoneyBadger Trader, tradingbots en geautomatiseerd crypto handelen.">
 
   <section class="section">
     <div class="container">
       <div class="section__header">
         <h1>Veelgestelde vragen</h1>
-        <p>Alles wat je wilt weten over HoneyBadger Bots.</p>
+        <p>Alles wat je wilt weten over HoneyBadger Trader en geautomatiseerd crypto handelen.</p>
       </div>
 
       <div class="faq-list">
@@ -59,7 +63,7 @@ const faqs = [
           <details class="faq">
             <summary class="faq__question">{faq.q}</summary>
             <div class="faq__answer">
-              <p>{faq.a}</p>
+              {faq.aHtml ? <p set:html={faq.aHtml}></p> : <p>{faq.a}</p>}
             </div>
           </details>
         ))}

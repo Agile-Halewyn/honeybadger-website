@@ -1,14 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
+import BitvavoAffiliate from '../components/BitvavoAffiliate.astro';
 ---
 
-<Base title="Hoe het werkt — HoneyBadger Bots" description="Ontdek hoe HoneyBadger trading bots werken op je Bitvavo account.">
+<Base title="Hoe het werkt — HoneyBadger Trader" description="Ontdek hoe HoneyBadger Trader tradingbots inzet voor geautomatiseerd crypto handelen op je Bitvavo account.">
 
   <section class="section">
     <div class="container">
       <div class="section__header">
         <h1>Hoe het werkt</h1>
-        <p>Van aanmelding tot je eerste geautomatiseerde trade — dit is wat je kunt verwachten.</p>
+        <p>Van aanmelding tot je eerste geautomatiseerde trade: duidelijk, stap voor stap en ook geschikt als je nog nieuw bent met crypto.</p>
       </div>
 
       <div class="steps">
@@ -19,8 +20,12 @@ import Base from '../layouts/Base.astro';
           </div>
           <div class="step-detail__content">
             <h3>Maak een account aan</h3>
-            <p>Registreer veilig bij HoneyBadger en log in op je persoonlijke dashboard. Je hebt alleen een bestaand Bitvavo account nodig om te starten.</p>
+            <p>Registreer veilig bij HoneyBadger Trader en log in op je persoonlijke dashboard. Je hebt alleen een bestaand Bitvavo account nodig om te starten.</p>
           </div>
+        </div>
+
+        <div class="step-affiliate">
+          <BitvavoAffiliate collapsible={true} />
         </div>
 
         <div class="step-detail">
@@ -40,7 +45,7 @@ import Base from '../layouts/Base.astro';
             <div class="step-detail__line"></div>
           </div>
           <div class="step-detail__content">
-            <h3>Kies een strategie</h3>
+            <h3>Activeer een strategie</h3>
             <p>Selecteer een van onze professionele bots, gebaseerd op bewezen strategieën zoals DCA en grid trading. Bij elke bot zie je direct het risicoprofiel en historische prestaties.</p>
           </div>
         </div>
@@ -114,6 +119,10 @@ import Base from '../layouts/Base.astro';
   .step-detail {
     display: flex;
     gap: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .step-affiliate {
     padding-bottom: 2.5rem;
   }
 

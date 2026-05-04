@@ -1,0 +1,126 @@
+---
+import {
+  BITVAVO_AFFILIATE_DISCLOSURE,
+  BITVAVO_AFFILIATE_PROMO_NOTE,
+  BITVAVO_AFFILIATE_URL,
+} from '../constants/affiliate';
+
+interface Props {
+  collapsible?: boolean;
+  defaultOpen?: boolean;
+}
+
+const { collapsible = false, defaultOpen = false } = Astro.props;
+---
+
+<aside class="bitvavo-affiliate" aria-label="Bitvavo affiliate suggestie">
+  {collapsible ? (
+    <details class="bitvavo-affiliate__details" open={defaultOpen}>
+      <summary class="bitvavo-affiliate__summary">Nog geen Bitvavo account?</summary>
+      <div class="bitvavo-affiliate__content">
+        <p>
+          Om HoneyBadger Trader te gebruiken heb je een Bitvavo account nodig.
+          Je kunt je aanmelden via de knop hieronder. {BITVAVO_AFFILIATE_DISCLOSURE}
+        </p>
+        <p class="bitvavo-affiliate__promo">{BITVAVO_AFFILIATE_PROMO_NOTE}</p>
+        <a
+          href={BITVAVO_AFFILIATE_URL}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="btn btn--secondary"
+        >
+          Account aanmaken bij Bitvavo
+        </a>
+        <p class="bitvavo-affiliate__disclaimer">
+          Bitvavo is een gereguleerde Nederlandse crypto exchange (DNB-geregistreerd).
+        </p>
+      </div>
+    </details>
+  ) : (
+    <>
+      <h3>Nog geen Bitvavo account?</h3>
+      <p>
+        Om HoneyBadger Trader te gebruiken heb je een Bitvavo account nodig.
+        Je kunt je aanmelden via de knop hieronder. {BITVAVO_AFFILIATE_DISCLOSURE}
+      </p>
+      <p class="bitvavo-affiliate__promo">{BITVAVO_AFFILIATE_PROMO_NOTE}</p>
+      <a
+        href={BITVAVO_AFFILIATE_URL}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        class="btn btn--secondary"
+      >
+        Account aanmaken bij Bitvavo
+      </a>
+      <p class="bitvavo-affiliate__disclaimer">
+        Bitvavo is een gereguleerde Nederlandse crypto exchange (DNB-geregistreerd).
+      </p>
+    </>
+  )}
+</aside>
+
+<style>
+  .bitvavo-affiliate {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  .bitvavo-affiliate h3 {
+    margin-bottom: 0.75rem;
+  }
+
+  .bitvavo-affiliate__details {
+    text-align: left;
+  }
+
+  .bitvavo-affiliate__summary {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    cursor: pointer;
+    list-style: none;
+    text-align: center;
+  }
+
+  .bitvavo-affiliate__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .bitvavo-affiliate__summary::after {
+    content: ' +';
+    color: var(--color-text-muted);
+  }
+
+  .bitvavo-affiliate__details[open] .bitvavo-affiliate__summary::after {
+    content: ' −';
+  }
+
+  .bitvavo-affiliate__content {
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  .bitvavo-affiliate p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .bitvavo-affiliate .btn {
+    margin-top: 1rem;
+  }
+
+  .bitvavo-affiliate__promo {
+    font-size: 0.9375rem;
+  }
+
+  .bitvavo-affiliate__disclaimer {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+  }
+</style>
