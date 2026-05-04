@@ -98,7 +98,7 @@ netlify.toml          # Build config + .com → .nl redirect
 
 ### Fase 4: Na VPS-migratie
 - [ ] Waitlist formulier migreren van Netlify Forms naar Flask API
-- [ ] "Inloggen" knop updaten naar app.honeybadgerbots.nl/login
+- [ ] "Inloggen" knop updaten naar app.honeybadgertrader.com/login
 
 ### Backlog (Ideeën voor later)
 - [ ] Specifieke 'Prestaties & Strategieën' pagina bouwen (backtests vs live data tonen om verwachtingen te managen)
