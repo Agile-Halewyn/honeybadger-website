@@ -2,6 +2,9 @@
 const year = new Date().getFullYear();
 import { Image } from 'astro:assets';
 import hbLogo from '../assets/hb-logo.png';
+import { CONTACT_EMAIL } from '../config';
+
+const contactMailto = `mailto:${CONTACT_EMAIL}`;
 ---
 
 <footer class="footer">
@@ -18,7 +21,9 @@ import hbLogo from '../assets/hb-logo.png';
           <li><a href="/hoe-het-werkt">Hoe het werkt</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">Contact</a></li>
           <li><a href="/waitlist">Early access</a></li>
+          <li><a href={contactMailto}>{CONTACT_EMAIL}</a></li>
         </ul>
       </div>
 

@@ -1,5 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { PRIVACY_EMAIL } from '../../config';
+
+const privacyMailto = `mailto:${PRIVACY_EMAIL}`;
 ---
 
 <Base title="Cookie Policy — HoneyBadger Trader" description="Hoe HoneyBadger Trader omgaat met cookies.">
@@ -31,6 +34,6 @@ import Base from '../../layouts/Base.astro';
     <p>Als wij in de toekomst aanvullende cookies gebruiken, werken wij deze policy bij en informeren we je waar nodig.</p>
 
     <h2>Contact</h2>
-    <p>Vragen over cookies? Neem contact op via <a href="mailto:privacy@honeybadgerbots.nl">privacy@honeybadgerbots.nl</a>.</p>
+    <p>Vragen over cookies? Neem contact op via <a href={privacyMailto}>{PRIVACY_EMAIL}</a>.</p>
   </div>
 </Base>

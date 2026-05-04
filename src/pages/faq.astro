@@ -4,6 +4,7 @@ import {
   BITVAVO_AFFILIATE_DISCLOSURE,
   BITVAVO_AFFILIATE_URL,
 } from '../constants/affiliate';
+import { CONTACT_EMAIL } from '../config';
 
 const faqs = [
   {
@@ -47,6 +48,8 @@ const faqs = [
     a: 'We zijn momenteel in early access. Schrijf je in op onze waitlist en we nemen contact met je op zodra er plek is.'
   }
 ];
+
+const contactMailto = `mailto:${CONTACT_EMAIL}`;
 ---
 
 <Base title="FAQ — HoneyBadger Trader" description="Veelgestelde vragen over HoneyBadger Trader, tradingbots en geautomatiseerd crypto handelen.">
@@ -70,7 +73,7 @@ const faqs = [
       </div>
 
       <div class="faq-contact">
-        <p>Staat je vraag er niet tussen? Neem contact op via <a href="mailto:info@honeybadgerbots.nl">info@honeybadgerbots.nl</a></p>
+        <p>Staat je vraag er niet tussen? Neem contact op via <a href={contactMailto}>{CONTACT_EMAIL}</a></p>
       </div>
     </div>
   </section>
