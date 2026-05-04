@@ -1,7 +1,6 @@
 ---
-// TIJDELIJK: Netlify Forms (tot Flask productie live is)
-// Migratie naar POST /api/waitlist: zie docs/WAITLIST-API-SPEC.md
-// en branch feature/pr-c-waitlist-frontend zodra VPS productie actief is.
+// TIJDELIJK: Netlify Forms (tot Flask waitlist op productie betrouwbaar bereikbaar is).
+// Migratie naar POST /api/waitlist: zie docs/WAITLIST-API-SPEC.md (bron van waarheid).
 import Base from '../layouts/Base.astro';
 import BitvavoAffiliate from '../components/BitvavoAffiliate.astro';
 import { CONTACT_EMAIL } from '../config';
@@ -92,6 +91,7 @@ import { CONTACT_EMAIL } from '../config';
               Door je in te schrijven ga je akkoord met onze
               <a href="/juridisch/privacy">Privacy Policy</a>.
               We gebruiken je e-mailadres alleen om je te informeren over HoneyBadger Trader.
+              Netlify Forms heeft geen zelfde dubbele-aanmeldingcheck als onze API; hetzelfde e-mailadres kan tijdelijk meerdere keren worden ingediend tot overstap naar het platform (zie `docs/WAITLIST-API-SPEC.md`).
             </p>
           </form>
         </div>

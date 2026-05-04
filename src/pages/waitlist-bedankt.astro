@@ -1,48 +1,10 @@
 ---
-import Base from '../layouts/Base.astro';
+import ThankYouSimple from '../components/ThankYouSimple.astro';
 ---
 
-<Base
+<ThankYouSimple
   title="Bedankt voor je inschrijving — HoneyBadger Trader"
   description="Je staat op de early-access waitlist. We nemen contact op zodra er plek is."
->
-  <section class="section success-section">
-    <div class="container success-container">
-      <h1>Bedankt voor je inschrijving!</h1>
-      <p>
-        We nemen contact op zodra er plek beschikbaar is. Je ontvangt een bevestiging per e-mail.
-      </p>
-      <a href="/" class="btn btn--primary btn--large mt-8">Terug naar home</a>
-    </div>
-  </section>
-</Base>
-
-<style>
-  .success-section {
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .success-container {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .success-container h1 {
-    margin-bottom: 1rem;
-  }
-
-  .success-container p {
-    color: var(--color-text-muted);
-    font-size: 1.125rem;
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-  }
-
-  .mt-8 {
-    margin-top: 2rem;
-  }
-</style>
+  heading="Bedankt voor je inschrijving!"
+  intro="We hebben je aanmelding ontvangen. We nemen contact met je op zodra er plek beschikbaar is."
+/>
