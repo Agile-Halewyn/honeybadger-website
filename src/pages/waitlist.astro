@@ -1,12 +1,14 @@
 ---
+// TIJDELIJK: Netlify Forms (tot Flask waitlist op productie betrouwbaar bereikbaar is).
+// Migratie naar POST /api/waitlist: zie docs/WAITLIST-API-SPEC.md (bron van waarheid).
 import Base from '../layouts/Base.astro';
 import BitvavoAffiliate from '../components/BitvavoAffiliate.astro';
-import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
+import { CONTACT_EMAIL } from '../config';
 ---
 
 <Base title="Early access — HoneyBadger Trader" description="Schrijf je in voor early access bij HoneyBadger Trader.">
   <Fragment slot="body-scripts">
-    <script defer src="/js/waitlist-form.js"></script>
+    <script defer src="/js/waitlist-netlify-submitted-at.js"></script>
   </Fragment>
 
   <section class="section">
@@ -33,42 +35,42 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
           </div>
         </div>
 
-        <div
-          class="waitlist__form-wrapper"
-          id="waitlist-form-panel"
-          data-contact-email={CONTACT_EMAIL}
-        >
+        <div class="waitlist__form-wrapper">
           <noscript>
             <p class="form-status form-status--warn">
-              Om je aan te melden via dit formulier is JavaScript nodig. Schakel JavaScript in of mail ons op{' '}
-              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+              Dit formulier kun je ook zonder JavaScript versturen. Vul de velden in en gebruik de knop hieronder.
+              Bij problemen mail <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
             </p>
           </noscript>
-          <p id="waitlist-init-notice" class="form-status form-status--warn" role="status" aria-live="polite">
-            Het formulier wordt geladen. Zie je na een paar seconden geen invoervelden, vernieuw de pagina of mail{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
-          </p>
           <form
-            id="waitlist-form"
+            name="waitlist"
             class="waitlist__form"
-            method="post"
-            action="/waitlist/"
-            data-waitlist-api={WAITLIST_API_URL}
-            hidden
+            method="POST"
+            action="/waitlist-bedankt/"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
           >
+            <input type="hidden" name="form-name" value="waitlist" />
             <p class="hidden" aria-hidden="true">
-              <label>Niet invullen: <input name="bot-field" id="bot-field" /></label>
+              <label>Niet invullen: <input name="bot-field" /></label>
             </p>
-            <input type="hidden" name="submitted_at" id="submitted-at" />
+            <input type="hidden" name="submitted_at" id="submitted_at" value="" />
 
             <div class="form-group">
               <label for="name">Naam</label>
-              <input type="text" id="name" name="name" placeholder="Je naam" required />
+              <input type="text" id="name" name="name" placeholder="Je naam" required autocomplete="name" />
             </div>
 
             <div class="form-group">
               <label for="email">E-mailadres</label>
-              <input type="email" id="email" name="email" placeholder="je@email.nl" required />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="je@email.nl"
+                required
+                autocomplete="email"
+              />
             </div>
 
             <div class="form-group">
@@ -81,15 +83,15 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
               </select>
             </div>
 
-            <button type="submit" id="waitlist-submit" class="btn btn--primary btn--large" style="width: 100%; justify-content: center;">
+            <button type="submit" class="btn btn--primary btn--large waitlist__submit">
               Schrijf me in
             </button>
-            <p id="waitlist-form-status" class="form-status" role="status" aria-live="polite"></p>
 
             <p class="form-privacy">
               Door je in te schrijven ga je akkoord met onze
               <a href="/juridisch/privacy">Privacy Policy</a>.
               We gebruiken je e-mailadres alleen om je te informeren over HoneyBadger Trader.
+              Netlify Forms heeft geen zelfde dubbele-aanmeldingcheck als onze API; hetzelfde e-mailadres kan tijdelijk meerdere keren worden ingediend tot overstap naar het platform (zie `docs/WAITLIST-API-SPEC.md`).
             </p>
           </form>
         </div>
@@ -102,7 +104,6 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
       <BitvavoAffiliate />
     </div>
   </section>
-
 </Base>
 
 <style>
@@ -157,6 +158,11 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
     gap: 1.25rem;
   }
 
+  .waitlist__submit {
+    width: 100%;
+    justify-content: center;
+  }
+
   .form-group {
     display: flex;
     flex-direction: column;
@@ -207,7 +213,9 @@ import { CONTACT_EMAIL, WAITLIST_API_URL } from '../config';
     border-radius: var(--radius);
   }
 
-  .hidden { display: none; }
+  .hidden {
+    display: none;
+  }
 
   @media (max-width: 768px) {
     .waitlist {
