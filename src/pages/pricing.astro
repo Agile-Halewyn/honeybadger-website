@@ -29,7 +29,7 @@ import Base from '../layouts/Base.astro';
         <p class="pricing-card__tagline">Start met één strategie. Voeg de tweede toe wanneer je wilt.</p>
 
         <ul class="pricing-card__features">
-          <li>Beide strategieën beschikbaar — per actieve strategie €5/maand</li>
+          <li>Beide strategieën beschikbaar — €5 per actieve strategie per maand</li>
           <li><strong>Geen</strong> <em>management fee</em> over je inleg</li>
           <li>Veilig Spot-traden (HODL-vriendelijk)</li>
           <li>24/7 geautomatiseerd handelen</li>
@@ -43,15 +43,15 @@ import Base from '../layouts/Base.astro';
 
         <p class="pricing-card__early-access-note">
           Tijdens early access: de eerste 3 maanden zijn gratis per strategie.<br />
-          Daarna €5 per actieve strategie per maand.
+          Daarna €5 per actieve strategie per maand + 8% performance fee over netto winst.
         </p>
       </div>
 
       <div class="pricing-example">
-        <h2>Hoe de kosten uitpakken</h2>
+        <h2>Hoe de kosten uitpakken over een jaar</h2>
         <p class="pricing-example__intro">De onderstaande voorbeelden illustreren hoe de kosten over een jaar worden berekend — niet wat je kunt verwachten. Rendementen uit het verleden bieden geen garantie voor de toekomst.</p>
         <div class="pricing-example__scroll">
-          <div class="grid-3 pricing-example__grid">
+          <div class="pricing-scenarios">
 
             <div class="card pricing-scenario">
               <h4>Één strategie, winst gemaakt</h4>
@@ -246,7 +246,10 @@ import Base from '../layouts/Base.astro';
     overflow-x: auto;
   }
 
-  .pricing-example__grid {
+  .pricing-scenarios {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 2rem;
     min-width: 540px;
   }
 
