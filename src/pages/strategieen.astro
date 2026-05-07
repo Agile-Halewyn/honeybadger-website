@@ -1,0 +1,195 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Onze strategieën — HoneyBadger Trader"
+  description="HoneyBadger Trader biedt twee geautomatiseerde Bitcoin-strategieën: RegimeSwitch (voorzichtige handelaar) en Swing Balanced (actieve handelaar). Volledig automatisch, 24/7 actief op jouw Bitvavo account."
+>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1>Onze strategieën</h1>
+        <p>Beide bots handelen volledig automatisch op Bitcoin. Ze vullen elkaar aan:
+        de één is voorzichtig en wacht op de juiste marktomstandigheden,
+        de ander is actiever en benut kortere bewegingen.</p>
+      </div>
+
+      <div class="grid-2">
+
+        <!-- RegimeSwitch -->
+        <div class="card">
+          <span class="badge">Voorzichtige handelaar</span>
+          <h2 class="strategy__name">RegimeSwitch</h2>
+          <p>RegimeSwitch kijkt voortdurend naar de stemming van de markt en past
+          zijn gedrag daar op aan. Hij herkent vier marktfasen en handelt alleen
+          als de omstandigheden gunstig zijn.</p>
+
+          <div class="table-wrap">
+            <table class="strategy-table">
+              <thead>
+                <tr>
+                  <th>Marktsituatie</th>
+                  <th>Wat doet de bot?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Markt stijgt</td>
+                  <td>Zoekt actief naar instapkansen</td>
+                </tr>
+                <tr>
+                  <td>Markt beweegt zijwaarts</td>
+                  <td>Handelt selectief op terugvallen</td>
+                </tr>
+                <tr>
+                  <td>Markt daalt</td>
+                  <td>Opent geen nieuwe posities</td>
+                </tr>
+                <tr>
+                  <td>Plotselinge koersval</td>
+                  <td>Opent geen nieuwe posities</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="strategy__closing">In ongunstige markten staat de bot stil. Zo beschermt hij het kapitaal
+          totdat de omstandigheden verbeteren.</p>
+        </div>
+
+        <!-- Swing Balanced -->
+        <div class="card">
+          <span class="badge">Actieve handelaar</span>
+          <h2 class="strategy__name">Swing Balanced</h2>
+          <p>Swing Balanced handelt op momenten dat het marktmomentum omslaat naar
+          boven. Zodra een uitbraak wordt gedetecteerd, opent de bot een positie
+          en bewaakt hij die met twee exitregels tegelijk.</p>
+
+          <div class="exit-rules">
+            <div class="exit-rule">
+              <span class="exit-rule__label">1. Signaalexit</span>
+              <p>Zodra het momentum keert, sluit de bot de positie.</p>
+            </div>
+            <div class="exit-rule">
+              <span class="exit-rule__label">2. Winstdrempel</span>
+              <p>Als de koers een bepaalde winstdrempel bereikt, wordt automatisch
+              verkocht — ook als het signaal nog niet is omgeslagen. Zo wordt winst
+              daadwerkelijk vastgezet.</p>
+            </div>
+          </div>
+
+          <p class="strategy__closing">De bot sluit nooit met verlies op basis van deze regels. Een brede
+          veiligheidsgrens vangt extreme situaties op.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="disclaimer">
+        <p>Beide strategieën zijn ontwikkeld en geoptimaliseerd op historische
+        Bitcoin-data en draaien volledig geautomatiseerd. Resultaten uit het
+        verleden bieden geen garantie voor de toekomst.</p>
+        <a href="/juridisch/disclaimer">Lees onze volledige risicoverklaring &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .strategy__name {
+    margin: 1rem 0 0.75rem;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .strategy-table {
+    width: 100%;
+    min-width: 320px;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .strategy-table th,
+  .strategy-table td {
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .strategy-table th {
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .strategy-table td {
+    color: var(--color-text);
+  }
+
+  .strategy-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .exit-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .exit-rule {
+    padding: 1rem;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--color-primary);
+  }
+
+  .exit-rule__label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-accent);
+    margin-bottom: 0.375rem;
+  }
+
+  .exit-rule p {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .strategy__closing {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-top: 0;
+  }
+
+  .disclaimer {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .disclaimer p {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .disclaimer a {
+    font-weight: 600;
+  }
+</style>
