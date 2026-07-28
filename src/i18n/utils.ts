@@ -48,3 +48,9 @@ export function getLanguageSwitcherUrls(
   const routeKey = findRouteKeyFromPath(pathname) ?? fallbackKey;
   return getAlternateUrls(routeKey);
 }
+
+/** True when at least two locales have distinct URLs (e.g. not NL-only cookies/disclaimer). */
+export function hasLocaleAlternates(pathname: string): boolean {
+  const urls = Object.values(getLanguageSwitcherUrls(pathname));
+  return new Set(urls).size > 1;
+}
