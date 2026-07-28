@@ -1,10 +1,6 @@
 ---
-import ThankYouSimple from '../components/ThankYouSimple.astro';
+import ThankYouPage from '../components/pages/ThankYouPage.astro';
+import { waitlistBedanktContent } from '../i18n/pages/bedankt';
 ---
 
-<ThankYouSimple
-  title="Bedankt voor je inschrijving — HoneyBadger Trader"
-  description="Je staat op de early-access waitlist. We nemen contact op zodra er plek is."
-  heading="Bedankt voor je inschrijving!"
-  intro="We hebben je aanmelding ontvangen. We nemen contact met je op zodra er plek beschikbaar is."
-/>
+<ThankYouPage locale="nl" content={waitlistBedanktContent.nl} routeKey="waitlistThankYou" />

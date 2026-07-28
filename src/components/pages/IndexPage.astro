@@ -1,0 +1,214 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import type { Locale } from '../../i18n/routes';
+import { indexContent } from '../../i18n/pages/index';
+import { getAlternateUrls, getLocalizedPath } from '../../i18n/utils';
+import { getPathPlaceholders, interpolatePaths } from '../../i18n/pages/helpers';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = indexContent[locale];
+const paths = getPathPlaceholders(locale);
+const alternates = getAlternateUrls('home');
+const waitlistPath = getLocalizedPath('waitlist', locale);
+const howItWorksPath = getLocalizedPath('howItWorks', locale);
+---
+
+<Base
+  title={content.title}
+  description={content.description}
+  lang={locale}
+  alternateUrls={alternates}
+>
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <span class="badge">{content.hero.badge}</span>
+        <h1>{content.hero.h1}</h1>
+        <p class="hero__sub">{content.hero.sub}</p>
+        <p class="hero__pricing-note">{content.hero.pricingNote}</p>
+        <div class="hero__actions">
+          <a href={waitlistPath} class="btn btn--primary btn--large">{content.hero.ctaPrimary}</a>
+          <a href={howItWorksPath} class="btn btn--secondary">{content.hero.ctaSecondary}</a>
+        </div>
+      </div>
+      <Image src={import('../../assets/banner.png')} alt={content.imageAlt} widths={[640, 1024, 1600]} />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <h2>{content.why.heading}</h2>
+        <p>{content.why.intro}</p>
+      </div>
+      <div class="grid-3">
+        {content.why.cards.map((card) => (
+          <div class="card">
+            <div class="card__icon">{card.icon}</div>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2>{content.steps.heading}</h2>
+      </div>
+      <div class="grid-3">
+        {content.steps.items.map((step, index) => (
+          <div class="step">
+            <span class="step__number">{index + 1}</span>
+            <h3>{step.title}</h3>
+            {step.bodyHtml ? (
+              <p set:html={interpolatePaths(step.bodyHtml, paths)} />
+            ) : (
+              <p>{step.body}</p>
+            )}
+          </div>
+        ))}
+      </div>
+      <div class="section__footer">
+        <a href={howItWorksPath} class="btn btn--secondary">{content.steps.footerCta}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container cta">
+      <h2>{content.cta.heading}</h2>
+      <p>{content.cta.body}</p>
+      <a href={waitlistPath} class="btn btn--primary btn--large">{content.cta.button}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 5rem 0 4rem;
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4rem;
+  }
+
+  .hero__content {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .hero__content h1 {
+    margin-top: 1rem;
+  }
+
+  .hero__sub {
+    margin-top: 1.25rem;
+    font-size: 1.1875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .hero__pricing-note {
+    margin-top: 0.875rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .card__icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .card h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .card p {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .step {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 960px) {
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 60%;
+      right: -40%;
+      height: 2px;
+      background-color: var(--color-border);
+      z-index: -1;
+    }
+  }
+
+  .step__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    color: var(--color-primary-hover);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .step h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .step p {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .section__footer {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .cta {
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .cta p {
+    color: var(--color-text-muted);
+    margin: 1rem 0 2rem;
+    font-size: 1.125rem;
+  }
+</style>

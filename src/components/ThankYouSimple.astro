@@ -1,23 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
+import type { Locale } from '../i18n/routes';
+import { getAlternateUrls, getLocalizedPath } from '../i18n/utils';
+import { getUi } from '../i18n/ui';
+import type { ThankYouPageContent } from '../i18n/pages/types';
 
 interface Props {
-  title: string;
-  description: string;
-  heading: string;
-  intro: string;
+  locale: Locale;
+  content: ThankYouPageContent;
+  routeKey?: 'bedankt' | 'contactThankYou' | 'waitlistThankYou';
 }
 
-const { title, description, heading, intro } = Astro.props;
+const { locale, content, routeKey = 'bedankt' } = Astro.props;
+const ui = getUi(locale);
+const homePath = getLocalizedPath('home', locale);
+const alternates = getAlternateUrls(routeKey);
 ---
 
-<Base title={title} description={description}>
+<Base
+  title={content.title}
+  description={content.description}
+  lang={locale}
+  alternateUrls={alternates}
+>
   <section class="section success-section">
     <div class="container success-container">
-      <slot name="icon" />
-      <h1>{heading}</h1>
-      <p>{intro}</p>
-      <a href="/" class="btn btn--primary btn--large mt-8">Terug naar home</a>
+      <div class="success-icon">{content.icon}</div>
+      <h1>{content.heading}</h1>
+      <p>{content.intro}</p>
+      <a href={homePath} class="btn btn--primary btn--large mt-8">{ui.common.backToHome}</a>
     </div>
   </section>
 </Base>
@@ -36,7 +47,7 @@ const { title, description, heading, intro } = Astro.props;
     margin: 0 auto;
   }
 
-  .success-container :global(.success-icon) {
+  .success-icon {
     font-size: 4rem;
     margin-bottom: 1.5rem;
   }

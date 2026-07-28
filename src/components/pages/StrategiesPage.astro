@@ -1,0 +1,184 @@
+---
+import Base from '../../layouts/Base.astro';
+import type { Locale } from '../../i18n/routes';
+import { strategiesContent } from '../../i18n/pages/strategieen';
+import { getAlternateUrls, getLocalizedPath } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = strategiesContent[locale];
+const alternates = getAlternateUrls('strategies');
+const disclaimerPath = getLocalizedPath('disclaimer', locale);
+const [regimeSwitch, swingBalanced] = content.strategies;
+---
+
+<Base
+  title={content.title}
+  description={content.description}
+  lang={locale}
+  alternateUrls={alternates}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1>{content.h1}</h1>
+        <p>{content.intro}</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="badge">{regimeSwitch.badge}</span>
+          <h2 class="strategy__name">{regimeSwitch.name}</h2>
+          <p>{regimeSwitch.intro}</p>
+
+          {regimeSwitch.table && (
+            <div class="table-wrap">
+              <table class="strategy-table">
+                <thead>
+                  <tr>
+                    <th>{regimeSwitch.table.headers[0]}</th>
+                    <th>{regimeSwitch.table.headers[1]}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {regimeSwitch.table.rows.map((row) => (
+                    <tr>
+                      <td>{row.situation}</td>
+                      <td>{row.action}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          <p class="strategy__closing">{regimeSwitch.closing}</p>
+        </div>
+
+        <div class="card">
+          <span class="badge">{swingBalanced.badge}</span>
+          <h2 class="strategy__name">{swingBalanced.name}</h2>
+          <p>{swingBalanced.intro}</p>
+
+          {swingBalanced.exitRules && (
+            <div class="exit-rules">
+              {swingBalanced.exitRules.map((rule) => (
+                <div class="exit-rule">
+                  <span class="exit-rule__label">{rule.label}</span>
+                  <p>{rule.body}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <p class="strategy__closing">{swingBalanced.closing}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="disclaimer">
+        <p>{content.disclaimer.body}</p>
+        <a href={disclaimerPath}>{content.disclaimer.linkText}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .strategy__name {
+    margin: 1rem 0 0.75rem;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .strategy-table {
+    width: 100%;
+    min-width: 320px;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .strategy-table th,
+  .strategy-table td {
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .strategy-table th {
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .strategy-table td {
+    color: var(--color-text);
+  }
+
+  .strategy-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .exit-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .exit-rule {
+    padding: 1rem;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--color-primary);
+  }
+
+  .exit-rule__label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-accent);
+    margin-bottom: 0.375rem;
+  }
+
+  .exit-rule p {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .strategy__closing {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-top: 0;
+  }
+
+  .disclaimer {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .disclaimer p {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .disclaimer a {
+    font-weight: 600;
+  }
+</style>

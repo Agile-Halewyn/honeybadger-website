@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getAlternateUrls } from '../../i18n/utils';
+import type { Locale } from '../../i18n/routes';
+import { termsContent } from '../../i18n/legal/terms';
+import { CONTACT_EMAIL } from '../../config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = termsContent[locale];
+const contactMailto = `mailto:${CONTACT_EMAIL}`;
+const alternates = getAlternateUrls('terms');
+---
+
+<Base
+  title={content.title}
+  description={content.metaDescription}
+  lang={locale}
+  alternateUrls={alternates}
+>
+  <div class="legal">
+    <h1>{content.h1}</h1>
+    <p class="last-updated">{content.lastUpdated}</p>
+    <p><strong>{content.noticeLabel}</strong> {content.notice}</p>
+    {content.bindingClause && (
+      <p><em>{content.bindingClause}</em></p>
+    )}
+
+    {content.sections.map((section) => (
+      <>
+        <h2>{section.heading}</h2>
+        {section.intro && <p set:html={section.intro.replace('{contactEmail}', CONTACT_EMAIL).replace('{contactMailto}', contactMailto)} />}
+        {section.paragraphs?.map((p) => (
+          p.html ? <p set:html={p.html.replace('{contactEmail}', CONTACT_EMAIL).replace('{contactMailto}', contactMailto)} /> : <p>{p.text}</p>
+        ))}
+        {section.list && (
+          <ul>
+            {section.list.map((item) => (
+              <li set:html={item} />
+            ))}
+          </ul>
+        )}
+      </>
+    ))}
+  </div>
+</Base>
