@@ -143,8 +143,8 @@ const navItems = [
     transition: transform 0.2s;
   }
 
-  /* keep in sync with LanguageSwitcher.astro mobile breakpoint (post-nowrap scan: ES 1064px + 25px; gap fix keeps 1089) */
-  @media (max-width: 1089px) {
+  /* keep in sync with LanguageSwitcher.astro — cross-browser strict min 1120 (ES/Firefox) + 10px margin */
+  @media (max-width: 1129px) {
     .nav__toggle { display: flex; }
 
     .nav__menu {

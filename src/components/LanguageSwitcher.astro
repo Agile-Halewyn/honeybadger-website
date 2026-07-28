@@ -57,8 +57,8 @@ const labels: Record<Locale, string> = { nl: 'NL', es: 'ES', en: 'EN' };
     background: var(--color-primary-light);
   }
 
-  /* keep in sync with Header.astro mobile breakpoint (post-nowrap scan: ES 1064px + 25px) */
-  @media (max-width: 1089px) {
+  /* keep in sync with Header.astro — cross-browser strict min 1120 (ES/Firefox) + 10px margin */
+  @media (max-width: 1129px) {
     .lang-switcher {
       margin-left: 0;
       margin-top: 0.5rem;
