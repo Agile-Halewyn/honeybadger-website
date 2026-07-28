@@ -105,6 +105,7 @@ const navItems = [
     color: var(--color-text-muted);
     font-weight: 500;
     font-size: 0.9375rem;
+    white-space: nowrap;
     transition: color 0.15s, background 0.15s;
     text-decoration: none;
   }
@@ -140,7 +141,8 @@ const navItems = [
     transition: transform 0.2s;
   }
 
-  @media (max-width: 768px) {
+  /* keep in sync with LanguageSwitcher.astro mobile breakpoint */
+  @media (max-width: 1089px) {
     .nav__toggle { display: flex; }
 
     .nav__menu {
