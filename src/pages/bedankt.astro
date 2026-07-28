@@ -1,12 +1,6 @@
 ---
-import ThankYouSimple from '../components/ThankYouSimple.astro';
+import ThankYouPage from '../components/pages/ThankYouPage.astro';
+import { bedanktContent } from '../i18n/pages/bedankt';
 ---
 
-<ThankYouSimple
-  title="Bedankt voor je aanmelding! — HoneyBadger Trader"
-  description="Je inschrijving voor de early access is gelukt."
-  heading="Je staat op de lijst!"
-  intro="Fantastisch dat je meedoet aan de early access van HoneyBadger Trader. We nemen zo snel mogelijk contact met je op via het opgegeven e-mailadres wanneer er een plekje voor je vrijkomt."
->
-  <div slot="icon" class="success-icon">&#x1F389;</div>
-</ThankYouSimple>
+<ThankYouPage locale="nl" content={bedanktContent.nl} routeKey="bedankt" />

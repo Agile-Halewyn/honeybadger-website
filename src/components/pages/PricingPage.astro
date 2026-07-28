@@ -1,0 +1,292 @@
+---
+import Base from '../../layouts/Base.astro';
+import type { Locale } from '../../i18n/routes';
+import { pricingContent } from '../../i18n/pages/pricing';
+import { getAlternateUrls, getLocalizedPath } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = pricingContent[locale];
+const alternates = getAlternateUrls('pricing');
+const waitlistPath = getLocalizedPath('waitlist', locale);
+---
+
+<Base
+  title={content.title}
+  description={content.description}
+  lang={locale}
+  alternateUrls={alternates}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1>{content.h1}</h1>
+        <p>{content.intro}</p>
+      </div>
+
+      <div class="pricing-card">
+        <span class="badge">{content.card.badge}</span>
+        <div class="pricing-card__price">
+          <span class="pricing-card__amount">{content.card.amount}</span>
+          <span class="pricing-card__period">{content.card.period}</span>
+        </div>
+        <div class="pricing-card__plus">+</div>
+        <div class="pricing-card__fee">
+          <span class="pricing-card__fee-pct">{content.card.feePct}</span>
+          <span class="pricing-card__fee-label">{content.card.feeLabel}</span>
+        </div>
+
+        <p class="pricing-card__tagline">{content.card.tagline}</p>
+
+        <ul class="pricing-card__features">
+          {content.card.features.map((feature) => (
+            <li>{feature}</li>
+          ))}
+        </ul>
+
+        <a href={waitlistPath} class="btn btn--primary btn--large pricing-card__cta">
+          {content.card.cta}
+        </a>
+
+        <p class="pricing-card__early-access-note">
+          {content.card.earlyAccessNote.split('\n').map((line, i) => (
+            <>
+              {i > 0 && <br />}
+              {line}
+            </>
+          ))}
+        </p>
+      </div>
+
+      <div class="pricing-example">
+        <h2>{content.example.heading}</h2>
+        <p class="pricing-example__intro">{content.example.intro}</p>
+        <div class="pricing-example__scroll">
+          <div class="pricing-scenarios">
+            {content.example.scenarios.map((scenario) => (
+              <div class="card pricing-scenario">
+                <h4>{scenario.title}</h4>
+                <dl class="scenario__rows">
+                  {scenario.rows.map((row) => (
+                    <div class:list={['scenario__row', { 'scenario__row--sep': row.isSep, 'scenario__row--total': row.isTotal }]}>
+                      <dt>{row.label}</dt>
+                      <dd>
+                        {row.value}
+                        {row.note && <span class="scenario__note">{row.note}</span>}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <p class="scenario__net">
+                  {scenario.netLabel}{' '}
+                  {scenario.netHtml ? <span set:html={scenario.netHtml} /> : null}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p class="pricing-example__toelichting">{content.example.footnote}</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pricing-card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .pricing-card__price {
+    margin-top: 1.5rem;
+  }
+
+  .pricing-card__amount {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .pricing-card__period {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+  }
+
+  .pricing-card__plus {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    margin: 0.75rem 0;
+  }
+
+  .pricing-card__fee-pct {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .pricing-card__fee-label {
+    display: block;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .pricing-card__tagline {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .pricing-card__features {
+    list-style: none;
+    margin: 2rem 0;
+    text-align: left;
+  }
+
+  .pricing-card__features li {
+    padding: 0.5rem 0;
+    padding-left: 1.75rem;
+    position: relative;
+    color: var(--color-text-muted);
+  }
+
+  .pricing-card__features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-success);
+    font-weight: 700;
+  }
+
+  .pricing-card__cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pricing-card__early-access-note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .pricing-example {
+    margin-top: 4rem;
+  }
+
+  .pricing-example h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-example__intro {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    max-width: 640px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  .pricing-example__scroll {
+    overflow-x: auto;
+  }
+
+  .pricing-scenarios {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 2rem;
+    min-width: 540px;
+  }
+
+  .pricing-scenario {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pricing-scenario h4 {
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .scenario__rows {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .scenario__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.375rem 0;
+    font-size: 0.9375rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .scenario__row:last-child {
+    border-bottom: none;
+  }
+
+  .scenario__row dt {
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .scenario__row dd {
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .scenario__row--sep {
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 0.75rem;
+  }
+
+  .scenario__row--total dt,
+  .scenario__row--total dd {
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .scenario__note {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin-top: 0.125rem;
+  }
+
+  .scenario__net {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 2px solid var(--color-primary);
+    font-size: 0.9375rem;
+    color: var(--color-success);
+    text-align: center;
+  }
+
+  .pricing-example__toelichting {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+</style>

@@ -1,9 +1,18 @@
 ---
-const year = new Date().getFullYear();
+import type { Locale } from '../i18n/routes';
+import { getLocalizedPath } from '../i18n/utils';
+import { getUi } from '../i18n/ui';
 import { Image } from 'astro:assets';
 import hbLogo from '../assets/hb-logo.png';
 import { CONTACT_EMAIL } from '../config';
 
+interface Props {
+  locale?: Locale;
+}
+
+const locale = Astro.props.locale ?? 'nl';
+const ui = getUi(locale);
+const year = new Date().getFullYear();
 const contactMailto = `mailto:${CONTACT_EMAIL}`;
 ---
 
@@ -12,38 +21,36 @@ const contactMailto = `mailto:${CONTACT_EMAIL}`;
     <div class="footer__grid">
       <div class="footer__brand">
         <span class="footer__logo" style="display: flex; align-items: center; gap: 0.5rem;"><Image src={hbLogo} alt="HoneyBadger Trader" width={24} height={24} style={{ borderRadius: '4px' }} /> HoneyBadger<span class="footer__accent">Trader</span></span>
-        <p class="footer__tagline">Geautomatiseerd crypto handelen met tradingbots, zonder technische kennis.</p>
+        <p class="footer__tagline">{ui.footer.tagline}</p>
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__heading">Product</h4>
+        <h4 class="footer__heading">{ui.footer.product}</h4>
         <ul class="footer__links">
-          <li><a href="/hoe-het-werkt">Hoe het werkt</a></li>
-          <li><a href="/strategieen">Strategieën</a></li>
-          <li><a href="/pricing">Pricing</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/waitlist">Early access</a></li>
+          <li><a href={getLocalizedPath('howItWorks', locale)}>{ui.nav.howItWorks}</a></li>
+          <li><a href={getLocalizedPath('strategies', locale)}>{ui.nav.strategies}</a></li>
+          <li><a href={getLocalizedPath('pricing', locale)}>{ui.nav.pricing}</a></li>
+          <li><a href={getLocalizedPath('faq', locale)}>{ui.nav.faq}</a></li>
+          <li><a href={getLocalizedPath('contact', locale)}>{ui.nav.contact}</a></li>
+          <li><a href={getLocalizedPath('waitlist', locale)}>{ui.nav.earlyAccess}</a></li>
           <li><a href={contactMailto}>{CONTACT_EMAIL}</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4 class="footer__heading">Juridisch</h4>
+        <h4 class="footer__heading">{ui.footer.legal}</h4>
         <ul class="footer__links">
-          <li><a href="/juridisch/privacy">Privacy Policy</a></li>
-          <li><a href="/juridisch/voorwaarden">Algemene Voorwaarden</a></li>
-          <li><a href="/juridisch/disclaimer">Risicoverklaring</a></li>
-          <li><a href="/juridisch/cookies">Cookie Policy</a></li>
+          <li><a href={getLocalizedPath('privacy', locale)}>{ui.footer.privacy}</a></li>
+          <li><a href={getLocalizedPath('terms', locale)}>{ui.footer.terms}</a></li>
+          <li><a href={getLocalizedPath('disclaimer', locale)}>{ui.footer.disclaimer}</a></li>
+          <li><a href={getLocalizedPath('cookies', locale)}>{ui.footer.cookies}</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <p>&copy; {year} HoneyBadger Trader. Alle rechten voorbehouden.</p>
-      <p class="footer__risk">
-        Crypto-trading brengt risico's met zich mee. Resultaten uit het verleden bieden geen garantie voor de toekomst.
-      </p>
+      <p>&copy; {year} HoneyBadger Trader. {ui.footer.copyright}</p>
+      <p class="footer__risk">{ui.footer.risk}</p>
     </div>
   </div>
 </footer>

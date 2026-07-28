@@ -1,0 +1,174 @@
+---
+import Base from '../../layouts/Base.astro';
+import BitvavoAffiliate from '../BitvavoAffiliate.astro';
+import type { Locale } from '../../i18n/routes';
+import { howItWorksContent } from '../../i18n/pages/hoe-het-werkt';
+import { getAlternateUrls, getLocalizedPath } from '../../i18n/utils';
+import { getPathPlaceholders, interpolatePaths } from '../../i18n/pages/helpers';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = howItWorksContent[locale];
+const paths = getPathPlaceholders(locale);
+const alternates = getAlternateUrls('howItWorks');
+const waitlistPath = getLocalizedPath('waitlist', locale);
+---
+
+<Base
+  title={content.title}
+  description={content.description}
+  lang={locale}
+  alternateUrls={alternates}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1>{content.h1}</h1>
+        <p>{content.intro}</p>
+      </div>
+
+      <div class="steps">
+        <div class="step-detail">
+          <div class="step-detail__marker">
+            <span class="step-detail__number">1</span>
+            <div class="step-detail__line"></div>
+          </div>
+          <div class="step-detail__content">
+            <h3>{content.steps[0].title}</h3>
+            <p>{content.steps[0].body}</p>
+          </div>
+        </div>
+
+        <div class="step-affiliate">
+          <BitvavoAffiliate collapsible={true} locale={locale} />
+        </div>
+
+        {content.steps.slice(1).map((step, index) => (
+          <div class="step-detail">
+            <div class="step-detail__marker">
+              <span class="step-detail__number">{index + 2}</span>
+              {index < content.steps.length - 2 && <div class="step-detail__line"></div>}
+            </div>
+            <div class="step-detail__content">
+              <h3>{step.title}</h3>
+              {step.bodyHtml ? (
+                <p set:html={interpolatePaths(step.bodyHtml, paths)} />
+              ) : (
+                <p>{step.body}</p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <h2>{content.security.heading}</h2>
+      </div>
+      <div class="grid-2">
+        {content.security.cards.map((card) => (
+          <div class="card">
+            <h3 class="card__title-inline">
+              <span class="card__icon-inline">{card.icon}</span>
+              {card.title}
+            </h3>
+            <p>{card.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta">
+      <h2>{content.cta.heading}</h2>
+      <p>{content.cta.body}</p>
+      <a href={waitlistPath} class="btn btn--primary btn--large">{content.cta.button}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .steps {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .step-detail {
+    display: flex;
+    gap: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .step-affiliate {
+    padding-bottom: 2.5rem;
+  }
+
+  .step-detail__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .step-detail__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .step-detail__line {
+    flex: 1;
+    width: 2px;
+    background: var(--color-border);
+    margin-top: 0.5rem;
+  }
+
+  .step-detail__content h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+  }
+
+  .step-detail__content p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .cta {
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .cta p {
+    color: var(--color-text-muted);
+    margin: 1rem 0 2rem;
+    font-size: 1.125rem;
+  }
+
+  .card__title-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card__icon-inline {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+</style>
