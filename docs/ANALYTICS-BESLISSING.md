@@ -1,8 +1,8 @@
 # Analytics — beslissingsmemo (marketing site)
 
-**Datum:** 2026-07-29  
+**Datum:** 2026-07-29 (herzienzelfde dag — review Marc)  
 **Scope:** publieke website (`honeybadgertrader.com`), niet het Flask-dashboard  
-**Status:** Plausible actief (PR #30); dit document ondersteunt herbeoordeling van kosten vs. privacy-doelen
+**Status:** Plausible in code (PR #30 gemerged); **besluit launch-vendor nog open**
 
 ---
 
@@ -10,11 +10,13 @@
 
 | Item | Waarde |
 |------|--------|
-| Vendor | [Plausible Analytics](https://plausible.io/) |
+| Vendor (code) | [Plausible Analytics](https://plausible.io/) |
 | Integratie | `src/layouts/Base.astro` + `public/js/plausible-init.js` |
 | CSP | `script-src` / `connect-src` → `https://plausible.io` in `public/_headers` |
-| Juridisch | `src/pages/juridisch/cookies.astro` — geen cookies, geen consent banner op marketing site |
-| Kosten | ~€9/maand (10k pageviews, geen gratis plan na trial) |
+| Juridisch | `cookies.astro` + `src/i18n/legal/privacy.ts` (NL/ES/EN) vermelden Plausible |
+| Kosten Plausible | ~€9/maand (10k pageviews, geen gratis plan na trial) |
+| DNS | Cloudflare (`honeybadgerbots.nl`, `honeybadgertrader.com`, …) |
+| **Baseline pageviews** | **Geen** — pre-launch; volume ≈ 0 tot `.com` live is |
 
 ---
 
@@ -25,7 +27,16 @@
 3. **EU-hosting** — vermeld in README; past bij privacy-story.
 4. **Eenvoud** — één lightweight script; geen complex consent-management.
 
-**Niet** gekozen vanwege prijs: voor pre-launch / laag verkeer is €9/maand relatief duur.
+**Niet** gekozen vanwege prijs.
+
+### Scheiding privacy vs. kosten (belangrijk)
+
+| Dimensie | Status |
+|----------|--------|
+| **Privacy / cookieloos / geen banner** | Oorspronkelijke afweging **blijft geldig** — dat is geen reden om Plausible *specifiek* te houden |
+| **Kosten vs. launch-fase verkeer** | **Nieuwe** afweging — €9/mnd is duur wanneer volume ≈ 0 en funnel-analyse nog niet nodig is |
+
+Heroverwegen gaat dus **niet** over “privacy opgeven”, maar over **welke cookieloos-gratis optie** past bij pre-launch.
 
 ---
 
@@ -33,53 +44,105 @@
 
 | Optie | Kosten (indicatie) | Cookiebanner nodig? | Detail / UX | Juridische impact | Ops |
 |-------|-------------------|---------------------|-------------|-------------------|-----|
-| **A. Plausible (huidig)** | ~€9/mnd | Nee | Goed dashboard, realtime | Cookies- + privacy-copy klopt nu | Laag |
-| **B. Umami Cloud** | Gratis tier / lager betaald | Meestal nee* | Vergelijkbaar eenvoudig | Cookies/privacy tekst aanpassen + vendor noemen | Laag |
-| **C. Cloudflare Web Analytics** | Gratis | Nee | Minder detail dan Plausible | CF als verwerker vermelden; script/CSP wijzigen | Laag (DNS al CF) |
-| **D. Self-hosted Umami/Matomo** | VPS (al Hetzner) | Matomo vaak wel cookies | Volledige controle | Meer DPA/AVG-verantwoordelijkheid bij jou | Medium–hoog |
-| **E. Geen analytics** | €0 | Nee | Alleen Netlify deploy-logs / server logs | Cookies-pagina: Plausible-paragraaf verwijderen | Minimaal |
-| **F. Google Analytics 4** | Gratis | **Ja** (consent) | Rijkste data | Grote wijziging cookies/privacy + banner-UX | Medium |
+| **A. Plausible (code nu)** | ~€9/mnd | Nee | Goals, realtime, waitlist-funnel | Copy klopt nu (cookies + privacy i18n) | Laag |
+| **B. Umami Cloud** | Gratis tier / lager betaald | Meestal nee* | Vergelijkbaar eenvoudig | Cookies/privacy tekst aanpassen | Laag |
+| **C. Cloudflare Web Analytics** | Gratis | Nee* | Minder detail; geen Plausible-goals | CF als verwerker; cookies/privacy tekst | **Laagst** (DNS al CF) |
+| **D. Self-hosted Umami/Matomo** | VPS | Matomo vaak wel cookies | Volledige controle | Meer DPA/AVG bij jou | Medium–hoog |
+| **E. Geen analytics** | €0 | Nee | Alleen Netlify/CF edge logs | Plausible-verwijzingen verwijderen | Minimaal |
+| **F. Google Analytics 4** | Gratis | **Ja** | Rijkste data | Banner + grote copy-wijziging | Medium |
 
-\*Umami positioneert zich als privacy-first; altijd vendor-DPA en tekst laten kloppen met feitelijk gedrag.
+\*Umami/CF: altijd feitelijk gedrag vs. tekst checken; CF Web Analytics is cookieless per Cloudflare-docs, geen banner voor standaard pageview-metriek.
 
----
+### Optie C — launch-fase sterker dan initieel memo suggereerde
 
-## Aanbeveling (2026-07-29)
+| Voordeel | Toelichting |
+|----------|-------------|
+| Geen nieuwe vendor | DNS loopt al via Cloudflare |
+| €0 | Precies in fase met minste verkeer |
+| Zelfde AVG-positionering | Cookieloos → geen consent banner (parallel aan Plausible) |
+| Voldoende bij ≈0 verkeer | Pageviews/uniques/referrers; geen waitlist goal-tracking nodig tot er volume is |
 
-### Fase 1 — Launch (nu)
-
-**Plausible aanhouden** zolang:
-
-- PR #30 gemerged en live op `.com` (na 503-fix);
-- je basale funnel-metrics wilt (waitlist, juridisch, pricing) zonder cookiebanner;
-- €9/mnd acceptabel is als **launch-kosten** (1–3 maanden).
-
-Review **maandelijks** pageview-volume in Plausible dashboard. Onder ~2k pageviews/mnd is de prijs per insight hoog.
-
-### Fase 2 — Herbeoordeling (bijv. na 3 maanden live)
-
-Besliscriteria:
-
-| Trigger | Actie |
-|---------|--------|
-| Consistent &lt; 5k pageviews + budget gevoelig | Overweeg **E (uit)** of **C (CF Analytics gratis)** |
-| Wel metrics nodig, €9 te duur | Migreer naar **B (Umami Cloud gratis tier)** |
-| Geen behoefte aan marketing analytics | **E** — script eruit, cookies-pagina bijwerken |
+| Trade-off | Toelichting |
+|-----------|-------------|
+| Minder rijk | Geen Plausible-achtige goals/events voor waitlist-optimalisatie |
+| Later upgraden | Terug-migreren naar Plausible = zelfde checklist-moeite als nu weg van Plausible |
+| Integratie | CF-dashboard inschakelen ± beacon/CSP; site host op Netlify achter CF-proxy |
 
 ---
 
-## Migratie-checklist (bij vendor-wissel of uitzetten)
+## Baseline-gap (kritiek op v1-aanbeveling)
 
-Gebruik bij elke optie ≠ Plausible:
+De oorspronkelijke trigger “consistent &lt; 5k pageviews → overweeg C” is **niet toetsbaar vóór launch**:
 
-- [ ] `src/layouts/Base.astro` — script(s) verwijderen of vervangen
-- [ ] `public/js/plausible-init.js` — verwijderen indien niet meer nodig
-- [ ] `public/_headers` — CSP `script-src` / `connect-src` hosts bijwerken
-- [ ] `src/pages/juridisch/cookies.astro` — Plausible-paragraaf aanpassen of verwijderen
-- [ ] `README.md` — analytics-regel bijwerken
-- [ ] Privacy policy (indien Plausible/andere vendor als verwerker genoemd)
-- [ ] Plausible-abonnement opzeggen (voorkom dubbele kosten)
-- [ ] Smoke: Network (scripts 200), CSP 0 violations, Realtime hit op prod-domein
+- Er is **geen** historisch volume in Plausible (pre-launch ≈ 0).
+- Je weet pas **achteraf** (bijv. na 3 maanden) of €9/mnd te duur was — niet vooraf.
+
+**Mitigatie:** bij go-live **maand 1** baseline vastleggen (CF of Plausible — één vendor):
+
+| Meting | Doel |
+|--------|------|
+| Pageviews maand 1 | Vergelijk met €9/mnd drempel (~€0,0009/view bij 10k cap) |
+| Waitlist submits | Bepaalt of goal/funnel-analyse (Plausible) nodig wordt |
+| Besluitdatum | Vast in tabel onderaan (niet open-ended “over 3 maanden”) |
+
+---
+
+## Aanbevelingen (twee sporen)
+
+### Spoor 1 — Herziene fasering (Marc, 2026-07-29) — **voorkeur bij groenfield launch**
+
+**Fase 1 — Launch:** start met **C (Cloudflare Web Analytics)**, niet Plausible.
+
+- Bespaart €9/mnd in periode met minste data.
+- Behoudt juridische eenvoud (geen cookiebanner).
+- Plausible-account **niet** verlengen / trial laten verlopen tot upgrade-trigger.
+
+**Fase 2 — Upgrade naar Plausible** wanneer **concrete** trigger (niet alleen “3 maanden”):
+
+| Trigger | Voorbeeld |
+|---------|-----------|
+| Funnel-analyse | Waitlist-conversie per land/pagina optimaliseren met goals |
+| Volume | Pageviews rechtvaardigen dashboard-kosten (bijv. &gt;5k/mnd **en** actieve content-beslissingen) |
+| Product | A/B of event-tracking op marketing flows |
+
+**Migratie Fase 1→2:** checklist onderaan (Plausible erin = zelfde moeite als Plausible eruit).
+
+### Spoor 2 — Plausible aanhouden (v1-memo) — **alleen als uitzondering**
+
+Plausible **niet** switchen als:
+
+- PR #30 **live** op `.com` **en**
+- je **actief** Plausible-dashboard gebruikt voor besluitvorming (content/waitlist), **en**
+- €9/mnd &lt; waarde van continuïteit + geen migratie-uren.
+
+**Huidige stand (2026-07-29):** PR #30 gemerged in repo; `.com` nog 503 → dashboard waarschijnlijk **nog niet** in actief gebruik → **Spoor 1** is praktisch nog vrijwel kosteloos te kiezen.
+
+---
+
+## Migratie-checklist (elke vendor-wissel)
+
+### Plausible → Cloudflare (Spoor 1)
+
+- [ ] Cloudflare dashboard → Web Analytics inschakelen voor `honeybadgertrader.com`
+- [ ] `src/layouts/Base.astro` — Plausible-scripts verwijderen
+- [ ] `public/js/plausible-init.js` — verwijderen
+- [ ] `public/_headers` — CSP: `plausible.io` eruit; CF-beacon host toevoegen indien van toepassing (`static.cloudflareinsights.com` o.i.d. — verify in CF UI)
+- [ ] `src/pages/juridisch/cookies.astro` — Plausible → Cloudflare Web Analytics
+- [ ] `src/i18n/legal/privacy.ts` — NL/ES/EN Plausible-verwijzingen → CF (3 locales)
+- [ ] `README.md` + dit memo — status/besluit bijwerken
+- [ ] Plausible-abonnement opzeggen
+- [ ] Smoke: 0 CSP violations; CF dashboard toont pageviews na prod-hit
+
+### Cloudflare → Plausible (Spoor 1 Fase 2)
+
+- [ ] Plausible property `honeybadgertrader.com` actief
+- [ ] PR #30-patroon opnieuw toepassen (of branch cherry-pick)
+- [ ] CSP + cookies + privacy i18n terug naar Plausible
+- [ ] CF Web Analytics uit in dashboard (geen dubbele telling)
+
+### Naar E (geen analytics)
+
+- [ ] Alle scripts eruit; cookies/privacy: “geen analytics” vermelden
 
 ---
 
@@ -87,15 +150,17 @@ Gebruik bij elke optie ≠ Plausible:
 
 | Besluit | Datum | Door | Notitie |
 |---------|-------|------|---------|
-| Plausible behouden t/m herbeoordeling | 2026-07-29 | Marc | Memo aangemaakt; PR #30 integratie |
-| | | | |
-| | | | |
+| Memo v1 + PR #30 code | 2026-07-29 | Agent | Plausible geïntegreerd |
+| Review: CF-first launch | 2026-07-29 | Marc | Baseline-gap; Spoor 1 vs 2 |
+| **Launch-vendor (C vs A)** | *open* | Marc | Kies vóór `.com` live + Plausible-betalingscyclus |
+| Baseline maand 1 | *open* | | Pageviews + waitlist na go-live |
 
 ---
 
 ## Referenties
 
 - PR #28 — domein `honeybadgertrader.com`
-- PR #30 — Plausible site-script (CSP-safe)
+- PR #30 — Plausible site-script (CSP-safe); **code ≠ verplichting tot betalen**
+- [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/)
 - `.github/skills/security-auditor/SKILL.md` — GDPR/cookie checks
-- Issue #29 (website) — Astro CVE’s (los van analytics-keuze)
+- Issue #29 — Astro CVE’s (los van analytics-keuze)
