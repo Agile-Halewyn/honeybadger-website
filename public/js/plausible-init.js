@@ -1,11 +1,11 @@
 window.plausible =
   window.plausible ||
   function () {
-    (plausible.q = plausible.q || []).push(arguments);
+    (window.plausible.q = window.plausible.q || []).push(arguments);
   };
-plausible.init =
-  plausible.init ||
+window.plausible.init =
+  window.plausible.init ||
   function (i) {
-    plausible.o = i || {};
+    window.plausible.o = i || {};
   };
-plausible.init();
+window.plausible.init();
