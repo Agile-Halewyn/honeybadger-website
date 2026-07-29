@@ -1,9 +1,3 @@
-[[redirects]]
-  from = "https://honeybadgerbots.com/*"
-  to = "https://honeybadgerbots.nl/:splat"
-  status = 301
-  force = true
-
 [build]
   command = "npm run build"
   publish = "dist"

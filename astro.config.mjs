@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://honeybadgerbots.nl',
+  site: 'https://honeybadgertrader.com',
   i18n: {
     locales: ['nl', 'es', 'en'],
     defaultLocale: 'nl',

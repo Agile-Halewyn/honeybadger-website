@@ -23,7 +23,7 @@ const {
 } = Astro.props;
 
 const metaDescription = description ?? defaultDescription[lang];
-const site = Astro.site?.href?.replace(/\/$/, '') ?? 'https://honeybadgerbots.nl';
+const site = Astro.site?.href?.replace(/\/$/, '') ?? 'https://honeybadgertrader.com';
 
 const hreflangEntries = alternateUrls
   ? (Object.entries(alternateUrls) as [Locale, string][]).map(([locale, path]) => ({
@@ -61,7 +61,7 @@ const hreflangEntries = alternateUrls
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Plausible Analytics — uncomment wanneer account actief: -->
-  <script defer data-domain="honeybadgerbots.nl" src="https://plausible.io/js/script.js"></script>
+  <script defer data-domain="honeybadgertrader.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
   <Header locale={lang} />
