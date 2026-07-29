@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = "dist"
 
+# @astrojs/sitemap → sitemap@9.x requires Node >=20.19.5 (Netlify default may be 18).
+[build.environment]
+  NODE_VERSION = "20.19.5"
+
 # Alleen productie-builds: expliciete waitlist-API. Deploy previews / branch deploys krijgen
 # deze waarde niet automatisch — zet PUBLIC_WAITLIST_API_URL in Netlify (staging) om per ongeluk
 # productie-aanmeldingen te vermijden.
