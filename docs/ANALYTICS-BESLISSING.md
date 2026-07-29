@@ -2,7 +2,7 @@
 
 **Datum:** 2026-07-29 (herzienzelfde dag — review Marc)  
 **Scope:** publieke website (`honeybadgertrader.com`), niet het Flask-dashboard  
-**Status:** Plausible in code (PR #30 gemerged); **besluit launch-vendor nog open**
+**Status:** **Spoor 1 bevestigd (Marc, 2026-07-29)** — migratie PR naar Cloudflare Web Analytics; Plausible-trial niet verlengen
 
 ---
 
@@ -10,12 +10,12 @@
 
 | Item | Waarde |
 |------|--------|
-| Vendor (code) | [Plausible Analytics](https://plausible.io/) |
-| Integratie | `src/layouts/Base.astro` + `public/js/plausible-init.js` |
-| CSP | `script-src` / `connect-src` → `https://plausible.io` in `public/_headers` |
-| Juridisch | `cookies.astro` + `src/i18n/legal/privacy.ts` (NL/ES/EN) vermelden Plausible |
-| Kosten Plausible | ~€9/maand (10k pageviews, geen gratis plan na trial) |
-| DNS | Cloudflare (`honeybadgerbots.nl`, `honeybadgertrader.com`, …) |
+| Vendor (code) | [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) (JS-beacon) |
+| Integratie | `src/layouts/Base.astro` — `PUBLIC_CF_WEB_ANALYTICS_TOKEN` (build-time) |
+| CSP | `script-src` → `https://static.cloudflareinsights.com`; `connect-src` → `https://cloudflareinsights.com` |
+| Juridisch | `cookies.astro` + `src/i18n/legal/privacy.ts` (NL/ES/EN) vermelden Cloudflare Web Analytics |
+| Kosten | €0 (gratis tier) |
+| DNS | `honeybadgerbots.nl` proxied via Cloudflare (CF-RAY); `honeybadgertrader.com` wijst naar Netlify (75.2.60.5 / 99.83.231.61) — **geen orange-cloud vereist** voor JS-beacon |
 | **Baseline pageviews** | **Geen** — pre-launch; volume ≈ 0 tot `.com` live is |
 
 ---
@@ -66,7 +66,7 @@ Heroverwegen gaat dus **niet** over “privacy opgeven”, maar over **welke coo
 |-----------|-------------|
 | Minder rijk | Geen Plausible-achtige goals/events voor waitlist-optimalisatie |
 | Later upgraden | Terug-migreren naar Plausible = zelfde checklist-moeite als nu weg van Plausible |
-| Integratie | CF-dashboard inschakelen ± beacon/CSP; site host op Netlify achter CF-proxy |
+| Integratie | CF-dashboard inschakelen + token in Netlify env; beacon werkt **zonder** orange-cloud (alleen JS-snippet) |
 
 ---
 
@@ -124,14 +124,15 @@ Plausible **niet** switchen als:
 ### Plausible → Cloudflare (Spoor 1)
 
 - [ ] Cloudflare dashboard → Web Analytics inschakelen voor `honeybadgertrader.com`
-- [ ] `src/layouts/Base.astro` — Plausible-scripts verwijderen
-- [ ] `public/js/plausible-init.js` — verwijderen
-- [ ] `public/_headers` — CSP: `plausible.io` eruit; CF-beacon host toevoegen indien van toepassing (`static.cloudflareinsights.com` o.i.d. — verify in CF UI)
-- [ ] `src/pages/juridisch/cookies.astro` — Plausible → Cloudflare Web Analytics
-- [ ] `src/i18n/legal/privacy.ts` — NL/ES/EN Plausible-verwijzingen → CF (3 locales)
-- [ ] `README.md` + dit memo — status/besluit bijwerken
-- [ ] Plausible-abonnement opzeggen
-- [ ] Smoke: 0 CSP violations; CF dashboard toont pageviews na prod-hit
+- [ ] Netlify → `PUBLIC_CF_WEB_ANALYTICS_TOKEN` (secret) zetten vóór productie-deploy
+- [x] `src/layouts/Base.astro` — Plausible-scripts verwijderen; CF-beacon
+- [x] `public/js/plausible-init.js` — verwijderen
+- [x] `public/_headers` — CSP: `plausible.io` eruit; `static.cloudflareinsights.com` + `cloudflareinsights.com`
+- [x] `src/pages/juridisch/cookies.astro` — Plausible → Cloudflare Web Analytics
+- [x] `src/i18n/legal/privacy.ts` — NL/ES/EN Plausible-verwijzingen → CF (3 locales)
+- [x] `README.md` + dit memo — status/besluit bijwerken
+- [ ] Plausible-abonnement / trial **niet** verlengen
+- [ ] Smoke: 0 CSP violations; CF dashboard toont pageviews na prod-hit (`.com` moet uit 503)
 
 ### Cloudflare → Plausible (Spoor 1 Fase 2)
 
@@ -152,7 +153,7 @@ Plausible **niet** switchen als:
 |---------|-------|------|---------|
 | Memo v1 + PR #30 code | 2026-07-29 | Agent | Plausible geïntegreerd |
 | Review: CF-first launch | 2026-07-29 | Marc | Baseline-gap; Spoor 1 vs 2 |
-| **Launch-vendor (C vs A)** | *open* | Marc | Kies vóór `.com` live + Plausible-betalingscyclus |
+| **Launch-vendor: Spoor 1 (CF)** | 2026-07-29 | Marc | Plausible-trial niet verlengen; upgrade later bij funnel-trigger |
 | Baseline maand 1 | *open* | | Pageviews + waitlist na go-live |
 
 ---

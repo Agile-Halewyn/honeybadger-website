@@ -6,7 +6,7 @@ Informatieve website voor HoneyBadger Bots. Gebouwd met Astro, gehost op Netlify
 
 - **Framework:** [Astro](https://astro.build/) v5
 - **Hosting:** [Netlify](https://www.netlify.com/) (gratis tier)
-- **Analytics:** [Plausible](https://plausible.io/) (cookieloos, EU-hosted) — zie [docs/ANALYTICS-BESLISSING.md](docs/ANALYTICS-BESLISSING.md) voor kosten/alternatieven
+- **Analytics:** [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) (cookieloos JS-beacon) — token via `PUBLIC_CF_WEB_ANALYTICS_TOKEN`; zie [docs/ANALYTICS-BESLISSING.md](docs/ANALYTICS-BESLISSING.md)
 - **DNS:** [Cloudflare](https://www.cloudflare.com/) (gratis tier)
 - **Fonts:** Inter via Google Fonts
 
@@ -32,6 +32,7 @@ npm run preview
 
 - **Netlify — productie:** staat in `netlify.toml` onder `[context.production.environment]`.
 - **Netlify — deploy previews / branch deploys:** zelf een waarde instellen (bijv. staging-Flask); zie `docs/WAITLIST-API-SPEC.md`.
+- **Cloudflare Web Analytics:** zet `PUBLIC_CF_WEB_ANALYTICS_TOKEN` in Netlify (Site settings → Environment variables). Token uit Cloudflare dashboard → Web Analytics → Manage site. Lokaal optioneel in `.env`; zonder token wordt geen beacon ingebouwd.
 
 ## Projectstructuur
 
@@ -88,7 +89,7 @@ netlify.toml          # Build config + .com → .nl redirect
 - [x] GitHub repo aanmaken en code pushen
 - [x] Netlify koppelen aan repo
 - [x] Custom domain instellen (honeybadgerbots.nl)
-- [x] Plausible Analytics activeren (uncomment script in Base.astro)
+- [x] Cloudflare Web Analytics (JS-beacon via `PUBLIC_CF_WEB_ANALYTICS_TOKEN`)
 - [x] UptimeRobot instellen
 
 ### Fase 2: Content

@@ -25,6 +25,11 @@ const {
 const metaDescription = description ?? defaultDescription[lang];
 const site = Astro.site?.href?.replace(/\/$/, '') ?? 'https://honeybadgertrader.com';
 
+const cfAnalyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
+const cfBeaconAttr = cfAnalyticsToken
+  ? JSON.stringify({ token: cfAnalyticsToken })
+  : null;
+
 const hreflangEntries = alternateUrls
   ? (Object.entries(alternateUrls) as [Locale, string][]).map(([locale, path]) => ({
       locale,
@@ -60,9 +65,13 @@ const hreflangEntries = alternateUrls
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Privacy-friendly analytics by Plausible (site script from Plausible dashboard) -->
-  <script is:inline src="/js/plausible-init.js"></script>
-  <script is:inline async src="https://plausible.io/js/pa-31oPZ-f0S5jbh4FiY1BCf.js"></script>
+  {cfBeaconAttr && (
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={cfBeaconAttr}
+    ></script>
+  )}
 </head>
 <body>
   <Header locale={lang} />

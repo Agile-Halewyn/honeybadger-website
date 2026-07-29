@@ -25,7 +25,7 @@ export const privacyContent: LocalizedPrivacy = {
           '<strong>Accountgegevens:</strong> naam, e-mailadres bij registratie',
           '<strong>Waitlist:</strong> naam, e-mailadres, ervaring met crypto',
           '<strong>Contactformulier:</strong> naam, e-mailadres, onderwerp en bericht',
-          '<strong>Technische gegevens:</strong> IP-adres, browser type (geanonimiseerd via Plausible Analytics)',
+          '<strong>Technische gegevens:</strong> IP-adres, browser type (geanonimiseerd via Cloudflare Web Analytics)',
           '<strong>Handelsgegevens:</strong> API-sleutel (versleuteld opgeslagen), handelstransacties uitgevoerd door de bots',
         ],
       },
@@ -52,6 +52,7 @@ export const privacyContent: LocalizedPrivacy = {
         list: [
           '<strong>Bitvavo:</strong> handelsorders worden uitgevoerd op jouw Bitvavo account via de door jou verstrekte API-sleutel',
           '<strong>Netlify:</strong> hosting van de publieke website; voor het contactformulier en <strong>tijdelijk</strong> voor <strong>early-access / waitlist</strong>-inschrijvingen verwerkt Netlify ingediende formuliergegevens als onderaannemer in het kader van hun dienstverlening (EU/US-verwerkersstructuur zoals beschreven door Netlify). Een gegevensverwerkersovereenkomst met Netlify kan worden gesloten via het Netlify-account (Compliance / Data Processing Agreement). Zodra waitlist-inschrijvingen via onze eigen API verlopen, worden die gegevens rechtstreeks aan ons platform toegeleverd.',
+          '<strong>Cloudflare:</strong> Cloudflare verwerkt geanonimiseerde pageview-statistieken via Cloudflare Web Analytics (JS-beacon; geen cookies) als verwerker. Een gegevensverwerkersovereenkomst met Cloudflare kan worden gesloten via het Cloudflare-account.',
           '<strong>Eigen platform (API):</strong> zodra waitlist via onze server loopt: aanmeldingen rechtstreeks naar onze API; verwerking en opslag op ons platform (Hetzner EU)',
           '<strong>Hosting provider:</strong> Hetzner (Duitsland, EU) voor het hosten van ons platform',
           '<strong>Wettelijke verplichting:</strong> als wij hiertoe wettelijk verplicht zijn',
@@ -86,7 +87,7 @@ export const privacyContent: LocalizedPrivacy = {
         heading: '8. Cookies',
         paragraphs: [
           {
-            html: 'Wij gebruiken Plausible Analytics, een cookieloos analytics platform. Er worden geen tracking cookies geplaatst. Zie ook onze <a href="/juridisch/cookies">Cookie Policy</a>.',
+            html: 'Wij gebruiken Cloudflare Web Analytics, een cookieloos analytics-platform. Er worden geen tracking cookies geplaatst. Zie ook onze <a href="/juridisch/cookies">Cookie Policy</a>.',
           },
         ],
       },
@@ -134,7 +135,7 @@ export const privacyContent: LocalizedPrivacy = {
           '<strong>Datos de cuenta:</strong> nombre y dirección de correo electrónico al registrarse',
           '<strong>Lista de espera:</strong> nombre, dirección de correo electrónico y experiencia con criptomonedas',
           '<strong>Formulario de contacto:</strong> nombre, dirección de correo electrónico, asunto y mensaje',
-          '<strong>Datos técnicos:</strong> dirección IP y tipo de navegador (anonimizados mediante Plausible Analytics)',
+          '<strong>Datos técnicos:</strong> dirección IP y tipo de navegador (anonimizados mediante Cloudflare Web Analytics)',
           '<strong>Datos de trading:</strong> clave API (almacenada cifrada) y transacciones ejecutadas por los bots',
         ],
       },
@@ -161,6 +162,7 @@ export const privacyContent: LocalizedPrivacy = {
         list: [
           '<strong>Bitvavo:</strong> las órdenes de trading se ejecutan en su cuenta de Bitvavo mediante la clave API que usted proporciona',
           '<strong>Netlify:</strong> alojamiento del sitio web público; para el formulario de contacto y, <strong>de forma temporal</strong>, para inscripciones de <strong>acceso anticipado / lista de espera</strong>, Netlify procesa los datos del formulario como encargado del tratamiento en el marco de su prestación de servicios (estructura de encargados UE/EE. UU. según la documentación de Netlify). Puede formalizarse un acuerdo de tratamiento de datos con Netlify a través de la cuenta de Netlify (Compliance / Data Processing Agreement). En cuanto las inscripciones en la lista de espera se gestionen mediante nuestra propia API, esos datos se entregarán directamente a nuestra plataforma.',
+          '<strong>Cloudflare:</strong> Cloudflare procesa estadísticas de páginas vistas anonimizadas mediante Cloudflare Web Analytics (beacon JS; sin cookies) como encargado del tratamiento. Se puede formalizar un acuerdo de tratamiento de datos con Cloudflare a través de la cuenta de Cloudflare.',
           '<strong>Plataforma propia (API):</strong> cuando la lista de espera se procese en nuestro servidor: inscripciones directamente a nuestra API; tratamiento y almacenamiento en nuestra plataforma (Hetzner UE)',
           '<strong>Proveedor de alojamiento:</strong> Hetzner (Alemania, UE) para el alojamiento de nuestra plataforma',
           '<strong>Obligación legal:</strong> cuando estemos legalmente obligados a ello',
@@ -195,7 +197,7 @@ export const privacyContent: LocalizedPrivacy = {
         heading: '8. Cookies',
         paragraphs: [
           {
-            html: 'Utilizamos Plausible Analytics, una plataforma de analítica sin cookies. No se instalan cookies de seguimiento. Consulte también nuestra <a href="/juridisch/cookies">Política de Cookies</a>.',
+            html: 'Utilizamos Cloudflare Web Analytics, una plataforma de analítica sin cookies. No se instalan cookies de seguimiento. Consulte también nuestra <a href="/juridisch/cookies">Política de Cookies</a>.',
           },
         ],
       },
@@ -243,7 +245,7 @@ export const privacyContent: LocalizedPrivacy = {
           '<strong>Account data:</strong> name and email address upon registration',
           '<strong>Waitlist:</strong> name, email address and crypto experience',
           '<strong>Contact form:</strong> name, email address, subject and message',
-          '<strong>Technical data:</strong> IP address and browser type (anonymised via Plausible Analytics)',
+          '<strong>Technical data:</strong> IP address and browser type (anonymised via Cloudflare Web Analytics)',
           '<strong>Trading data:</strong> API key (stored encrypted) and trades executed by the bots',
         ],
       },
@@ -270,6 +272,7 @@ export const privacyContent: LocalizedPrivacy = {
         list: [
           '<strong>Bitvavo:</strong> trade orders are executed on your Bitvavo account via the API key you provide',
           '<strong>Netlify:</strong> hosting of the public website; for the contact form and, <strong>temporarily</strong>, for <strong>early access / waitlist</strong> registrations, Netlify processes submitted form data as a processor in the course of its service provision (EU/US processor structure as described by Netlify). A data processing agreement with Netlify can be entered into via the Netlify account (Compliance / Data Processing Agreement). Once waitlist registrations run via our own API, that data will be delivered directly to our platform.',
+          '<strong>Cloudflare:</strong> Cloudflare processes anonymised pageview statistics via Cloudflare Web Analytics (JS beacon; no cookies) as a processor. A data processing agreement with Cloudflare can be established via the Cloudflare account.',
           '<strong>Own platform (API):</strong> once the waitlist runs on our server: registrations sent directly to our API; processing and storage on our platform (Hetzner EU)',
           '<strong>Hosting provider:</strong> Hetzner (Germany, EU) for hosting our platform',
           '<strong>Legal obligation:</strong> where we are legally required to do so',
@@ -304,7 +307,7 @@ export const privacyContent: LocalizedPrivacy = {
         heading: '8. Cookies',
         paragraphs: [
           {
-            html: 'We use Plausible Analytics, a cookieless analytics platform. No tracking cookies are placed. See also our <a href="/juridisch/cookies">Cookie Policy</a>.',
+            html: 'We use Cloudflare Web Analytics, a cookieless analytics platform. No tracking cookies are placed. See also our <a href="/juridisch/cookies">Cookie Policy</a>.',
           },
         ],
       },
