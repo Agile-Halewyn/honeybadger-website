@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://honeybadgerbots.nl',
+  site: 'https://honeybadgertrader.com',
+  integrations: [sitemap()],
   i18n: {
     locales: ['nl', 'es', 'en'],
     defaultLocale: 'nl',

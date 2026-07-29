@@ -2,6 +2,10 @@
   "name": "honeybadger-website",
   "type": "module",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=20.19.5",
+    "npm": ">=10.8.2"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -9,6 +13,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^5.18.1"
   },
   "devDependencies": {
