@@ -13,7 +13,7 @@ const { collapsible = false, defaultOpen = false, locale = 'nl' } = Astro.props;
 const affiliate = getUi(locale).affiliate;
 ---
 
-<aside class="bitvavo-affiliate" aria-label="Bitvavo affiliate suggestie">
+<aside class="bitvavo-affiliate" aria-label={affiliate.heading}>
   {collapsible ? (
     <details class="bitvavo-affiliate__details" open={defaultOpen}>
       <summary class="bitvavo-affiliate__summary">{affiliate.summary}</summary>

@@ -1,6 +1,7 @@
 ---
 import type { Locale } from '../i18n/routes';
 import { getLanguageSwitcherUrls, hasLocaleAlternates } from '../i18n/utils';
+import { getUi } from '../i18n/ui';
 
 interface Props {
   locale: Locale;
@@ -8,13 +9,14 @@ interface Props {
 }
 
 const { locale, currentPath } = Astro.props;
+const ui = getUi(locale);
 const showSwitcher = hasLocaleAlternates(currentPath);
 const switcherUrls = getLanguageSwitcherUrls(currentPath);
 const labels: Record<Locale, string> = { nl: 'NL', es: 'ES', en: 'EN' };
 ---
 
 {showSwitcher && (
-  <nav class="lang-switcher" aria-label="Language">
+  <nav class="lang-switcher" aria-label={ui.common.language}>
     {(Object.keys(labels) as Locale[]).map((code) => (
       <a
         href={switcherUrls[code]}

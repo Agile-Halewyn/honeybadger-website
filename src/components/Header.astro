@@ -1,6 +1,6 @@
 ---
 import type { Locale } from '../i18n/routes';
-import { getLocalizedPath } from '../i18n/utils';
+import { getLocalizedPath, normalizePath } from '../i18n/utils';
 import { getUi } from '../i18n/ui';
 import { Image } from 'astro:assets';
 import hbLogo from '../assets/hb-logo.png';
@@ -40,7 +40,7 @@ const navItems = [
           <li>
             <a
               href={item.href}
-              class:list={['nav__link', { 'nav__link--active': currentPath === item.href || currentPath === item.href.replace(/\/$/, '') }]}
+              class:list={['nav__link', { 'nav__link--active': normalizePath(currentPath) === normalizePath(item.href) }]}
             >
               {item.label}
             </a>
