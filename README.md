@@ -4,7 +4,7 @@ Informatieve website voor HoneyBadger Bots. Gebouwd met Astro, gehost op Netlify
 
 ## Stack
 
-- **Framework:** [Astro](https://astro.build/) v5
+- **Framework:** [Astro](https://astro.build/) v7
 - **Hosting:** [Netlify](https://www.netlify.com/) (gratis tier)
 - **Analytics:** [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) (cookieloos JS-beacon) — token via `PUBLIC_CF_WEB_ANALYTICS_TOKEN`; zie [docs/ANALYTICS-BESLISSING.md](docs/ANALYTICS-BESLISSING.md)
 - **DNS:** [Cloudflare](https://www.cloudflare.com/) (gratis tier)

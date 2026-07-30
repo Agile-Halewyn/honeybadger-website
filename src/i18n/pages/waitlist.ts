@@ -29,7 +29,7 @@ export const waitlistContent: LocalizedPage<WaitlistPageContent> = {
       ],
       submit: 'Schrijf me in',
       privacyHtml:
-        'Door je in te schrijven ga je akkoord met onze <a href="{privacyPath}">Privacy Policy</a>. We gebruiken je e-mailadres alleen om je te informeren over HoneyBadger Trader. Netlify Forms heeft geen zelfde dubbele-aanmeldingcheck als onze API; hetzelfde e-mailadres kan tijdelijk meerdere keren worden ingediend tot overstap naar het platform.',
+        'Door je in te schrijven ga je akkoord met onze <a href="{privacyPath}">Privacy Policy</a>. We gebruiken je e-mailadres alleen om je te informeren over HoneyBadger Trader. Netlify Forms heeft niet dezelfde dubbele-aanmeldingcheck als onze API; hetzelfde e-mailadres kan tijdelijk meerdere keren worden ingediend tot overstap naar het platform.',
     },
   },
   es: {

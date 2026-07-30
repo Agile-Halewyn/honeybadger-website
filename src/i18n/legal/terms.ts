@@ -81,11 +81,11 @@ export const termsContent: LocalizedTerms = {
         ],
       },
       {
-        heading: '8. Beeindiging',
+        heading: '8. Beëindiging',
         list: [
           'Je kunt op elk moment je account opzeggen en je bots stoppen.',
           'Bij opzegging worden openstaande posities niet automatisch gesloten — je bent zelf verantwoordelijk voor het beheer van je Bitvavo account na opzegging.',
-          'Wij kunnen je account beeindigen bij schending van deze voorwaarden, met inachtneming van een redelijke waarschuwingstermijn tenzij onmiddellijke beeindiging noodzakelijk is.',
+          'Wij kunnen je account beëindigen bij schending van deze voorwaarden, met inachtneming van een redelijke waarschuwingstermijn tenzij onmiddellijke beëindiging noodzakelijk is.',
         ],
       },
       {
