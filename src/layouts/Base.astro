@@ -2,27 +2,61 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import type { Locale } from '../i18n/routes';
+import { getOgLocale } from '../i18n/routes';
+import { defaultDescription } from '../i18n/ui';
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Locale;
+  ogLocale?: string;
+  alternateUrls?: Partial<Record<Locale, string>>;
 }
 
-const { title, description = 'Geautomatiseerd crypto handelen met tradingbots, zonder technische kennis. HoneyBadger Trader beheert de automatisering, jij behoudt de controle.' } = Astro.props;
+const {
+  title,
+  description,
+  lang = 'nl',
+  ogLocale = getOgLocale(lang),
+  alternateUrls,
+} = Astro.props;
+
+const metaDescription = description ?? defaultDescription[lang];
+const site = Astro.site?.href?.replace(/\/$/, '') ?? 'https://honeybadgertrader.com';
+
+const cfAnalyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
+const cfBeaconAttr = cfAnalyticsToken
+  ? JSON.stringify({ token: cfAnalyticsToken })
+  : null;
+
+const hreflangEntries = alternateUrls
+  ? (Object.entries(alternateUrls) as [Locale, string][]).map(([locale, path]) => ({
+      locale,
+      href: `${site}${path}`,
+    }))
+  : [];
 ---
 
 <!doctype html>
-<html lang="nl">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
+  <meta name="description" content={metaDescription} />
   <meta name="theme-color" content="#f59e0b" />
 
   <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
+  <meta property="og:description" content={metaDescription} />
   <meta property="og:type" content="website" />
-  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:locale" content={ogLocale} />
+
+  {hreflangEntries.map(({ locale, href }) => (
+    <link rel="alternate" hreflang={locale} href={href} />
+  ))}
+  {alternateUrls?.nl && (
+    <link rel="alternate" hreflang="x-default" href={`${site}${alternateUrls.nl}`} />
+  )}
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>{title}</title>
@@ -31,15 +65,20 @@ const { title, description = 'Geautomatiseerd crypto handelen met tradingbots, z
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Plausible Analytics — uncomment wanneer account actief: -->
-  <script defer data-domain="honeybadgerbots.nl" src="https://plausible.io/js/script.js"></script>
+  {cfBeaconAttr && (
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={cfBeaconAttr}
+    ></script>
+  )}
 </head>
 <body>
-  <Header />
+  <Header locale={lang} />
   <main>
     <slot />
   </main>
-  <Footer />
+  <Footer locale={lang} />
 
   <slot name="body-scripts" />
 

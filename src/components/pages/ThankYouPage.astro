@@ -1,0 +1,15 @@
+---
+import ThankYouSimple from '../ThankYouSimple.astro';
+import type { Locale } from '../../i18n/routes';
+import type { ThankYouPageContent } from '../../i18n/pages/types';
+
+interface Props {
+  locale: Locale;
+  content: ThankYouPageContent;
+  routeKey: 'bedankt' | 'contactThankYou' | 'waitlistThankYou';
+}
+
+const { locale, content, routeKey } = Astro.props;
+---
+
+<ThankYouSimple locale={locale} content={content} routeKey={routeKey} />

@@ -1,0 +1,119 @@
+---
+import Base from '../../layouts/Base.astro';
+import { BITVAVO_AFFILIATE_URL } from '../../config';
+import { CONTACT_EMAIL } from '../../config';
+import type { Locale } from '../../i18n/routes';
+import { faqContent } from '../../i18n/pages/faq';
+import { getAlternateUrls } from '../../i18n/utils';
+import { getPathPlaceholders, interpolatePaths } from '../../i18n/pages/helpers';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = faqContent[locale];
+const paths = getPathPlaceholders(locale);
+const alternates = getAlternateUrls('faq');
+const contactMailto = `mailto:${CONTACT_EMAIL}`;
+
+function renderAnswer(answer?: string, answerHtml?: string) {
+  if (answerHtml) {
+    return interpolatePaths(answerHtml, paths, {
+      bitvavoAffiliateUrl: BITVAVO_AFFILIATE_URL,
+      affiliateDisclosure: content.affiliateDisclosure,
+    });
+  }
+  return answer ?? '';
+}
+---
+
+<Base
+  title={content.title}
+  description={content.description}
+  lang={locale}
+  alternateUrls={alternates}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h1>{content.h1}</h1>
+        <p>{content.intro}</p>
+      </div>
+
+      <div class="faq-list">
+        {content.items.map((faq) => (
+          <details class="faq">
+            <summary class="faq__question">{faq.question}</summary>
+            <div class="faq__answer">
+              {faq.answerHtml ? (
+                <p set:html={renderAnswer(undefined, faq.answerHtml)} />
+              ) : (
+                <p>{faq.answer}</p>
+              )}
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div class="faq-contact">
+        <p>
+          {content.contactPrompt}{' '}
+          <a href={contactMailto}>{CONTACT_EMAIL}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .faq {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__question {
+    padding: 1.25rem 0;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq__question::-webkit-details-marker { display: none; }
+
+  .faq__question::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: transform 0.2s;
+  }
+
+  .faq[open] .faq__question::after {
+    content: '−';
+  }
+
+  .faq__answer {
+    padding-bottom: 1.25rem;
+  }
+
+  .faq__answer p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .faq-contact {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--color-text-muted);
+  }
+</style>

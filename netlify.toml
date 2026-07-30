@@ -1,12 +1,10 @@
-[[redirects]]
-  from = "https://honeybadgerbots.com/*"
-  to = "https://honeybadgerbots.nl/:splat"
-  status = 301
-  force = true
-
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Astro 7 requires Node >=22.12.0 (was 20.19.5 for @astrojs/sitemap / sitemap@9.x).
+[build.environment]
+  NODE_VERSION = "22.12.0"
 
 # Alleen productie-builds: expliciete waitlist-API. Deploy previews / branch deploys krijgen
 # deze waarde niet automatisch — zet PUBLIC_WAITLIST_API_URL in Netlify (staging) om per ongeluk

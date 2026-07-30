@@ -1,0 +1,240 @@
+---
+import Base from '../../layouts/Base.astro';
+import BitvavoAffiliate from '../BitvavoAffiliate.astro';
+import { CONTACT_EMAIL } from '../../config';
+import type { Locale } from '../../i18n/routes';
+import { waitlistContent } from '../../i18n/pages/waitlist';
+import { getAlternateUrls, getLocalizedPath } from '../../i18n/utils';
+import { getPathPlaceholders, interpolatePaths } from '../../i18n/pages/helpers';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = waitlistContent[locale];
+const paths = getPathPlaceholders(locale);
+const alternates = getAlternateUrls('waitlist');
+const thankYouPath = getLocalizedPath('waitlistThankYou', locale);
+const noscriptHtml = interpolatePaths(content.form.noscriptHtml, paths, {
+  contactEmail: CONTACT_EMAIL,
+});
+const privacyHtml = interpolatePaths(content.form.privacyHtml, paths);
+---
+
+<Base
+  title={content.title}
+  description={content.description}
+  lang={locale}
+  alternateUrls={alternates}
+>
+  <Fragment slot="body-scripts">
+    <script defer src="/js/waitlist-netlify-submitted-at.js"></script>
+  </Fragment>
+
+  <section class="section">
+    <div class="container">
+      <div class="waitlist">
+        <div class="waitlist__content">
+          <span class="badge">{content.badge}</span>
+          <h1>{content.h1}</h1>
+          <p>{content.intro}</p>
+
+          <div class="waitlist__benefits">
+            {content.benefits.map((benefit) => (
+              <div class="waitlist__benefit">
+                <span>&#x2713;</span>
+                <span>{benefit}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="waitlist__form-wrapper">
+          <noscript>
+            <p class="form-status form-status--warn" set:html={noscriptHtml} />
+          </noscript>
+          <form
+            name="waitlist"
+            class="waitlist__form"
+            method="POST"
+            action={thankYouPath}
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="waitlist" />
+            <p class="hidden" aria-hidden="true">
+              <label>{content.form.honeypotLabel} <input name="bot-field" /></label>
+            </p>
+            <input type="hidden" name="submitted_at" id="submitted_at" value="" />
+
+            <div class="form-group">
+              <label for="name">{content.form.nameLabel}</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder={content.form.namePlaceholder}
+                required
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">{content.form.emailLabel}</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder={content.form.emailPlaceholder}
+                required
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="experience">{content.form.experienceLabel}</label>
+              <select id="experience" name="experience">
+                <option value="">{content.form.experiencePlaceholder}</option>
+                {content.form.experienceOptions.map((option) => (
+                  <option value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--large waitlist__submit">
+              {content.form.submit}
+            </button>
+
+            <p class="form-privacy" set:html={privacyHtml} />
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <BitvavoAffiliate locale={locale} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .waitlist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .waitlist__content h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .waitlist__content > p {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .waitlist__benefits {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .waitlist__benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .waitlist__benefit span:first-child {
+    color: var(--color-success);
+    font-weight: 700;
+  }
+
+  .waitlist__form-wrapper {
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+  }
+
+  .waitlist__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .waitlist__submit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .form-group label {
+    font-weight: 500;
+    font-size: 0.9375rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+    border-color: var(--color-primary);
+  }
+
+  .form-privacy {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .form-status {
+    min-height: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .form-status--warn {
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .waitlist {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

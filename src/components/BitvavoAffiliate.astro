@@ -1,59 +1,57 @@
 ---
-import {
-  BITVAVO_AFFILIATE_DISCLOSURE,
-  BITVAVO_AFFILIATE_PROMO_NOTE,
-  BITVAVO_AFFILIATE_URL,
-} from '../constants/affiliate';
+import { BITVAVO_AFFILIATE_URL } from '../config';
+import type { Locale } from '../i18n/routes';
+import { getUi } from '../i18n/ui';
 
 interface Props {
   collapsible?: boolean;
   defaultOpen?: boolean;
+  locale?: Locale;
 }
 
-const { collapsible = false, defaultOpen = false } = Astro.props;
+const { collapsible = false, defaultOpen = false, locale = 'nl' } = Astro.props;
+const affiliate = getUi(locale).affiliate;
 ---
 
-<aside class="bitvavo-affiliate" aria-label="Bitvavo affiliate suggestie">
+<aside class="bitvavo-affiliate" aria-label={affiliate.heading}>
   {collapsible ? (
     <details class="bitvavo-affiliate__details" open={defaultOpen}>
-      <summary class="bitvavo-affiliate__summary">Nog geen Bitvavo account?</summary>
+      <summary class="bitvavo-affiliate__summary">{affiliate.summary}</summary>
       <div class="bitvavo-affiliate__content">
         <p>
-          Om HoneyBadger Trader te gebruiken heb je een Bitvavo account nodig.
-          Je kunt je aanmelden via de knop hieronder. {BITVAVO_AFFILIATE_DISCLOSURE}
+          {affiliate.body} {affiliate.disclosure}
         </p>
-        <p class="bitvavo-affiliate__promo">{BITVAVO_AFFILIATE_PROMO_NOTE}</p>
+        <p class="bitvavo-affiliate__promo">{affiliate.promo}</p>
         <a
           href={BITVAVO_AFFILIATE_URL}
           target="_blank"
           rel="noopener noreferrer sponsored"
           class="btn btn--secondary"
         >
-          Account aanmaken bij Bitvavo
+          {affiliate.cta}
         </a>
         <p class="bitvavo-affiliate__disclaimer">
-          Bitvavo is een gereguleerde Nederlandse crypto exchange (DNB-geregistreerd).
+          {affiliate.disclaimer}
         </p>
       </div>
     </details>
   ) : (
     <>
-      <h3>Nog geen Bitvavo account?</h3>
+      <h3>{affiliate.heading}</h3>
       <p>
-        Om HoneyBadger Trader te gebruiken heb je een Bitvavo account nodig.
-        Je kunt je aanmelden via de knop hieronder. {BITVAVO_AFFILIATE_DISCLOSURE}
+        {affiliate.body} {affiliate.disclosure}
       </p>
-      <p class="bitvavo-affiliate__promo">{BITVAVO_AFFILIATE_PROMO_NOTE}</p>
+      <p class="bitvavo-affiliate__promo">{affiliate.promo}</p>
       <a
         href={BITVAVO_AFFILIATE_URL}
         target="_blank"
         rel="noopener noreferrer sponsored"
         class="btn btn--secondary"
       >
-        Account aanmaken bij Bitvavo
+        {affiliate.cta}
       </a>
       <p class="bitvavo-affiliate__disclaimer">
-        Bitvavo is een gereguleerde Nederlandse crypto exchange (DNB-geregistreerd).
+        {affiliate.disclaimer}
       </p>
     </>
   )}
