@@ -45,13 +45,6 @@ Sinds besluit b6 (2026-10-22) bestaat de site uit één neutrale startpagina (`/
 - [x] Cloudflare Web Analytics (JS-beacon via `PUBLIC_CF_WEB_ANALYTICS_TOKEN`)
 - [x] UptimeRobot instellen
 
-### Fase 2: Content
-- [x] Landing page copy finaliseren
-- [x] "Hoe het werkt" tekst reviewen
-- [x] Pricing bevestigen
-- [x] FAQ aanvullen op basis van feedback
-- [x] Banner/hero afbeelding designen of laten maken
-
 ### Fase 3: Juridisch
 - [ ] Juridisch adviesgesprek plannen
 - [ ] Privacy Policy finaliseren (placeholders invullen)
@@ -59,18 +52,12 @@ Sinds besluit b6 (2026-10-22) bestaat de site uit één neutrale startpagina (`/
 - [ ] Risicoverklaring finaliseren (incl. AFM-status)
 - [ ] Cookie Policy reviewen
 
-### Fase 4: Na VPS-migratie
-- [ ] Waitlist: na live Flask API terug naar directe `fetch`-POST (`PUBLIC_WAITLIST_API_URL`, zie `docs/WAITLIST-API-SPEC.md`). **Nu:** tijdelijk Netlify Forms op `/waitlist` zolang productie-endpoint ontbreekt.
-- [ ] "Inloggen" knop updaten naar app.honeybadgertrader.com/login
-
-### Backlog (Ideeën voor later)
-- [ ] Specifieke 'Prestaties & Strategieën' pagina bouwen (backtests vs live data tonen om verwachtingen te managen)
-- [ ] Kennisbank/Informatieve Hub opzetten (zoeken en filters)
-- [ ] Links naar educatieve artikelen (bijv. de Bitvavo actuele marktsituaties en uitleg) toevoegen in de FAQ sectie
+### Backlog
+- Geen openstaand werk aan de publieke site; uitbreiding van de site volgt pas na een nieuw besluit (zie besluit b6).
 
 ## Gerelateerde documenten
 
-- `docs/WAITLIST-API-SPEC.md` — Waitlist POST-contract, CORS/CSRF-notities, frontend env (`PUBLIC_WAITLIST_API_URL`)
+- `docs/WAITLIST-API-SPEC.md` — **Gearchiveerd (besluit b6):** de wachtlijst bestaat niet meer op deze site; alleen ter referentie
 - `docs/MULTI-USER-PLATFORM-PLAN.md` — Multi-user platform planning
 - `docs/SECURITY-STANDARDS.md` — Beveiligingsstandaarden
 - `DECISIONS.md` — ADR-004 (Frontend Framework keuze)
