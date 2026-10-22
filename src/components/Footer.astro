@@ -4,7 +4,6 @@ import { getLocalizedPath } from '../i18n/utils';
 import { getUi } from '../i18n/ui';
 import { Image } from 'astro:assets';
 import hbLogo from '../assets/hb-logo.png';
-import { CONTACT_EMAIL } from '../config';
 
 interface Props {
   locale?: Locale;
@@ -13,7 +12,6 @@ interface Props {
 const locale = Astro.props.locale ?? 'nl';
 const ui = getUi(locale);
 const year = new Date().getFullYear();
-const contactMailto = `mailto:${CONTACT_EMAIL}`;
 ---
 
 <footer class="footer">
@@ -21,20 +19,6 @@ const contactMailto = `mailto:${CONTACT_EMAIL}`;
     <div class="footer__grid">
       <div class="footer__brand">
         <span class="footer__logo" style="display: flex; align-items: center; gap: 0.5rem;"><Image src={hbLogo} alt="HoneyBadger Trader" width={24} height={24} style={{ borderRadius: '4px' }} /> HoneyBadger<span class="footer__accent">Trader</span></span>
-        <p class="footer__tagline">{ui.footer.tagline}</p>
-      </div>
-
-      <div class="footer__col">
-        <h4 class="footer__heading">{ui.footer.product}</h4>
-        <ul class="footer__links">
-          <li><a href={getLocalizedPath('howItWorks', locale)}>{ui.nav.howItWorks}</a></li>
-          <li><a href={getLocalizedPath('strategies', locale)}>{ui.nav.strategies}</a></li>
-          <li><a href={getLocalizedPath('pricing', locale)}>{ui.nav.pricing}</a></li>
-          <li><a href={getLocalizedPath('faq', locale)}>{ui.nav.faq}</a></li>
-          <li><a href={getLocalizedPath('contact', locale)}>{ui.nav.contact}</a></li>
-          <li><a href={getLocalizedPath('waitlist', locale)}>{ui.nav.earlyAccess}</a></li>
-          <li><a href={contactMailto}>{CONTACT_EMAIL}</a></li>
-        </ul>
       </div>
 
       <div class="footer__col">
@@ -65,7 +49,7 @@ const contactMailto = `mailto:${CONTACT_EMAIL}`;
 
   .footer__grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 3rem;
   }
 
@@ -75,13 +59,6 @@ const contactMailto = `mailto:${CONTACT_EMAIL}`;
   }
 
   .footer__accent { color: var(--color-primary); }
-
-  .footer__tagline {
-    margin-top: 0.75rem;
-    color: #9ca3af;
-    font-size: 0.9375rem;
-    max-width: 280px;
-  }
 
   .footer__heading {
     font-size: 0.875rem;

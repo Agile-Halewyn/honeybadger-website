@@ -26,60 +26,13 @@ npm run build
 npm run preview
 ```
 
-## Omgeving (waitlist-API)
+## Omgeving
 
-**Verplicht op buildtijd:** variabele **`PUBLIC_WAITLIST_API_URL`** (wordt door Astro ingebakken voor toekomstige API-modus en blijft geëvalueerd in `src/config.ts`). Lokaal: kopieer `.env.example` naar `.env`. Het waitlist-formulier gebruikt deze URL **niet** zolang Netlify Forms actief is — zie `docs/WAITLIST-API-SPEC.md`.
+- **Cloudflare Web Analytics:** zet `PUBLIC_CF_WEB_ANALYTICS_TOKEN` in Netlify (Site settings → Environment variables). Lokaal optioneel in `.env`; zonder token wordt geen beacon ingebouwd.
 
-- **Netlify — productie:** staat in `netlify.toml` onder `[context.production.environment]`.
-- **Netlify — deploy previews / branch deploys:** zelf een waarde instellen (bijv. staging-Flask); zie `docs/WAITLIST-API-SPEC.md`.
-- **Cloudflare Web Analytics:** zet `PUBLIC_CF_WEB_ANALYTICS_TOKEN` in Netlify (Site settings → Environment variables). Token uit Cloudflare dashboard → Web Analytics → Manage site. Lokaal optioneel in `.env`; zonder token wordt geen beacon ingebouwd.
+## Projectstructuur en pagina's
 
-## Projectstructuur
-
-```
-src/
-├── assets/           # Afbeeldingen (worden geoptimaliseerd door Astro)
-│   └── banner.png    # TODO: banner toevoegen (3200x1280)
-├── components/
-│   ├── Header.astro  # Navigatie + mobiel menu
-│   └── Footer.astro  # Footer met juridische links
-├── layouts/
-│   └── Base.astro    # Hoofdlayout (SEO, fonts, analytics)
-├── pages/
-│   ├── index.astro         # Landing page
-│   ├── hoe-het-werkt.astro # Uitleg over de dienst
-│   ├── pricing.astro       # Pricing met rekenvoorbeelden
-│   ├── faq.astro           # Veelgestelde vragen
-│   ├── waitlist.astro      # Early access (tijdelijk Netlify Forms)
-│   ├── waitlist-bedankt.astro # Bedankpagina na waitlist-submit
-│   └── juridisch/
-│       ├── privacy.astro       # Privacy Policy (concept)
-│       ├── voorwaarden.astro   # Algemene Voorwaarden (concept)
-│       ├── disclaimer.astro    # Risicoverklaring (concept)
-│       └── cookies.astro       # Cookie Policy
-└── styles/
-    └── global.css    # Design tokens, reset, utilities
-public/
-├── _headers          # Security headers voor Netlify
-├── favicon.svg
-└── robots.txt
-netlify.toml          # Build config + .com → .nl redirect
-```
-
-## Pagina's
-
-| URL | Pagina | Status |
-|-----|--------|--------|
-| `/` | Landing page | Scaffold compleet |
-| `/hoe-het-werkt` | Hoe het werkt | Scaffold compleet |
-| `/pricing` | Pricing | Scaffold compleet |
-| `/faq` | FAQ | Scaffold compleet |
-| `/waitlist` | Early access formulier | **Tijdelijk:** Netlify Forms (`POST`, bedankpagina `/waitlist-bedankt/`); zie `docs/WAITLIST-API-SPEC.md` |
-| `/waitlist-bedankt` | Bedankpagina na waitlist-inschrijving | Netlify Forms redirect |
-| `/juridisch/privacy` | Privacy Policy | Concept — juridisch advies nodig |
-| `/juridisch/voorwaarden` | Algemene Voorwaarden | Concept — juridisch advies nodig |
-| `/juridisch/disclaimer` | Risicoverklaring | Concept — juridisch advies nodig |
-| `/juridisch/cookies` | Cookie Policy | Scaffold compleet |
+Sinds besluit b6 (2026-10-22) bestaat de site uit één neutrale startpagina (`/`, `src/pages/index.astro`: «HoneyBadger Trader is in ontwikkeling. Er wordt op dit moment geen dienst aangeboden.» plus het contactadres) en de juridische pagina's (`/juridisch/*`, plus `/en/juridisch/*` en `/es/juridisch/*` voor privacy en voorwaarden). Prijzen, wachtlijst, uitleg- en dienstpagina's zijn verwijderd; zie git-historie vóór deze wijziging voor de oude opzet.
 
 ## TODO voor go-live
 
