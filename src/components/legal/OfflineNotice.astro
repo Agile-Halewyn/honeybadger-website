@@ -19,9 +19,10 @@ const text: Record<Locale, { before: string }> = {
   en: { before: 'This page is temporarily unavailable. Questions: ' },
   es: { before: 'Esta página no está disponible temporalmente. Preguntas: ' },
 };
+const description = `${text[locale].before}${CONTACT_EMAIL}`;
 ---
 
-<Base title={title} lang={locale} alternateUrls={alternates}>
+<Base title={title} description={description} lang={locale} alternateUrls={alternates}>
   <div class="legal">
     <p>{text[locale].before}<a href={contactMailto}>{CONTACT_EMAIL}</a></p>
   </div>
