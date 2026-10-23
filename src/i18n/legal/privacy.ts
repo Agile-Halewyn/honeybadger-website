@@ -34,7 +34,7 @@ export const privacyContent: LocalizedPrivacy = {
         list: [
           'Het leveren van onze dienst (geautomatiseerd handelen)',
           'Het tonen van je handelsresultaten in het dashboard',
-          'Het informeren over de status van je early access aanmelding',
+          'Het beantwoorden van je aanmelding of bericht',
           'Het verbeteren van onze dienst (geanonimiseerde analytics)',
         ],
       },
@@ -51,7 +51,7 @@ export const privacyContent: LocalizedPrivacy = {
         intro: 'Wij delen je gegevens niet met derden, behalve:',
         list: [
           '<strong>Bitvavo:</strong> handelsorders worden uitgevoerd op jouw Bitvavo account via de door jou verstrekte API-sleutel',
-          '<strong>Netlify:</strong> hosting van de publieke website; voor het contactformulier en <strong>tijdelijk</strong> voor <strong>early-access / waitlist</strong>-inschrijvingen verwerkt Netlify ingediende formuliergegevens als onderaannemer in het kader van hun dienstverlening (EU/US-verwerkersstructuur zoals beschreven door Netlify). Een gegevensverwerkersovereenkomst met Netlify kan worden gesloten via het Netlify-account (Compliance / Data Processing Agreement). Zodra waitlist-inschrijvingen via onze eigen API verlopen, worden die gegevens rechtstreeks aan ons platform toegeleverd.',
+          '<strong>Netlify:</strong> hosting van de publieke website; voor het contactformulier en <strong>tijdelijk</strong> voor <strong>waitlist</strong>-inschrijvingen verwerkt Netlify ingediende formuliergegevens als onderaannemer in het kader van hun dienstverlening (EU/US-verwerkersstructuur zoals beschreven door Netlify). Een gegevensverwerkersovereenkomst met Netlify kan worden gesloten via het Netlify-account (Compliance / Data Processing Agreement). Zodra waitlist-inschrijvingen via onze eigen API verlopen, worden die gegevens rechtstreeks aan ons platform toegeleverd.',
           '<strong>Cloudflare:</strong> Cloudflare verwerkt geanonimiseerde pageview-statistieken via Cloudflare Web Analytics (JS-beacon; geen cookies) als verwerker. Een gegevensverwerkersovereenkomst met Cloudflare kan worden gesloten via het Cloudflare-account.',
           '<strong>Eigen platform (API):</strong> zodra waitlist via onze server loopt: aanmeldingen rechtstreeks naar onze API; verwerking en opslag op ons platform (Hetzner EU)',
           '<strong>Hosting provider:</strong> Hetzner (Duitsland, EU) voor het hosten van ons platform',
@@ -144,7 +144,7 @@ export const privacyContent: LocalizedPrivacy = {
         list: [
           'Prestar nuestro servicio (trading automatizado)',
           'Mostrar sus resultados de trading en el panel de control',
-          'Informarle sobre el estado de su solicitud de acceso anticipado',
+          'Responder a su inscripción o mensaje',
           'Mejorar nuestro servicio (analítica anonimizada)',
         ],
       },
@@ -161,7 +161,7 @@ export const privacyContent: LocalizedPrivacy = {
         intro: 'No compartimos sus datos con terceros, excepto en los siguientes casos:',
         list: [
           '<strong>Bitvavo:</strong> las órdenes de trading se ejecutan en su cuenta de Bitvavo mediante la clave API que usted proporciona',
-          '<strong>Netlify:</strong> alojamiento del sitio web público; para el formulario de contacto y, <strong>de forma temporal</strong>, para inscripciones de <strong>acceso anticipado / lista de espera</strong>, Netlify procesa los datos del formulario como encargado del tratamiento en el marco de su prestación de servicios (estructura de encargados UE/EE. UU. según la documentación de Netlify). Puede formalizarse un acuerdo de tratamiento de datos con Netlify a través de la cuenta de Netlify (Compliance / Data Processing Agreement). En cuanto las inscripciones en la lista de espera se gestionen mediante nuestra propia API, esos datos se entregarán directamente a nuestra plataforma.',
+          '<strong>Netlify:</strong> alojamiento del sitio web público; para el formulario de contacto y, <strong>de forma temporal</strong>, para inscripciones de <strong>lista de espera</strong>, Netlify procesa los datos del formulario como encargado del tratamiento en el marco de su prestación de servicios (estructura de encargados UE/EE. UU. según la documentación de Netlify). Puede formalizarse un acuerdo de tratamiento de datos con Netlify a través de la cuenta de Netlify (Compliance / Data Processing Agreement). En cuanto las inscripciones en la lista de espera se gestionen mediante nuestra propia API, esos datos se entregarán directamente a nuestra plataforma.',
           '<strong>Cloudflare:</strong> Cloudflare procesa estadísticas de páginas vistas anonimizadas mediante Cloudflare Web Analytics (beacon JS; sin cookies) como encargado del tratamiento. Se puede formalizar un acuerdo de tratamiento de datos con Cloudflare a través de la cuenta de Cloudflare.',
           '<strong>Plataforma propia (API):</strong> cuando la lista de espera se procese en nuestro servidor: inscripciones directamente a nuestra API; tratamiento y almacenamiento en nuestra plataforma (Hetzner UE)',
           '<strong>Proveedor de alojamiento:</strong> Hetzner (Alemania, UE) para el alojamiento de nuestra plataforma',
@@ -254,7 +254,7 @@ export const privacyContent: LocalizedPrivacy = {
         list: [
           'Providing our service (automated trading)',
           'Displaying your trading results in the dashboard',
-          'Informing you about the status of your early access registration',
+          'Responding to your registration or message',
           'Improving our service (anonymised analytics)',
         ],
       },
@@ -271,7 +271,7 @@ export const privacyContent: LocalizedPrivacy = {
         intro: 'We do not share your data with third parties, except:',
         list: [
           '<strong>Bitvavo:</strong> trade orders are executed on your Bitvavo account via the API key you provide',
-          '<strong>Netlify:</strong> hosting of the public website; for the contact form and, <strong>temporarily</strong>, for <strong>early access / waitlist</strong> registrations, Netlify processes submitted form data as a processor in the course of its service provision (EU/US processor structure as described by Netlify). A data processing agreement with Netlify can be entered into via the Netlify account (Compliance / Data Processing Agreement). Once waitlist registrations run via our own API, that data will be delivered directly to our platform.',
+          '<strong>Netlify:</strong> hosting of the public website; for the contact form and, <strong>temporarily</strong>, for <strong>waitlist</strong> registrations, Netlify processes submitted form data as a processor in the course of its service provision (EU/US processor structure as described by Netlify). A data processing agreement with Netlify can be entered into via the Netlify account (Compliance / Data Processing Agreement). Once waitlist registrations run via our own API, that data will be delivered directly to our platform.',
           '<strong>Cloudflare:</strong> Cloudflare processes anonymised pageview statistics via Cloudflare Web Analytics (JS beacon; no cookies) as a processor. A data processing agreement with Cloudflare can be established via the Cloudflare account.',
           '<strong>Own platform (API):</strong> once the waitlist runs on our server: registrations sent directly to our API; processing and storage on our platform (Hetzner EU)',
           '<strong>Hosting provider:</strong> Hetzner (Germany, EU) for hosting our platform',
